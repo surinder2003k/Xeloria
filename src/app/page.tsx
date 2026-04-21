@@ -68,7 +68,7 @@ export default function Home() {
 
   return (
     <SmoothScrollProvider>
-      <div className="min-h-screen flex flex-col bg-white overflow-hidden">
+      <div className="min-h-screen flex flex-col bg-white overflow-hidden pt-16">
         <Navbar />
         <main className="flex-grow">
         <Hero />
