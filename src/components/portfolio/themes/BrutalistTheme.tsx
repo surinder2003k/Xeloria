@@ -140,11 +140,19 @@ export const PortfolioThemeBrutalist = ({
           </h2>
           <div className="w-20 h-1 bg-[#ffe600] mb-16" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 border-2 border-[#f5f5f0]">
-             {data.skills.map((skill, i) => (
-                <div key={skill} className="p-10 border-r-2 border-b-2 border-[#f5f5f0] last:border-r-0 hover:bg-[#ffe600] hover:text-black transition-all group">
-                   <div className="font-bebas text-2xl tracking-[2px] mb-4 text-[#ffe600] group-hover:text-black">CAPABILITY_{i + 1}</div>
-                   <div className="font-mono text-[12px] font-bold uppercase tracking-widest">{skill}</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-2 border-[#f5f5f0]">
+             {data.skills.map((skillGroup, i) => (
+                <div key={skillGroup.category} className="p-10 border-r-2 border-b-2 border-[#f5f5f0] last:border-r-0 hover:bg-[#ffe600] hover:text-black transition-all group">
+                   <div className="font-bebas text-3xl tracking-[2px] mb-6 text-[#ffe600] group-hover:text-black border-b border-white/10 pb-2 group-hover:border-black/10">
+                     {skillGroup.category.toUpperCase()}
+                   </div>
+                   <div className="flex flex-wrap gap-3">
+                     {skillGroup.items.map(skill => (
+                       <span key={skill} className="font-mono text-[11px] font-bold uppercase tracking-widest border border-white/20 px-2 py-1 group-hover:border-black/20">
+                         {skill}
+                       </span>
+                     ))}
+                   </div>
                 </div>
              ))}
           </div>
@@ -227,7 +235,7 @@ export const PortfolioThemeBrutalist = ({
           <div className="border-4 border-black p-12 max-w-3xl group hover:bg-black transition-colors">
              <a 
                href={`mailto:${data.personalInfo.email}`} 
-               className="font-bebas text-4xl md:text-7xl leading-none block mb-8 border-b-4 border-black group-hover:border-[#ffe600] group-hover:text-[#ffe600] transition-colors overflow-hidden text-ellipsis pb-4"
+               className="font-bebas text-4xl md:text-7xl leading-none block mb-8 border-b-4 border-black group-hover:border-[#ffe600] group-hover:text-[#ffe600] transition-colors overflow-hidden text-ellipsis pb-4 break-all md:break-normal"
              >
                {data.personalInfo.email}
              </a>

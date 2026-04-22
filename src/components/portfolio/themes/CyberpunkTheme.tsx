@@ -44,7 +44,7 @@ export const PortfolioThemeCyberpunk = ({
       {/* Hero Section */}
       {pData.sectionsVisibility.hero && (
         <section id="hero" className="min-h-screen flex items-center pt-20 px-6 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto border border-[#00cc33] p-10 md:p-16 bg-black/50 relative">
+          <div className="max-w-4xl mx-auto border border-[#00cc33] p-6 md:p-16 bg-black/50 relative">
              <div className="absolute top-[-1px] left-4 bg-[#030a03] px-2 text-[10px] text-[#00ff41] tracking-[2px]">
                {username.toUpperCase()}.system_init
              </div>
@@ -56,7 +56,7 @@ export const PortfolioThemeCyberpunk = ({
              <motion.h1 
                initial={{ opacity: 0, x: -20 }}
                animate={{ opacity: 1, x: 0 }}
-               className="text-5xl md:text-8xl font-black text-[#00ff41] leading-none mb-6 drop-shadow-[0_0_15px_rgba(0,255,65,0.4)] tracking-tighter"
+               className="text-4xl md:text-8xl font-black text-[#00ff41] leading-[1.1] md:leading-none mb-6 drop-shadow-[0_0_15px_rgba(0,255,65,0.4)] tracking-tighter"
              >
                {data.personalInfo.fullName?.split(' ')[0]}<br />
                {data.personalInfo.fullName?.split(' ').slice(1).join(' ')}
@@ -143,16 +143,24 @@ export const PortfolioThemeCyberpunk = ({
               <div className="h-px w-24 bg-[#00ff41] mt-4" />
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {data.skills.map((skill, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {data.skills.map((skillGroup, i) => (
                 <motion.div 
-                  key={skill} 
+                  key={skillGroup.category} 
                   {...fadeIn}
                   transition={{ delay: i * 0.05 }}
-                  className="p-6 border border-[#0d3d0d] bg-black/30 group hover:border-[#00ff41] transition-all relative"
+                  className="p-8 border border-[#0d3d0d] bg-black/30 group hover:border-[#00ff41] transition-all relative"
                 >
-                  <div className="text-[8px] text-[#1a4d1a] mb-2 font-bold select-none">[TECH_NODE_{i.toString().padStart(2, '0')}]</div>
-                  <div className="text-[11px] font-bold uppercase tracking-widest text-[#7acc7a] group-hover:text-[#00ff41]">{skill}</div>
+                  <div className="text-[9px] text-[#1a4d1a] mb-4 font-bold select-none tracking-[2px]">
+                    [CAT_NODE_{i.toString().padStart(2, '0')}] // {skillGroup.category.toUpperCase()}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {skillGroup.items.map(skill => (
+                      <span key={skill} className="text-[11px] font-bold uppercase tracking-widest text-[#7acc7a] group-hover:text-[#00ff41] border border-[#0d3d0d] px-2 py-1 bg-black/40">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                   <div className="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[#1a4d1a] group-hover:border-[#00ff41]" />
                 </motion.div>
               ))}
@@ -176,7 +184,7 @@ export const PortfolioThemeCyberpunk = ({
                 <motion.div 
                   key={i} 
                   {...fadeIn}
-                  className="p-10 border border-[#0d3d0d] bg-black/40 group hover:border-[#00ffff] transition-all relative overflow-hidden"
+                  className="p-6 md:p-10 border border-[#0d3d0d] bg-black/40 group hover:border-[#00ffff] transition-all relative overflow-hidden"
                 >
                   <div className="absolute top-0 left-0 w-full h-[2px] bg-[#00ff41] shadow-[0_0_10px_rgba(0,255,65,0.5)]" />
                   <div className="text-[9px] tracking-[4px] text-[#1a4d1a] uppercase mb-4">NODE_{i.toString().padStart(2, '0')} // DEPLOYED</div>
@@ -237,14 +245,14 @@ export const PortfolioThemeCyberpunk = ({
       {/* Contact Section */}
       {pData.sectionsVisibility.contact && (
         <section id="contact" className="py-40 px-6 text-center">
-           <div className="max-w-2xl mx-auto border border-[#00ff41] p-12 bg-black/40 relative">
+           <div className="max-w-2xl mx-auto border border-[#00ff41] p-6 md:p-12 bg-black/40 relative">
              <div className="absolute top-[-1px] left-1/2 -translate-x-1/2 bg-[#030a03] px-4 text-[10px] text-[#00ff41] font-bold tracking-[4px] uppercase">
                Transmission_Start
              </div>
              <p className="text-[10px] text-[#1a4d1a] font-bold tracking-[2px] uppercase mb-12">{"$ "}echo "Send protocol request for collaboration"</p>
              <a 
                href={`mailto:${data.personalInfo.email}`} 
-               className="text-2xl md:text-5xl font-black text-[#00ff41] uppercase tracking-tighter block mb-12 hover:text-[#00ffff] hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all"
+               className="text-lg md:text-5xl font-black text-[#00ff41] uppercase tracking-tighter block mb-12 hover:text-[#00ffff] hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all break-all"
              >
                {data.personalInfo.email}
              </a>

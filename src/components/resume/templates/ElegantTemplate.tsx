@@ -56,8 +56,11 @@ export const ElegantTemplate = ({ data }: { data: ResumeData }) => (
           <section>
             <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-6">Expertise</h2>
             <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {data.skills.map((s, i) => (
-                <span key={i} className="text-[10px] font-bold uppercase tracking-tight text-slate-500">{s}</span>
+              {data.skills.map((skill, i) => (
+                <div key={i} className="mb-3">
+                  <p className="text-[9px] font-black text-slate-300 uppercase tracking-[0.2em] mb-1">{skill.category}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-tight text-slate-500">{skill.items.join(", ")}</p>
+                </div>
               ))}
             </div>
           </section>
@@ -85,8 +88,17 @@ export const BoldTemplate = ({ data }: { data: ResumeData }) => (
         </section>
         <section>
           <h2 className="text-xs font-black uppercase text-indigo-600 mb-4 tracking-widest">Skills</h2>
-          <div className="flex flex-col gap-2 font-bold text-sm">
-            {data.skills.map((s, i) => <span key={i}>{s}</span>)}
+          <div className="space-y-4">
+            {data.skills.map((skill, i) => (
+              <div key={i}>
+                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">{skill.category}</p>
+                <div className="flex flex-col gap-1 font-bold text-sm">
+                  {skill.items.map((item, j) => (
+                    <span key={j}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </div>

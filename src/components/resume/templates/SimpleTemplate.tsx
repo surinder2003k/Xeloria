@@ -58,8 +58,17 @@ export const BoldTemplate = ({ data }: { data: ResumeData }) => (
         </section>
         <section>
           <h2 className="text-xs font-black uppercase text-indigo-600 mb-4 tracking-widest">Skills</h2>
-          <div className="flex flex-col gap-2 font-bold text-sm">
-            {data.skills.map((s, i) => <span key={i}>{s}</span>)}
+          <div className="space-y-4">
+            {data.skills.map((skill, i) => (
+              <div key={i}>
+                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">{skill.category}</p>
+                <div className="flex flex-col gap-1 font-bold text-sm">
+                  {skill.items.map((item, j) => (
+                    <span key={j}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </div>

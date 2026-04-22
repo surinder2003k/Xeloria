@@ -20,8 +20,17 @@ export const PremiumTemplate = ({ data }: { data: ResumeData }) => (
 
           <section>
             <h2 className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 border-b border-white/10 pb-1">Expertise</h2>
-            <div className="flex flex-col gap-2 text-[10px]">
-              {data.skills.map((s, i) => <span key={i} className="bg-white/5 p-2 rounded">{s}</span>)}
+            <div className="space-y-4">
+              {data.skills.map((skill, i) => (
+                <div key={i}>
+                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">{skill.category}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {skill.items.map((item, j) => (
+                      <span key={j} className="bg-white/5 p-2 rounded text-[10px]">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
         </div>
@@ -92,8 +101,17 @@ export const BoldTemplate = ({ data }: { data: ResumeData }) => (
         </section>
         <section>
           <h2 className="text-xs font-black uppercase text-indigo-600 mb-4 tracking-widest">Skills</h2>
-          <div className="flex flex-col gap-2 font-bold text-sm">
-            {data.skills.map((s, i) => <span key={i}>{s}</span>)}
+          <div className="space-y-4">
+            {data.skills.map((skill, i) => (
+              <div key={i}>
+                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">{skill.category}</p>
+                <div className="flex flex-col gap-1 font-bold text-sm">
+                  {skill.items.map((item, j) => (
+                    <span key={j}>{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       </div>

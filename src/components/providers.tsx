@@ -13,6 +13,34 @@ export function Providers({ children }: { children: React.ReactNode }) {
       trickleSpeed: 200,
       minimum: 0.3
     });
+
+    // Fix for legacy addListener/removeListener issues in some libraries (like Clerk)
+    if (typeof window !== 'undefined') {
+      if (!window.matchMedia) {
+        (window as any).matchMedia = (query: string) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: () => {},
+          removeListener: () => {},
+          addEventListener: () => {},
+          removeEventListener: () => {},
+          dispatchEvent: () => false,
+        });
+      } else {
+        const matchMedia = window.matchMedia;
+        window.matchMedia = (query) => {
+          const mql = matchMedia(query);
+          if (mql && !mql.addListener) {
+            (mql as any).addListener = (fn: any) => mql.addEventListener('change', fn);
+          }
+          if (mql && !mql.removeListener) {
+            (mql as any).removeListener = (fn: any) => mql.removeEventListener('change', fn);
+          }
+          return mql;
+        };
+      }
+    }
   }, []);
 
   return (
@@ -33,15 +61,17 @@ export function Providers({ children }: { children: React.ReactNode }) {
         position="top-right" 
         richColors 
         closeButton 
+        theme="dark"
         toastOptions={{
           style: {
-            borderRadius: '1rem',
-            padding: '0.75rem 1rem',
-            border: '1px solid #e2e8f0',
-            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-            background: 'white',
+            borderRadius: '1.25rem',
+            padding: '1rem',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(16px)',
+            background: 'rgba(10, 10, 10, 0.8)',
+            color: 'white',
           },
-          className: "font-semibold",
+          className: "font-black uppercase tracking-widest text-[10px]",
         }}
       />
     </ClerkProvider>

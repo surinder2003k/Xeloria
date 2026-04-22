@@ -46,10 +46,10 @@ export const PortfolioThemeMinimal = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight mb-8">
+            <h1 className="text-4xl md:text-8xl font-bold tracking-tighter leading-tight mb-8">
               {data.personalInfo.jobTitle || "Creative Professional"}
             </h1>
-            <p className="max-w-2xl text-xl text-slate-500 leading-relaxed mb-12">
+            <p className="max-w-2xl text-lg md:text-xl text-slate-500 leading-relaxed mb-12">
               {data.summary || "Focused on building elegant solutions and meaningful digital experiences."}
             </p>
             <div className="flex flex-wrap gap-4">
@@ -69,7 +69,7 @@ export const PortfolioThemeMinimal = ({
       {pData.sectionsVisibility.experience && data.experience.length > 0 && (
         <section id="experience" className="py-32 px-6 max-w-6xl mx-auto">
           <h2 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-16">Experience</h2>
-          <div className="space-y-24">
+          <div className="space-y-16 md:space-y-24">
             {data.experience.map((exp, i) => (
               <motion.div key={i} {...fadeIn} className="grid grid-cols-1 md:grid-cols-12 gap-8">
                 <div className="md:col-span-4">
@@ -120,10 +120,17 @@ export const PortfolioThemeMinimal = ({
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (
         <section id="skills" className="py-32 px-6 max-w-6xl mx-auto border-t border-slate-100">
           <h2 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-16">Expertise</h2>
-          <div className="flex flex-wrap gap-x-16 gap-y-8">
-            {data.skills.map((skill, i) => (
-              <motion.div key={skill} {...fadeIn} className="text-3xl md:text-5xl font-bold text-slate-200 hover:text-slate-900 transition-colors cursor-default">
-                {skill}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {data.skills.map((skillGroup, i) => (
+              <motion.div key={skillGroup.category} {...fadeIn} className="space-y-6">
+                <h3 className="text-xs font-bold uppercase tracking-[4px] text-slate-900 border-b border-slate-200 pb-4">{skillGroup.category}</h3>
+                <div className="flex flex-col gap-3">
+                  {skillGroup.items.map(skill => (
+                    <span key={skill} className="text-xl md:text-2xl font-bold text-slate-300 hover:text-slate-900 transition-colors cursor-default">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -134,7 +141,7 @@ export const PortfolioThemeMinimal = ({
       {pData.sectionsVisibility.contact && (
         <section id="contact" className="py-40 px-6 max-w-6xl mx-auto border-t border-slate-100 text-center">
           <h2 className="text-4xl md:text-7xl font-bold tracking-tighter mb-12">Let's work together.</h2>
-          <a href={`mailto:${data.personalInfo.email}`} className="text-2xl md:text-4xl text-slate-500 hover:text-slate-900 transition-colors border-b-2 border-slate-200 hover:border-slate-900 pb-2">
+          <a href={`mailto:${data.personalInfo.email}`} className="text-xl md:text-4xl text-slate-500 hover:text-slate-900 transition-colors border-b-2 border-slate-200 hover:border-slate-900 pb-2 break-all md:break-normal">
             {data.personalInfo.email}
           </a>
           <div className="mt-20 flex justify-center gap-12 text-slate-400 font-medium">

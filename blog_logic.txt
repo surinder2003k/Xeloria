@@ -1,0 +1,95 @@
+================================================================================
+XYLOS AI | BLOG SYSTEM ARCHITECTURE & LOGIC DOCUMENTATION
+================================================================================
+
+This document explains the internal mechanics of the Xylos AI Blog System, 
+designed for automated SEO-driven content generation and management.
+
+--------------------------------------------------------------------------------
+1. TECHNOLOGY STACK
+--------------------------------------------------------------------------------
+- Framework: Next.js (App Router)
+- Database: Supabase (PostgreSQL)
+- Authentication: Supabase Auth
+- AI Models: Groq (Primary), Gemini, OpenRouter (Fallbacks)
+- Image Provider: Pexels API
+- Infrastructure: Vercel (Serverless Functions + Cron Jobs)
+
+--------------------------------------------------------------------------------
+2. DATABASE STRUCTURE (Supabase)
+--------------------------------------------------------------------------------
+- [blogs]: Stores all articles. Fields: id, title, slug, excerpt, content, category, 
+           feature_image_url, author_id, status (published/draft), meta_data, created_at.
+- [profiles]: Stores user roles. Used to identify 'admin' or 'super_admin' for authorship.
+- [app_settings]: Key-value store for automation config (e.g., 'auto_category').
+- [automation_logs]: Tracks every automated run (start, success, error, duration).
+
+--------------------------------------------------------------------------------
+3. BLOG CREATION TYPES
+--------------------------------------------------------------------------------
+A. MANUAL CREATION (Admin Dashboard)
+   - Admin goes to /dashboard/create.
+   - They can type manually OR use AI to generate title/excerpt/content.
+   - Uses React Hook Form for state management.
+   - Logic: Client sends data to /api/blog/generate or /api/blog/save.
+
+B. AUTOMATED GENERATION (The "Cron" System)
+   - Triggered by Vercel Cron Jobs (/api/automate).
+   - Designed to run daily without human intervention.
+   - Handles everything: Topic selection -> Content -> Links -> Images -> DB Insert.
+
+--------------------------------------------------------------------------------
+4. THE "SMART GENERATOR" LOGIC (lib/ai/smart-generator.ts)
+--------------------------------------------------------------------------------
+The AI doesn't just write text; it follows a precise neural blueprint:
+- CONTEXT: It looks at the last 10 post titles to avoid repeating topics.
+- LINKING: 
+    - Internal Links: It crawls your site's sitemap/DB to find relevant past posts.
+    - External Links: It looks for authoritative partner sites.
+    - Strategy: It forces the AI to embed these links naturally into the text.
+- STRUCTURE: 
+    - Introduction, Genesis, Deep Dive, Global Implications, Outlook, Synthesis.
+    - Optimized for 600-800 words to stay within serverless time limits.
+- SEO: Automatically generates Meta Title, Meta Description, and Slug.
+
+--------------------------------------------------------------------------------
+5. AUTOMATION ORCHESTRATION (/app/api/automate/route.ts)
+--------------------------------------------------------------------------------
+This is the "Brain" of the daily posting system:
+1. AUTH: Checks for 'x-vercel-cron' header or a secret token to prevent spam.
+2. AUTHOR RESOLUTION: Finds an active admin user ID to assign as the post's author.
+3. CONTEXT GATHERING: Fetches category settings and recent posts.
+4. GENERATION LOOP: 
+   - Calls the AI generator for content.
+   - Calls Pexels API for a matching high-quality cover image.
+   - Generates a unique slug.
+5. INSERTION: Saves to [blogs] table.
+6. LOGGING: Records the event in [automation_logs] for debugging.
+
+--------------------------------------------------------------------------------
+6. ADMIN DASHBOARD FEATURES (/app/dashboard)
+--------------------------------------------------------------------------------
+- POSTS PAGE (/dashboard/posts):
+    - LISTING: Fetches all posts with pagination.
+    - PREVIEW: Shows how the blog looks to the public.
+    - UNPUBLISH: Switches status from 'published' to 'draft'.
+    - EDIT: Opens a full editor with AI assistance.
+    - DELETE: Removes post and triggers a sitemap refresh.
+- AI MANAGER: Control center for automation settings (Categories, counts).
+
+--------------------------------------------------------------------------------
+7. VERCEL CRON CONFIGURATION (vercel.json)
+--------------------------------------------------------------------------------
+- Defined in vercel.json.
+- Schedule: "30 2 * * *" (8:00 AM IST).
+- Logic Splitting: Because Vercel Hobby has a 60s timeout, we split 2 posts 
+  into 2 separate cron calls (e.g., 8:00 AM and 8:15 AM) to ensure reliability.
+
+--------------------------------------------------------------------------------
+8. IMPLEMENTATION TIPS FOR YOUR PROJECT
+--------------------------------------------------------------------------------
+1. Author ID: Always ensure you have a valid user_id to link posts to.
+2. Serverless Limits: If using AI, aim for 1 post per API call to avoid timeouts.
+3. Image Fallbacks: Always have a default image URL if the search API fails.
+4. Logs Table: Don't skip this. It's the only way to know why a cron failed at 2 AM.
+================================================================================

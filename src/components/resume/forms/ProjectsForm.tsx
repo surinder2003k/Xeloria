@@ -5,160 +5,107 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, Trash2, Briefcase, Award } from "lucide-react";
+import { Plus, Trash2, Rocket, Link2, Code, Github } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const ProjectsForm = () => {
-  const { data, addProject, updateProject, removeProject, addCertification, removeCertification } = useResumeStore();
+  const { data, addProject, updateProject, removeProject } = useResumeStore();
+
+  const handleAdd = () => {
+    addProject({
+      name: "",
+      description: "",
+      technologies: [],
+      link: "",
+    });
+  };
 
   return (
-    <div className="space-y-12">
-      {/* Projects Section */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-2 text-indigo-600 mb-2">
-          <Briefcase className="h-5 w-5" />
-          <h3 className="font-bold">Projects</h3>
-        </div>
-        
-        <AnimatePresence>
-          {data.projects.map((proj, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="p-4 border border-slate-200 rounded-xl space-y-4 bg-slate-50 relative group"
+    <div className="space-y-10">
+      <AnimatePresence mode="popLayout">
+        {data.projects.map((project, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+            className="p-6 md:p-10 bg-white/[0.03] border border-white/10 rounded-[1.5rem] md:rounded-[3rem] space-y-8 relative group hover:border-emerald-500/30 transition-all shadow-2xl"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-4 right-4 md:top-8 md:right-8 h-10 w-10 md:h-12 md:w-12 rounded-xl md:rounded-2xl bg-red-500/10 text-red-400 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white border border-red-500/20"
+              onClick={() => removeProject(index)}
             >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-destructive hover:bg-destructive/10"
-                onClick={() => removeProject(index)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
+              <Trash2 className="h-5 w-5" />
+            </Button>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              <div className="space-y-4">
+                <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                   <Rocket className="h-4 w-4" /> Deployment Name
+                </Label>
+                <Input
+                  value={project.name}
+                  onChange={(e) => updateProject(index, { ...project, name: e.target.value })}
+                  placeholder="E.G., XELORIA PROTOCOL"
+                  className="bg-white/5 border-white/10 text-white h-14 md:h-16 rounded-xl md:rounded-2xl placeholder:text-slate-700 font-black tracking-widest uppercase text-base md:text-lg"
+                />
+              </div>
 
               <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label>Project Name</Label>
-                  <Input
-                    value={proj.name}
-                    onChange={(e) => updateProject(index, { ...proj, name: e.target.value })}
-                    placeholder="E-commerce Platform"
-                    className="bg-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Description</Label>
-                  <Textarea
-                    value={proj.description}
-                    onChange={(e) => updateProject(index, { ...proj, description: e.target.value })}
-                    placeholder="Built a full-stack e-commerce app using Next.js..."
-                    rows={3}
-                    className="bg-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Link (Optional)</Label>
-                  <Input
-                    value={proj.link}
-                    onChange={(e) => updateProject(index, { ...proj, link: e.target.value })}
-                    placeholder="https://github.com/yourusername/project"
-                    className="bg-white"
-                  />
-                </div>
+                <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                   <Code className="h-4 w-4" /> Technology Stack (Comma Separated)
+                </Label>
+                <Input
+                  value={project.technologies?.join(", ") ?? ""}
+                  onChange={(e) =>
+                    updateProject(index, {
+                      ...project,
+                      technologies: e.target.value.split(",").map((s) => s.trim()).filter(Boolean),
+                    })
+                  }
+                  placeholder="NEXT.JS, SUPABASE, FRAMER MOTION..."
+                  className="bg-white/5 border-white/10 text-white h-16 rounded-2xl placeholder:text-slate-700"
+                />
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
 
-        <Button
-          variant="outline"
-          className="w-full border-dashed border-2 py-8 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 group"
-          onClick={() => addProject({ name: "", description: "", link: "", technologies: [] })}
-        >
-          <Plus className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" /> Add Project
-        </Button>
-      </div>
-
-      {/* Certifications Section */}
-      <div className="space-y-6">
-        <div className="flex items-center gap-2 text-indigo-600 mb-2">
-          <Award className="h-5 w-5" />
-          <h3 className="font-bold">Certifications</h3>
-        </div>
-
-        <AnimatePresence>
-          {data.certifications.map((cert, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="p-4 border border-slate-200 rounded-xl space-y-4 bg-slate-50 relative group"
-            >
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-destructive hover:bg-destructive/10"
-                onClick={() => removeCertification(index)}
-              >
-                <Trash2 className="h-4 w-4" />
-              </Button>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Certification Name</Label>
-                  <Input
-                    value={cert.name}
-                    onChange={(e) => {
-                      const newCerts = [...data.certifications];
-                      newCerts[index] = { ...cert, name: e.target.value };
-                      useResumeStore.setState({ data: { ...data, certifications: newCerts } });
-                    }}
-                    placeholder="AWS Certified Developer"
-                    className="bg-white"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label>Issuer</Label>
-                  <Input
-                    value={cert.issuer}
-                    onChange={(e) => {
-                      const newCerts = [...data.certifications];
-                      newCerts[index] = { ...cert, issuer: e.target.value };
-                      useResumeStore.setState({ data: { ...data, certifications: newCerts } });
-                    }}
-                    placeholder="Amazon Web Services"
-                    className="bg-white"
-                  />
-                </div>
-                <div className="space-y-2 col-span-2">
-                  <Label>Date</Label>
-                  <Input
-                    value={cert.date}
-                    onChange={(e) => {
-                      const newCerts = [...data.certifications];
-                      newCerts[index] = { ...cert, date: e.target.value };
-                      useResumeStore.setState({ data: { ...data, certifications: newCerts } });
-                    }}
-                    placeholder="June 2023"
-                    className="bg-white"
-                  />
-                </div>
+              <div className="space-y-4">
+                <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                   <Link2 className="h-4 w-4" /> Live URL
+                </Label>
+                <Input
+                  value={project.link}
+                  onChange={(e) => updateProject(index, { ...project, link: e.target.value })}
+                  placeholder="HTTPS://XELORIA.DEV"
+                  className="bg-white/5 border-white/10 text-white h-14 rounded-2xl placeholder:text-slate-700"
+                />
               </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
 
-        <Button
-          variant="outline"
-          className="w-full border-dashed border-2 py-8 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-600 group"
-          onClick={() => addCertification({ name: "", issuer: "", date: "" })}
-        >
-          <Plus className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" /> Add Certification
-        </Button>
-      </div>
+
+
+              <div className="col-span-1 md:col-span-2 space-y-4">
+                <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">Operational Overview</Label>
+                <Textarea
+                  value={project.description}
+                  onChange={(e) => updateProject(index, { ...project, description: e.target.value })}
+                  placeholder="DESCRIBE THE CORE VALUE AND TECHNICAL ARCHITECTURE..."
+                  rows={5}
+                  className="bg-white/5 border-white/10 text-white rounded-[2rem] placeholder:text-slate-700 resize-none p-6"
+                />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+
+      <Button
+        variant="outline"
+        className="w-full h-16 md:h-24 border-dashed border-2 rounded-2xl md:rounded-[2.5rem] border-white/10 bg-white/5 hover:bg-white/10 hover:border-emerald-500/50 text-slate-400 hover:text-white font-black text-[10px] uppercase tracking-[0.4em] group transition-all"
+        onClick={handleAdd}
+      >
+        <Plus className="mr-3 h-6 w-6 group-hover:scale-125 transition-transform text-emerald-500" /> Deploy New Project Node
+      </Button>
     </div>
   );
 };

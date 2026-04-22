@@ -46,11 +46,18 @@ export const PremiumProTemplate = ({ data }: { data: ResumeData }) => {
 
           <section>
             <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-600 mb-5 pb-2 border-b-2 border-indigo-100">Core Expertise</h2>
-            <div className="flex flex-wrap gap-2">
+            <div className="space-y-4">
               {data.skills.map((skill, i) => (
-                <span key={i} className="text-[10px] bg-white px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 font-bold shadow-sm">
-                  {skill}
-                </span>
+                <div key={i}>
+                  <p className="text-[9px] font-black text-slate-400 mb-2 uppercase tracking-widest">{skill.category}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {skill.items.map((item, j) => (
+                      <span key={j} className="text-[10px] bg-white px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 font-bold shadow-sm">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </section>

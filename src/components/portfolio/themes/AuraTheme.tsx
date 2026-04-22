@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Github, Linkedin, Twitter, Mail, Sparkles, Wand2, Bird, Moon, Sun, Star } from "lucide-react";
 import { ResumeData } from "@/lib/store";
 import { PortfolioData } from "@/lib/portfolio-store";
@@ -14,6 +15,21 @@ export const PortfolioThemeAura = ({
   data: ResumeData; 
   pData: PortfolioData; 
 }) => {
+  const [mounted, setMounted] = useState(false);
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+    const p = Array.from({ length: 50 }).map(() => ({
+      opacity: Math.random(),
+      scale: Math.random(),
+      duration: 2 + Math.random() * 4,
+      delay: Math.random() * 5,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+    }));
+    setParticles(p);
+  }, []);
 
   return (
     <div className="bg-[#0a0a1a] min-h-screen text-white font-sans selection:bg-indigo-500/30 selection:text-white relative overflow-hidden">
@@ -25,23 +41,23 @@ export const PortfolioThemeAura = ({
         
         {/* Animated stars/particles */}
         <div className="absolute inset-0 opacity-30">
-          {Array.from({ length: 50 }).map((_, i) => (
+          {mounted && particles.map((p, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: Math.random(), scale: Math.random() }}
+              initial={{ opacity: p.opacity, scale: p.scale }}
               animate={{ 
                 opacity: [0.2, 0.8, 0.2],
                 scale: [0.5, 1.2, 0.5],
               }}
               transition={{ 
-                duration: 2 + Math.random() * 4, 
+                duration: p.duration, 
                 repeat: Infinity,
-                delay: Math.random() * 5
+                delay: p.delay
               }}
               className="absolute w-1 h-1 bg-white rounded-full"
               style={{ 
-                top: `${Math.random() * 100}%`, 
-                left: `${Math.random() * 100}%` 
+                top: p.top, 
+                left: p.left 
               }}
             />
           ))}
@@ -223,7 +239,7 @@ export const PortfolioThemeAura = ({
            </div>
 
            <div className="pt-32 flex flex-col md:row justify-between items-center gap-8 text-[10px] uppercase tracking-[4px] font-bold text-white/20">
-              <span>{data.personalInfo.fullName} // © {new Date().getFullYear()}</span>
+              <span>{data.personalInfo.fullName} // © {mounted ? new Date().getFullYear() : "2024"}</span>
               <span className="animate-pulse text-indigo-500/50 italic font-black">Aura Protocol v3.0</span>
               <span className="italic">Powered by Xeloria</span>
            </div>

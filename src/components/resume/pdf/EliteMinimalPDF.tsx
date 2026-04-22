@@ -232,7 +232,9 @@ export const EliteMinimalPDF = ({ data }: { data: ResumeData }) => (
           </View>
           <View style={styles.skillsWrap}>
             {data.skills.map((skill, i) => (
-              <Text key={i} style={styles.skillItem}>{skill}</Text>
+              <Text key={i} style={styles.skillItem}>
+                {skill.category}: {skill.items.join(", ")}
+              </Text>
             ))}
           </View>
         </View>

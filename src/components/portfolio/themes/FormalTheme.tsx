@@ -29,7 +29,7 @@ export const PortfolioThemeFormal = ({
           <span className="font-serif text-lg tracking-[2px] text-[#c9a84c] uppercase font-bold">
             {data.personalInfo.fullName || username}
           </span>
-          <div className="hidden md:flex items-center gap-10 text-[10px] font-bold tracking-[2px] text-[#8899aa] uppercase">
+          <div className="hidden md:flex items-center gap-6 lg:gap-10 text-[10px] font-bold tracking-[2px] text-[#8899aa] uppercase">
             {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#c9a84c] transition-colors">Home</a>}
             {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#c9a84c] transition-colors">Career</a>}
             {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#c9a84c] transition-colors">Portfolio</a>}
@@ -61,7 +61,7 @@ export const PortfolioThemeFormal = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="font-serif text-6xl md:text-8xl font-bold text-white leading-[1.1] mb-8"
+              className="font-serif text-4xl md:text-8xl font-bold text-white leading-[1.2] md:leading-[1.1] mb-8"
             >
               {data.personalInfo.fullName?.split(' ')[0]}<br />
               <span className="text-[#c9a84c]">
@@ -116,7 +116,7 @@ export const PortfolioThemeFormal = ({
                 ))}
               </ul>
             </div>
-            <div className="bg-[#1b2d42] border border-[#2a3d52] p-12 relative">
+            <div className="bg-[#1b2d42] border border-[#2a3d52] p-8 md:p-12 relative">
                <div className="absolute top-0 left-0 w-2 h-full bg-[#c9a84c]" />
                <h3 className="text-[#c9a84c] text-[10px] tracking-[4px] uppercase font-bold mb-8">Current Status</h3>
                <p className="text-2xl font-serif italic text-white leading-relaxed">
@@ -135,7 +135,7 @@ export const PortfolioThemeFormal = ({
             <p className="text-[#c9a84c] text-[10px] tracking-[4px] uppercase mb-4">History</p>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-12">Professional Experience</h2>
             
-            <div className="border-l-[2px] border-[#c9a84c] pl-10 space-y-20">
+            <div className="border-l-[2px] border-[#c9a84c] pl-6 md:pl-10 space-y-20">
               {data.experience.map((exp, i) => (
                 <motion.div 
                   key={i} 
@@ -143,7 +143,7 @@ export const PortfolioThemeFormal = ({
                   transition={{ delay: i * 0.1 }}
                   className="relative"
                 >
-                  <div className="absolute -left-[3.15rem] top-2 w-4 h-4 rounded-full bg-[#c9a84c] border-[3px] border-[#1b2d42]" />
+                  <div className="absolute -left-[1.65rem] md:-left-[3.15rem] top-2 w-4 h-4 rounded-full bg-[#c9a84c] border-[3px] border-[#1b2d42]" />
                   <p className="text-[#c9a84c] text-[10px] tracking-[2px] uppercase font-bold mb-4">
                     {exp.startDate} — {exp.current ? "Present" : exp.endDate}
                   </p>
@@ -170,7 +170,7 @@ export const PortfolioThemeFormal = ({
                   key={i} 
                   {...fadeIn}
                   transition={{ delay: i * 0.1 }}
-                  className="group bg-[#1b2d42] border border-[#2a3d52] p-12 relative overflow-hidden transition-all hover:border-[#c9a84c]"
+                  className="group bg-[#1b2d42] border border-[#2a3d52] p-8 md:p-12 relative overflow-hidden transition-all hover:border-[#c9a84c]"
                 >
                   <div className="absolute top-0 left-0 w-full h-[3px] bg-[#c9a84c] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
                   <p className="text-[#c9a84c] text-[10px] tracking-[2px] uppercase font-bold mb-6">Project {String(i + 1).padStart(2, '0')}</p>
@@ -206,8 +206,7 @@ export const PortfolioThemeFormal = ({
                  <div key={i} className="border border-[#2a3d52] p-8 hover:border-[#c9a84c] transition-colors">
                     <div className="text-2xl mb-4">🎓</div>
                     <div className="font-bold text-white mb-2">{edu.degree}</div>
-                    <div className="text-sm text-[#8899aa] mb-4">{edu.school} · {edu.duration}</div>
-                    {edu.score && <span className="px-3 py-1 bg-[#c9a84c]/10 border border-[#c9a84c]/30 text-[#c9a84c] text-xs font-bold">{edu.score}</span>}
+                    <div className="text-sm text-[#8899aa] mb-4">{edu.school} · {edu.startDate} - {edu.endDate}</div>
                  </div>
                ))}
              </div>
@@ -222,21 +221,30 @@ export const PortfolioThemeFormal = ({
             <p className="text-[#c9a84c] text-[10px] tracking-[4px] uppercase mb-4">Expertise</p>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-16">Technical Mastery</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-12">
-              {data.skills.map((skill, i) => (
-                <div key={skill} className="space-y-4">
-                  <div className="flex justify-between items-end text-[10px] font-bold uppercase tracking-[2px] text-[#aab8c6]">
-                    <span>{skill}</span>
-                    <span className="text-[#c9a84c]">Expert</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-16">
+              {data.skills.map((skillGroup, i) => (
+                <div key={skillGroup.category} className="space-y-6">
+                  <div className="flex justify-between items-end text-[11px] font-bold uppercase tracking-[3px] text-[#c9a84c] border-b border-[#2a3d52] pb-2">
+                    <span>{skillGroup.category}</span>
                   </div>
-                  <div className="h-[2px] bg-[#2a3d52] relative overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "85%" }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1.5, ease: "easeOut" }}
-                      className="absolute h-full bg-[#c9a84c]" 
-                    />
+                  <div className="flex flex-wrap gap-4">
+                    {skillGroup.items.map(skill => (
+                      <div key={skill} className="space-y-2 w-full">
+                        <div className="flex justify-between text-[10px] font-bold uppercase tracking-[2px] text-[#aab8c6]">
+                          <span>{skill}</span>
+                          <span className="text-[#c9a84c]/50">Expert</span>
+                        </div>
+                        <div className="h-[1px] bg-[#2a3d52] relative overflow-hidden">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: "90%" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.5, ease: "easeOut" }}
+                            className="absolute h-full bg-[#c9a84c]" 
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               ))}
@@ -251,7 +259,7 @@ export const PortfolioThemeFormal = ({
           <div className="max-w-3xl mx-auto space-y-12">
             <div className="space-y-6">
               <p className="text-[#c9a84c] text-[10px] tracking-[6px] uppercase font-bold">Contact</p>
-              <h2 className="font-serif text-5xl md:text-7xl font-bold text-white tracking-tight">Get In Touch</h2>
+              <h2 className="font-serif text-4xl md:text-7xl font-bold text-white tracking-tight">Get In Touch</h2>
               <div className="w-16 h-[2px] bg-[#c9a84c] mx-auto" />
             </div>
             
@@ -261,7 +269,7 @@ export const PortfolioThemeFormal = ({
 
             <a 
               href={`mailto:${data.personalInfo.email}`} 
-              className="font-serif text-3xl md:text-5xl text-[#c9a84c] hover:text-[#e8c97a] transition-all underline decoration-1 underline-offset-[12px] block pt-10"
+              className="font-serif text-xl md:text-5xl text-[#c9a84c] hover:text-[#e8c97a] transition-all underline decoration-1 underline-offset-[12px] block pt-10 break-all md:break-normal"
             >
               {data.personalInfo.email}
             </a>

@@ -19,7 +19,7 @@ export const PortfolioThemeMinimalV2 = ({
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 0.8, ease: "easeOut" as const }
   };
 
   return (
@@ -75,12 +75,12 @@ export const PortfolioThemeMinimalV2 = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex gap-6"
+              className="flex flex-wrap gap-4 md:gap-6"
             >
-              <a href="#work" className="px-8 py-4 bg-black text-white text-[11px] font-bold tracking-[2px] uppercase rounded-full hover:bg-black/80 hover:shadow-lg hover:shadow-black/20 transition-all">
+              <a href="#work" className="px-6 md:px-8 py-4 bg-black text-white text-[11px] font-bold tracking-[2px] uppercase rounded-full hover:bg-black/80 hover:shadow-lg hover:shadow-black/20 transition-all text-center w-full sm:w-auto">
                 View Work
               </a>
-              <a href="#contact" className="px-8 py-4 border border-black/10 text-black text-[11px] font-bold tracking-[2px] uppercase rounded-full hover:border-black/30 transition-all hover:bg-black/5">
+              <a href="#contact" className="px-6 md:px-8 py-4 border border-black/10 text-black text-[11px] font-bold tracking-[2px] uppercase rounded-full hover:border-black/30 transition-all hover:bg-black/5 text-center w-full sm:w-auto">
                 Contact Me
               </a>
             </motion.div>
@@ -100,7 +100,7 @@ export const PortfolioThemeMinimalV2 = ({
                 Building the future of the web through <span className="italic font-black decoration-indigo-600 decoration-4 underline-offset-8 underline">elegant engineering</span> and clean code.
               </motion.h2>
               <motion.p {...fadeIn} className="text-xl text-[#888] leading-relaxed mb-6 font-light">
-                I'm a dedicated software developer with expert-level proficiency in Java, PL/SQL, and modern web frameworks. During my tenure at Emicon Global Advisory Services, I contributed to enterprise-scale payroll systems for Mashreq Bank across the GCC.
+                {data.summary || "Building the future of the web through elegant engineering and clean code."}
               </motion.p>
             </div>
             <div className="lg:col-span-5">
@@ -108,7 +108,7 @@ export const PortfolioThemeMinimalV2 = ({
                  {[
                    { label: "Focus", val: data.personalInfo.jobTitle },
                    { label: "Location", val: data.personalInfo.location },
-                   { label: "Experience", val: "Intern @ Emicon Global" },
+                   { label: "Experience", val: data.experience[0]?.company || "Available" },
                    { label: "Email", val: data.personalInfo.email },
                  ].map((item, i) => (
                    <motion.li 
@@ -135,16 +135,11 @@ export const PortfolioThemeMinimalV2 = ({
               02 / Stack
             </div>
             <div className="lg:col-span-11 grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-8">
-              {[
-                { title: "Languages", items: data.skills.slice(0, 4) },
-                { title: "Backend", items: ["Java", "PL/SQL", "Oracle DB", "Next.js"] },
-                { title: "Systems", items: ["Oracle Fusion", "HCM", "Payroll", "Global HR"] },
-                { title: "Tools", items: ["OTBI", "BI Publisher", "HDL", "Git"] },
-              ].map((group, idx) => (
+              {data.skills.map((skillGroup, idx) => (
                 <div key={idx} className="space-y-6">
-                  <h3 className="text-indigo-600 text-[10px] font-bold tracking-[4px] uppercase">{group.title}</h3>
-                  <div className="flex flex-col gap-4">
-                    {group.items.map(item => (
+                  <h3 className="text-indigo-600 text-[10px] font-bold tracking-[4px] uppercase">{skillGroup.category}</h3>
+                  <div className="flex flex-wrap gap-x-8 gap-y-4">
+                    {skillGroup.items.map(item => (
                       <span key={item} className="text-2xl font-serif font-light italic text-[#1a1a1a]">{item}</span>
                     ))}
                   </div>
@@ -173,7 +168,7 @@ export const PortfolioThemeMinimalV2 = ({
                   <motion.div 
                     key={i}
                     {...fadeIn}
-                    className="flex flex-col md:grid md:grid-cols-12 gap-12 py-16 group cursor-default"
+                    className="flex flex-col md:grid md:grid-cols-12 gap-8 md:gap-12 py-16 group cursor-default"
                   >
                     <div className="md:col-span-1 text-[10px] font-bold text-[#888] pt-2">2024</div>
                     <div className="md:col-span-7">
@@ -211,7 +206,7 @@ export const PortfolioThemeMinimalV2 = ({
                 <motion.div 
                    key={i}
                    {...fadeIn}
-                   className="grid grid-cols-1 md:grid-cols-2 gap-12"
+                   className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
                 >
                   <div className="space-y-4">
                     <p className="text-[10px] tracking-[4px] font-bold text-[#888]">{exp.startDate.toUpperCase()} — {exp.endDate.toUpperCase()}</p>

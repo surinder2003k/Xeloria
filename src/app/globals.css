@@ -49,147 +49,77 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a1c1e;
-  --card: #ffffff;
-  --card-foreground: #1a1c1e;
-  --popover: #ffffff;
-  --popover-foreground: #1a1c1e;
-  --primary: #1e293b;
-  --primary-foreground: #f8fafc;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #1e293b;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #1e293b;
-  --destructive: #ef4444;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #1e293b;
-  --chart-1: #f97316;
-  --chart-2: #0ea5e9;
-  --chart-3: #3b82f6;
-  --chart-4: #eab308;
-  --chart-5: #facc15;
-  --radius: 0.75rem;
-}
-
-.dark {
-  --background: #1a1c1e;
+  --background: #050505;
   --foreground: #f8fafc;
-  --card: #1a1c1e;
+  --card: #0a0a0a;
   --card-foreground: #f8fafc;
-  --popover: #1a1c1e;
+  --popover: #0a0a0a;
   --popover-foreground: #f8fafc;
-  --primary: #f8fafc;
-  --primary-foreground: #1a1c1e;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
   --secondary: #1e293b;
   --secondary-foreground: #f8fafc;
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
   --accent: #1e293b;
   --accent-foreground: #f8fafc;
-  --destructive: #7f1d1d;
+  --destructive: #ef4444;
   --border: #1e293b;
   --input: #1e293b;
-  --ring: #94a3b8;
+  --ring: #6366f1;
+  --radius: 1rem;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-white/5 outline-none;
   }
   body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
+    @apply bg-[#050505] text-white;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Native Print Styles for High-Fidelity PDF Export */
-@media print {
-  @page {
-    size: A4;
-    margin: 0mm;
-  }
-  
-  /* Reset all elements to hidden by default */
-  html, body, #__next, [data-nextjs-scroll-focus-boundary] {
-    background: white !important;
-    overflow: visible !important;
-    height: auto !important;
-  }
-
-  /* Aggressively hide everything that is not the resume */
-  nav, header, aside, footer, button, .no-print, 
-  [role="tablist"], .tabs-list, 
-  .editor-sidebar, /* Custom class to hide ONLY the editor */
-  .lg\:w-\[400px\], /* Hide the portfolio sidebar */
-  .fixed, .sticky, 
-  form, input, textarea, select {
-    display: none !important;
-  }
-
-  /* Ensure only resume content is visible */
-  body * {
-    visibility: hidden !important;
-  }
-  
-  #resume-content, 
-  #resume-content *,
-  .portfolio-content,
-  .portfolio-content * {
-    visibility: visible !important;
-  }
-  
-  #resume-content {
-    display: block !important;
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 210mm !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 9999999 !important;
-    background: white !important;
-    color: black !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    box-shadow: none !important;
-    transform: none !important;
-  }
-
-  /* Fix for text rendering in print */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* PDF Export Compatibility Layer (for html2canvas/html2pdf) */
-.pdf-export, .pdf-export * {
-  /* Provide RGB fallbacks for modern Tailwind 4 colors (lab/oklch) */
-  --color-indigo-50: rgb(238, 242, 255) !important;
-  --color-indigo-600: rgb(79, 70, 229) !important;
-  --color-indigo-700: rgb(67, 56, 202) !important;
-  --color-slate-50: rgb(248, 250, 252) !important;
-  --color-slate-100: rgb(241, 245, 249) !important;
-  --color-slate-200: rgb(226, 232, 240) !important;
-  --color-slate-400: rgb(148, 163, 184) !important;
-  --color-slate-600: rgb(71, 85, 105) !important;
-  --color-slate-700: rgb(51, 65, 85) !important;
-  --color-slate-800: rgb(30, 41, 59) !important;
-  --color-slate-900: rgb(15, 23, 42) !important;
-  --color-orange-500: rgb(249, 115, 22) !important;
-  --color-blue-500: rgb(59, 130, 246) !important;
-  --color-amber-600: rgb(217, 119, 6) !important;
+/* Glassmorphism Utilities */
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
 }
 
-/* Hardcoded hex overrides for critical components during export */
-.pdf-export .text-indigo-600 { color: #4f46e5 !important; }
-.pdf-export .text-slate-900 { color: #0f172a !important; }
-.pdf-export .bg-indigo-600 { background-color: #4f46e5 !important; }
-.pdf-export .bg-slate-50 { background-color: #f8fafc !important; }
-.pdf-export .bg-indigo-50 { background-color: #eef2ff !important; }
+.glass-card {
+  @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl;
+}
+
+/* 3D Effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}

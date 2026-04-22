@@ -83,13 +83,18 @@ export const DeveloperTemplate = ({ data }: { data: ResumeData }) => {
                 <Code2 className="h-4 w-4" />
                 <h2 className="text-xs font-bold uppercase tracking-widest">Tech Stack</h2>
               </div>
-              <div className="flex flex-wrap gap-2">
                 {data.skills.map((skill, i) => (
-                  <span key={i} className="text-[10px] px-2 py-1 bg-slate-900 text-slate-200 rounded">
-                    {skill}
-                  </span>
+                  <div key={i} className="w-full mb-4">
+                    <p className="text-[9px] text-indigo-500 font-bold mb-2">/* {skill.category} */</p>
+                    <div className="flex flex-wrap gap-2">
+                      {skill.items.map((item, j) => (
+                        <span key={j} className="text-[10px] px-2 py-1 bg-slate-900 text-slate-200 rounded">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
-              </div>
             </section>
           )}
 

@@ -55,8 +55,15 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => (
           <section>
             <h2 className="text-sm font-black uppercase text-slate-900 bg-slate-50 px-4 py-1 mb-4 border-l-4 border-slate-900">Core Skills</h2>
             <div className="flex flex-wrap gap-2 px-1">
-              {data.skills.map((s, i) => (
-                <span key={i} className="text-xs border border-slate-200 px-2 py-1 rounded bg-white font-medium">{s}</span>
+              {data.skills.map((skill, i) => (
+                <div key={i} className="w-full mb-3">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">{skill.category}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {skill.items.map((item, j) => (
+                      <span key={j} className="text-xs border border-slate-200 px-2 py-1 rounded bg-white font-medium">{item}</span>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </section>

@@ -60,7 +60,10 @@ export const ExecutiveTemplate = ({ data }: { data: ResumeData }) => {
               <h2 className="text-sm font-black uppercase tracking-[0.2em] text-slate-900 mb-4 border-b-2 border-slate-900 pb-1 w-fit">Core Competencies</h2>
               <ul className="grid grid-cols-1 gap-1 text-[11px] font-bold text-slate-600 uppercase tracking-tight">
                 {data.skills.map((skill, i) => (
-                  <li key={i}>• {skill}</li>
+                  <li key={i} className="mb-2">
+                    <span className="text-[10px] text-slate-400 block mb-1">{skill.category}</span>
+                    <span className="block">• {skill.items.join(", ")}</span>
+                  </li>
                 ))}
               </ul>
             </section>

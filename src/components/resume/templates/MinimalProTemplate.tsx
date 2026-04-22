@@ -42,12 +42,19 @@ export const MinimalProTemplate = ({ data }: { data: ResumeData }) => {
           <section>
             <h2 className="text-[10px] font-black uppercase tracking-[0.2em] mb-6 text-slate-300">Expertise</h2>
             <div className="flex flex-col gap-3 font-bold text-xs">
-              {data.skills.map((skill, i) => (
-                <div key={i} className="flex items-center gap-2 group">
-                  <div className="w-1.5 h-1.5 bg-indigo-600 rounded-full scale-0 group-hover:scale-100 transition-transform" />
-                  <span>{skill}</span>
-                </div>
-              ))}
+                {data.skills.map((skill, i) => (
+                  <div key={i} className="space-y-3">
+                    <p className="text-[10px] font-black text-slate-300 uppercase italic tracking-widest">{skill.category}</p>
+                    <div className="flex flex-col gap-2 font-bold text-xs">
+                      {skill.items.map((item, j) => (
+                        <div key={j} className="flex items-center gap-2 group">
+                          <div className="w-1.5 h-1.5 bg-indigo-600 rounded-full" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
             </div>
           </section>
 

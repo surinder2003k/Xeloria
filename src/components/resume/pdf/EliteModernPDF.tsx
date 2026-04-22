@@ -226,7 +226,7 @@ export const EliteModernPDF = ({ data }: { data: ResumeData }) => (
             <Text style={styles.sidebarSectionHeading}>Expertise</Text>
             {data.skills.map((skill, i) => (
               <View key={i} style={styles.skillRow}>
-                <Text style={styles.skillText}>{skill}</Text>
+                <Text style={styles.skillText}>{skill.category}: {skill.items.join(", ")}</Text>
               </View>
             ))}
           </View>

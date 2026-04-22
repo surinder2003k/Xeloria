@@ -89,9 +89,16 @@ export const EliteMinimalTemplate = ({ data }: { data: ResumeData }) => {
               </div>
               <div className="flex flex-wrap gap-x-6 gap-y-3">
                 {data.skills.map((skill, i) => (
-                  <span key={i} className="text-[11px] font-sans text-[#444] capitalize">
-                    {skill}
-                  </span>
+                  <div key={i} className="w-full">
+                    <p className="text-[9px] font-sans text-[#aaa] uppercase tracking-[0.2em] mb-2">{skill.category}</p>
+                    <div className="flex flex-wrap gap-x-4 gap-y-2">
+                      {skill.items.map((item, j) => (
+                        <span key={j} className="text-[11px] font-sans text-[#444] capitalize">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>

@@ -9,6 +9,10 @@ import { PortfolioThemeMagazine } from "@/components/portfolio/themes/MagazineTh
 import { PortfolioThemeBrutalist } from "@/components/portfolio/themes/BrutalistTheme";
 import { PortfolioThemeAura } from "@/components/portfolio/themes/AuraTheme";
 import { PortfolioThemeNova } from "@/components/portfolio/themes/NovaTheme";
+import { PortfolioThemeQuantum } from "@/components/portfolio/themes/QuantumTheme";
+import { PortfolioThemeElysian } from "@/components/portfolio/themes/ElysianTheme";
+import { PortfolioThemeTitan } from "@/components/portfolio/themes/TitanTheme";
+import { PortfolioThemeModernNoir } from "@/components/portfolio/themes/ModernNoirTheme";
 import { ResumeData } from "@/lib/store";
 import { PortfolioData } from "@/lib/portfolio-store";
 
@@ -122,6 +126,14 @@ export default async function PortfolioPage({ params, searchParams }: Props) {
         return <PortfolioThemeAura {...props} />;
       case "nova":
         return <PortfolioThemeNova {...props} />;
+      case "quantum":
+        return <PortfolioThemeQuantum {...props} />;
+      case "elysian":
+        return <PortfolioThemeElysian {...props} />;
+      case "titan":
+        return <PortfolioThemeTitan {...props} />;
+      case "modern_noir":
+        return <PortfolioThemeModernNoir {...props} />;
       default:
         return <PortfolioThemeMinimalV2 {...props} />;
     }

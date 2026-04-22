@@ -171,7 +171,7 @@ export const GenericPDF = ({ data }: { data: ResumeData }) => (
         <View style={styles.skillsList}>
           {data.skills.map((skill, i) => (
             <View key={i} style={styles.skillBadge}>
-              <Text>{skill}</Text>
+              <Text>{skill.category}: {skill.items.join(", ")}</Text>
             </View>
           ))}
         </View>

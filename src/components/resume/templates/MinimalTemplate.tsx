@@ -28,9 +28,12 @@ export const MinimalTemplate = ({ data }: { data: ResumeData }) => {
               <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300 mb-4">Skills</h2>
               <div className="flex flex-col gap-2">
                 {data.skills.map((skill, i) => (
-                  <span key={i} className="text-xs font-medium text-slate-600">
-                    {skill}
-                  </span>
+                  <div key={i} className="mb-2">
+                    <p className="text-[10px] text-slate-300 font-bold mb-1 uppercase tracking-tighter">{skill.category}</p>
+                    <p className="text-xs font-medium text-slate-600">
+                      {skill.items.join(", ")}
+                    </p>
+                  </div>
                 ))}
               </div>
             </section>

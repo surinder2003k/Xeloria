@@ -40,13 +40,18 @@ export const CreativeTemplate = ({ data }: { data: ResumeData }) => {
           {data.skills.length > 0 && (
             <section>
               <h2 className="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4 border-b border-white/10 pb-2">Skills</h2>
-              <div className="flex flex-wrap gap-2">
                 {data.skills.map((skill, i) => (
-                  <span key={i} className="text-[10px] bg-white/10 px-2 py-1 rounded">
-                    {skill}
-                  </span>
+                  <div key={i} className="mb-3 last:mb-0">
+                    <p className="text-[10px] font-bold text-white/50 uppercase tracking-tighter mb-1.5">{skill.category}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {skill.items.map((item, j) => (
+                        <span key={j} className="text-[10px] bg-indigo-600/20 text-indigo-100 px-2 py-0.5 rounded border border-indigo-600/30">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
-              </div>
             </section>
           )}
 

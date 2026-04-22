@@ -56,7 +56,7 @@ export const downloadAsDocx = (data: ResumeData, templateId: string = "modern") 
   const header = `
     <div style="text-align: ${s.textAlign || 'center'}; margin-bottom: 25px; border-bottom: 3px solid ${s.primaryColor}; padding-bottom: 15px;">
       <div style="font-size: ${s.nameSize}; font-weight: bold; color: ${s.primaryColor}; line-height: 1.1;">${safe(data.personalInfo.fullName, "Your Name").toUpperCase()}</div>
-      <div style="font-size: 14pt; color: ${s.accentColor}; font-weight: bold; margin-top: 5px; margin-bottom: 8px;">${safe(data.personalInfo.title).toUpperCase()}</div>
+      <div style="font-size: 14pt; color: ${s.accentColor}; font-weight: bold; margin-top: 5px; margin-bottom: 8px;">${safe(data.personalInfo.jobTitle).toUpperCase()}</div>
       <div style="font-size: 10pt; color: #444444;">${contactText}</div>
     </div>
   `;
@@ -75,7 +75,6 @@ export const downloadAsDocx = (data: ResumeData, templateId: string = "modern") 
           <td style="text-align: right; font-size: 10pt; color: #666666;">${safe(exp.startDate)} — ${safe(exp.endDate, "Present")}</td>
         </tr>
       </table>
-      <div style="font-style: italic; font-size: 10pt; color: ${s.accentColor}; margin-bottom: 5px;">${safe(exp.location)}</div>
       <div style="font-size: 10pt; line-height: 1.4; color: #333333;">${safe(exp.description)}</div>
     </div>
   `).join("");
@@ -84,7 +83,7 @@ export const downloadAsDocx = (data: ResumeData, templateId: string = "modern") 
     <div style="margin-bottom: 12px;">
       <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
-          <td style="font-weight: bold; font-size: 11pt;">${safe(edu.degree)} ${edu.field ? `in ${edu.field}` : ""}</td>
+          <td style="font-weight: bold; font-size: 11pt;">${safe(edu.degree)}</td>
           <td style="text-align: right; font-size: 10pt; color: #666666;">${safe(edu.startDate)} — ${safe(edu.endDate)}</td>
         </tr>
       </table>
@@ -92,11 +91,12 @@ export const downloadAsDocx = (data: ResumeData, templateId: string = "modern") 
     </div>
   `).join("");
 
-  const skillsList = `
-    <div style="font-size: 10.5pt; line-height: 1.6; color: #333333;">
-      ${data.skills.join(" • ")}
+  const skillsList = data.skills.map(skill => `
+    <div style="margin-bottom: 10px;">
+      <div style="font-weight: bold; font-size: 11pt; color: ${s.primaryColor};">${safe(skill.category)}</div>
+      <div style="font-size: 10pt; color: #333333;">${skill.items.join(" • ")}</div>
     </div>
-  `;
+  `).join("");
  
   const projectsList = data.projects.map(proj => `
     <div style="margin-bottom: 12px;">
@@ -128,9 +128,9 @@ export const downloadAsDocx = (data: ResumeData, templateId: string = "modern") 
     <body style="padding: 40px; background-color: #ffffff;">
       ${header}
       
-      ${data.personalInfo.summary ? `
+      ${data.summary ? `
         ${sectionHeader("Professional Summary")}
-        <div style="font-size: 10.5pt; text-align: justify;">${safe(data.personalInfo.summary)}</div>
+        <div style="font-size: 10.5pt; text-align: justify;">${safe(data.summary)}</div>
       ` : ""}
 
       ${data.experience.length > 0 ? `

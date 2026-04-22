@@ -2,118 +2,133 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Globe, Layers, Share2, Sparkles } from "lucide-react";
+import { ArrowRight, Globe, Layers, Share2, Sparkles, Activity, ShieldCheck, Zap } from "lucide-react";
 import Link from "next/link";
 
 export const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-[#020817] pt-24 pb-32 sm:pt-32 sm:pb-40">
-      {/* Animated Aurora Background */}
+    <section className="relative overflow-hidden bg-[#050505] pt-32 pb-40 sm:pt-40 sm:pb-52">
+      {/* Dynamic Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-         <motion.div 
-           animate={{ 
-             scale: [1, 1.2, 1],
-             opacity: [0.3, 0.5, 0.3],
-             rotate: [0, 90, 0]
-           }}
-           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-           className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-indigo-600/20 blur-[120px]"
-         />
-         <motion.div 
-           animate={{ 
-             scale: [1, 1.5, 1],
-             opacity: [0.2, 0.4, 0.2],
-             rotate: [0, -90, 0]
-           }}
-           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-           className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-violet-600/20 blur-[120px]"
-         />
-         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_#020817_100%)]" />
-         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.15, 0.25, 0.15],
+              rotate: [0, 45, 0]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-20%] left-[-10%] w-[80vw] h-[80vw] rounded-full bg-indigo-600/10 blur-[120px]"
+          />
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.3, 1],
+              opacity: [0.1, 0.2, 0.1],
+              rotate: [0, -45, 0]
+            }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] rounded-full bg-purple-600/10 blur-[120px]"
+          />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-
+      <div className="container relative z-10 mx-auto px-6 lg:px-12">
+        <div className="text-center space-y-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-[0.4em] shadow-2xl shadow-indigo-500/20"
+          >
+            <Activity className="h-4 w-4 animate-pulse" />
+            System Broadcast Active // v2.0
+          </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl font-extrabold tracking-tight text-white sm:text-7xl leading-[1.05]"
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-6xl md:text-8xl font-black tracking-tight text-white leading-[0.95] uppercase"
           >
-            Build Your{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">Professional Portfolio</span>
-              <span className="absolute -bottom-2 left-0 right-0 h-4 bg-indigo-600/20 blur-xl -z-0" />
-            </span>
-            <br className="hidden lg:block" />
-            <span className="text-slate-300"> That Gets You Hired</span>
+            Architect Your <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 italic">Professional DNA</span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-6 text-lg leading-8 text-slate-400 max-w-2xl mx-auto font-medium"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-8 text-sm md:text-lg leading-relaxed text-slate-500 max-w-2xl mx-auto font-bold uppercase tracking-[0.2em]"
           >
-            Xeloria gives you a stunning, hosted personal site in minutes. Enter your profile, choose a theme, and share your live link — no code needed.
+            Xeloria synchronizes your narrative into a high-performance portfolio node. Deploy your legacy across the digital spectrum in minutes.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6"
           >
             <Link href="/dashboard">
-              <Button size="lg" className="bg-white text-indigo-950 hover:bg-slate-100 text-base h-14 px-8 rounded-full shadow-[0_0_40px_rgba(79,70,229,0.3)] font-black gap-2 transition-transform hover:scale-105">
-                Create Your Portfolio <ArrowRight className="h-5 w-5" />
+              <Button size="lg" className="bg-white text-black hover:bg-slate-200 text-xs h-16 px-12 rounded-2xl shadow-2xl shadow-white/10 font-black uppercase tracking-widest gap-3 transition-all hover:scale-105">
+                Initialize Synthesis <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/templates" className="text-sm font-bold leading-6 text-slate-300 flex items-center gap-2 hover:text-white transition-colors group px-6 py-4 rounded-full hover:bg-white/5 border border-transparent hover:border-white/10">
-              <Layers className="h-4 w-4 group-hover:text-indigo-400" />
-              Browse Themes
+            <Link href="/templates" className="text-[10px] font-black leading-6 text-slate-400 uppercase tracking-widest flex items-center gap-3 hover:text-white transition-all group px-8 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 shadow-2xl">
+              <Layers className="h-4 w-4 text-indigo-400 group-hover:rotate-12 transition-transform" />
+              Design Architectures
             </Link>
           </motion.div>
         </div>
 
-        {/* Feature badges */}
+        {/* Feature Badges with 3D Tilt feel */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-24 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          transition={{ duration: 1, delay: 0.5 }}
+          className="mt-32 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
         >
           {[
             {
               icon: Globe,
-              title: "Instant Live Hosting",
-              desc: "Your portfolio is live at a unique link the moment you finish — no deployment needed.",
-              color: "bg-indigo-600",
+              title: "EDGE BROADCAST",
+              desc: "Instant node deployment with global low-latency synchronization.",
+              color: "text-indigo-400",
+              bgColor: "bg-indigo-500/10",
+              borderColor: "border-indigo-500/20"
             },
             {
               icon: Sparkles,
-              title: "Professional Themes",
-              desc: "Choose from premium, hand-crafted portfolio themes designed to impress.",
-              color: "bg-violet-600",
+              title: "PREMIUM SYNTHESIS",
+              desc: "High-fidelity design systems architected for maximum impact.",
+              color: "text-purple-400",
+              bgColor: "bg-purple-500/10",
+              borderColor: "border-purple-500/20"
             },
             {
               icon: Share2,
-              title: "One-Tap Sharing",
-              desc: "Share your live portfolio link via WhatsApp, LinkedIn, or any platform instantly.",
-              color: "bg-sky-600",
+              title: "NEXUS PROTOCOL",
+              desc: "Seamless narrative transmission across all social architectures.",
+              color: "text-pink-400",
+              bgColor: "bg-pink-500/10",
+              borderColor: "border-pink-500/20"
             },
           ].map((f, i) => (
             <div
               key={i}
-              className="group flex flex-col items-center p-8 bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-500"
+              className={`group flex flex-col items-center p-10 bg-white/5 backdrop-blur-xl rounded-[3rem] border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-700 relative overflow-hidden`}
             >
-              <div className={`h-14 w-14 flex items-center justify-center rounded-2xl ${f.color} text-white mb-6 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.1)]`}>
-                <f.icon className="h-7 w-7" />
+              <div className={`absolute -top-10 -right-10 h-32 w-32 ${f.bgColor} blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity`} />
+              
+              <div className={`h-16 w-16 flex items-center justify-center rounded-2xl ${f.bgColor} ${f.color} mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all border ${f.borderColor} shadow-2xl shadow-black/50`}>
+                <f.icon className="h-8 w-8" />
               </div>
-              <h3 className="text-lg font-bold text-white relative z-10">{f.title}</h3>
-              <p className="mt-3 text-center text-slate-400 text-sm leading-relaxed relative z-10">{f.desc}</p>
+              <h3 className="text-xl font-black text-white uppercase tracking-tight group-hover:text-indigo-400 transition-colors">{f.title}</h3>
+              <p className="mt-4 text-center text-slate-500 text-[10px] font-bold uppercase tracking-widest leading-relaxed">{f.desc}</p>
+              
+              <div className="absolute bottom-6 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                 <div className="h-1 w-8 bg-indigo-500 rounded-full" />
+                 <div className="h-1 w-2 bg-indigo-500/30 rounded-full" />
+                 <div className="h-1 w-2 bg-indigo-500/30 rounded-full" />
+              </div>
             </div>
           ))}
         </motion.div>

@@ -102,11 +102,18 @@ export const ModernTemplate = ({ data }: { data: ResumeData }) => {
             {data.skills.length > 0 && (
               <section>
                 <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-600 mb-5">Key Skills</h2>
-                <div className="flex flex-wrap gap-2">
+                <div className="space-y-4">
                   {data.skills.map((skill, i) => (
-                    <span key={i} className="text-[10px] bg-slate-100 px-3 py-1.5 rounded-lg text-slate-700 font-bold border border-slate-200/50">
-                      {skill}
-                    </span>
+                    <div key={i}>
+                      <p className="text-[10px] font-black text-slate-400 mb-2 uppercase tracking-widest">{skill.category}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {skill.items.map((item, j) => (
+                          <span key={j} className="text-[10px] bg-slate-100 px-3 py-1.5 rounded-lg text-slate-700 font-bold border border-slate-200/50">
+                            {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </section>

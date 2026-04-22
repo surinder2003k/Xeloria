@@ -1,96 +1,85 @@
 "use client";
 
 import { useResumeStore } from "@/lib/store";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X, Wrench } from "lucide-react";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { Label } from "@/components/ui/label";
+import { Plus, Trash2, Zap, Layout } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const SkillsForm = () => {
-  const { data, updateSkills, updateSummary, updateData } = useResumeStore();
-  const [skillInput, setSkillInput] = useState("");
+  const { data, addSkill, updateSkill, removeSkill } = useResumeStore();
 
-  const handleAddSkill = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && skillInput.trim()) {
-      e.preventDefault();
-      if (!data.skills.includes(skillInput.trim())) {
-        updateData({ skills: [...data.skills, skillInput.trim()] });
-      }
-      setSkillInput("");
-    }
-  };
-
-  const removeSkill = (skillToRemove: string) => {
-    updateSkills(data.skills.filter((s) => s !== skillToRemove));
+  const handleAdd = () => {
+    addSkill({
+      category: "",
+      items: [],
+    });
   };
 
   return (
-    <div className="space-y-8">
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
-        <div className="flex items-center gap-2 text-indigo-600 mb-2">
-          <Wrench className="h-5 w-5" />
-          <h3 className="font-bold">Skills & Technologies</h3>
-        </div>
-        <div className="space-y-2">
-          <Label>Add Skills (Press Enter)</Label>
-          <Input
-            value={skillInput}
-            onChange={(e) => setSkillInput(e.target.value)}
-            onKeyDown={handleAddSkill}
-            placeholder="React, TypeScript, Figma..."
-            className="focus-visible:ring-indigo-600"
-          />
-        </div>
-        <div className="flex flex-wrap gap-2 pt-2">
-          {data.skills.map((skill) => (
-            <Badge 
-              key={skill} 
-              variant="secondary" 
-              className="px-3 py-1 bg-indigo-50 text-indigo-700 border-indigo-100 flex items-center gap-1 hover:bg-indigo-100 transition-colors"
+    <div className="space-y-10">
+      <AnimatePresence>
+        {data.skills && Array.isArray(data.skills) && data.skills.map((skillGroup, index) => (
+          typeof skillGroup === 'object' && skillGroup !== null && (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="p-8 bg-white/[0.03] border border-white/10 rounded-[2.5rem] space-y-8 relative group hover:border-cyan-500/30 transition-all"
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="absolute top-6 right-6 h-10 w-10 rounded-xl bg-red-500/10 text-red-400 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white border border-red-500/20"
+              onClick={() => removeSkill(index)}
             >
-              {skill}
-              <button 
-                onClick={() => removeSkill(skill)}
-                className="hover:text-indigo-900 transition-colors"
-              >
-                <X className="h-3 w-3" />
-              </button>
-            </Badge>
-          ))}
-          {data.skills.length === 0 && (
-            <p className="text-sm text-slate-400 italic">No skills added yet.</p>
-          )}
-        </div>
-      </motion.div>
+              <Trash2 className="h-4 w-4" />
+            </Button>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="space-y-4"
+            <div className="space-y-6">
+              <div className="space-y-3 max-w-md">
+                <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                   <Layout className="h-3 w-3" /> Capability Cluster Name
+                </Label>
+                <Input
+                  value={skillGroup.category}
+                  onChange={(e) => updateSkill(index, { ...skillGroup, category: e.target.value })}
+                  placeholder="E.G., TECH STACK, LANGUAGES"
+                  className="bg-white/5 border-white/10 text-white h-14 rounded-2xl placeholder:text-slate-700 font-black uppercase tracking-widest"
+                />
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                   <Zap className="h-3 w-3" /> Competencies (Comma Separated)
+                </Label>
+                <Input
+                  value={Array.isArray(skillGroup.items) ? skillGroup.items.join(", ") : ""}
+                  onChange={(e) =>
+                    updateSkill(index, {
+                      ...skillGroup,
+                      items: e.target.value.split(",").map((s) => s.trim()).filter(Boolean),
+                    })
+                  }
+                  placeholder="REACT, NEXT.JS, TYPESCRIPT, TAILWIND..."
+                  className="bg-white/5 border-white/10 text-white h-14 rounded-2xl placeholder:text-slate-700"
+                />
+              </div>
+            </div>
+          </motion.div>
+          )
+        ))}
+      </AnimatePresence>
+
+      <Button
+        variant="outline"
+        className="w-full h-20 border-dashed border-2 rounded-[2rem] border-white/10 bg-white/5 hover:bg-white/10 hover:border-cyan-500/50 text-slate-400 hover:text-white font-black text-[10px] uppercase tracking-[0.3em] group transition-all"
+        onClick={handleAdd}
       >
-        <div className="flex items-center gap-2 text-indigo-600 mb-2">
-          <h3 className="font-bold">Professional Summary</h3>
-        </div>
-        <div className="space-y-2">
-          <Label>Summary</Label>
-          <Textarea
-            value={data.summary}
-            onChange={(e) => updateSummary(e.target.value)}
-            placeholder="Briefly describe your career goals and key strengths..."
-            rows={5}
-            className="focus-visible:ring-indigo-600 resize-none"
-          />
-          <p className="text-xs text-slate-500">Aim for 3-5 sentences that highlight your expertise.</p>
-        </div>
-      </motion.div>
+        <Plus className="mr-3 h-5 w-5 group-hover:scale-125 transition-transform text-cyan-500" /> Initialize Skill Node
+      </Button>
     </div>
   );
 };

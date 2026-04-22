@@ -30,7 +30,10 @@ export interface ResumeData {
     description: string;
     current: boolean;
   }>;
-  skills: string[];
+  skills: Array<{
+    category: string;
+    items: string[];
+  }>;
   projects: Array<{
     name: string;
     description: string;
@@ -55,7 +58,10 @@ interface ResumeState {
   addExperience: (exp: ResumeData["experience"][0]) => void;
   updateExperience: (index: number, exp: ResumeData["experience"][0]) => void;
   removeExperience: (index: number) => void;
-  updateSkills: (skills: string[]) => void;
+  updateSkills: (skills: ResumeData["skills"]) => void;
+  addSkill: (skill: ResumeData["skills"][0]) => void;
+  updateSkill: (index: number, skill: ResumeData["skills"][0]) => void;
+  removeSkill: (index: number) => void;
   addProject: (proj: ResumeData["projects"][0]) => void;
   updateProject: (index: number, proj: ResumeData["projects"][0]) => void;
   removeProject: (index: number) => void;
@@ -122,7 +128,11 @@ const dummyData: ResumeData = {
       description: "Built payment processing APIs handling $2B+ in annual transactions. Improved fraud detection accuracy by 25% using ML models.",
     },
   ],
-  skills: ["TypeScript", "React", "Next.js", "Node.js", "Python", "PostgreSQL", "AWS", "Docker", "Kubernetes", "GraphQL"],
+  skills: [
+    { category: "Frontend", items: ["TypeScript", "React", "Next.js", "Tailwind CSS"] },
+    { category: "Backend", items: ["Node.js", "Python", "PostgreSQL", "Redis"] },
+    { category: "DevOps", items: ["AWS", "Docker", "Kubernetes", "CI/CD"] },
+  ],
   projects: [
     {
       name: "OpenTrack",
@@ -152,54 +162,66 @@ export const useResumeStore = create<ResumeState>()(
       clearData: () => set({ data: emptyData }),
       updatePersonalInfo: (info) =>
         set((state) => ({
-          data: { ...state.data, personalInfo: { ...state.data.personalInfo, ...info } },
+          data: { ...state.data, personalInfo: { ...(state.data.personalInfo || {}), ...info } },
         })),
       updateSummary: (summary) =>
         set((state) => ({ data: { ...state.data, summary } })),
       addEducation: (edu) =>
-        set((state) => ({ data: { ...state.data, education: [...state.data.education, edu] } })),
+        set((state) => ({ data: { ...state.data, education: [...(state.data.education || []), edu] } })),
       updateEducation: (index, edu) =>
         set((state) => {
-          const education = [...state.data.education];
+          const education = [...(state.data.education || [])];
           education[index] = edu;
           return { data: { ...state.data, education } };
         }),
       removeEducation: (index) =>
         set((state) => ({
-          data: { ...state.data, education: state.data.education.filter((_, i) => i !== index) },
+          data: { ...state.data, education: (state.data.education || []).filter((_, i) => i !== index) },
         })),
       addExperience: (exp) =>
-        set((state) => ({ data: { ...state.data, experience: [...state.data.experience, exp] } })),
+        set((state) => ({ data: { ...state.data, experience: [...(state.data.experience || []), exp] } })),
       updateExperience: (index, exp) =>
         set((state) => {
-          const experience = [...state.data.experience];
+          const experience = [...(state.data.experience || [])];
           experience[index] = exp;
           return { data: { ...state.data, experience } };
         }),
       removeExperience: (index) =>
         set((state) => ({
-          data: { ...state.data, experience: state.data.experience.filter((_, i) => i !== index) },
+          data: { ...state.data, experience: (state.data.experience || []).filter((_, i) => i !== index) },
         })),
       updateSkills: (skills) => set((state) => ({ data: { ...state.data, skills } })),
+      addSkill: (skill) =>
+        set((state) => ({ data: { ...state.data, skills: [...(state.data.skills || []), skill] } })),
+      updateSkill: (index, skill) =>
+        set((state) => {
+          const skills = [...(state.data.skills || [])];
+          skills[index] = skill;
+          return { data: { ...state.data, skills } };
+        }),
+      removeSkill: (index) =>
+        set((state) => ({
+          data: { ...state.data, skills: (state.data.skills || []).filter((_, i) => i !== index) },
+        })),
       addProject: (proj) =>
-        set((state) => ({ data: { ...state.data, projects: [...state.data.projects, proj] } })),
+        set((state) => ({ data: { ...state.data, projects: [...(state.data.projects || []), proj] } })),
       updateProject: (index, proj) =>
         set((state) => {
-          const projects = [...state.data.projects];
+          const projects = [...(state.data.projects || [])];
           projects[index] = proj;
           return { data: { ...state.data, projects } };
         }),
       removeProject: (index) =>
         set((state) => ({
-          data: { ...state.data, projects: state.data.projects.filter((_, i) => i !== index) },
+          data: { ...state.data, projects: (state.data.projects || []).filter((_, i) => i !== index) },
         })),
       addCertification: (cert) =>
         set((state) => ({
-          data: { ...state.data, certifications: [...state.data.certifications, cert] },
+          data: { ...state.data, certifications: [...(state.data.certifications || []), cert] },
         })),
       removeCertification: (index) =>
         set((state) => ({
-          data: { ...state.data, certifications: state.data.certifications.filter((_, i) => i !== index) },
+          data: { ...state.data, certifications: (state.data.certifications || []).filter((_, i) => i !== index) },
         })),
       setTemplateId: (id) => set({ templateId: id }),
       updateData: (updates) =>
@@ -210,6 +232,24 @@ export const useResumeStore = create<ResumeState>()(
     {
       name: "resume-storage",
       storage: createJSONStorage(() => safeStorage),
+      merge: (persistedState: any, currentState) => {
+        const persisted = (persistedState || {}) as Partial<ResumeState>;
+        const pData = (persisted.data || {}) as any;
+        return {
+          ...currentState,
+          ...persisted,
+          data: {
+            ...emptyData,
+            ...pData,
+            education: Array.isArray(pData.education) ? pData.education : [],
+            experience: Array.isArray(pData.experience) ? pData.experience : [],
+            skills: Array.isArray(pData.skills) ? pData.skills : [],
+            projects: Array.isArray(pData.projects) ? pData.projects : [],
+            certifications: Array.isArray(pData.certifications) ? pData.certifications : [],
+            personalInfo: { ...emptyData.personalInfo, ...(pData.personalInfo || {}) },
+          },
+        };
+      },
     }
   )
 );

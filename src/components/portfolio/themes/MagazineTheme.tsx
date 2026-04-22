@@ -41,8 +41,8 @@ export const PortfolioThemeMagazine = ({
       {/* Hero Section — Magazine Split */}
       {pData.sectionsVisibility.hero && (
         <section id="hero" className="min-h-screen grid grid-cols-1 md:grid-cols-2 pt-20">
-          <div className="bg-[#1c1209] p-12 md:p-24 flex flex-col justify-center relative overflow-hidden">
-             <div className="absolute bottom-[-5rem] right-[-2rem] font-serif text-[25rem] font-black text-white/5 leading-none pointer-events-none select-none">
+          <div className="bg-[#1c1209] p-8 md:p-24 flex flex-col justify-center relative overflow-hidden">
+             <div className="absolute bottom-[-5rem] right-[-2rem] font-serif text-[15rem] md:text-[25rem] font-black text-white/5 leading-none pointer-events-none select-none">
                {data.personalInfo.fullName?.[0]}
              </div>
              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#e8724a] text-[10px] tracking-[5px] uppercase font-bold mb-12">
@@ -51,7 +51,7 @@ export const PortfolioThemeMagazine = ({
              <motion.h1 
                initial={{ opacity: 0, y: 30 }}
                animate={{ opacity: 1, y: 0 }}
-               className="font-serif text-6xl md:text-9xl font-light text-white leading-[0.95] mb-8 tracking-tighter"
+               className="font-serif text-5xl md:text-9xl font-light text-white leading-[0.95] mb-8 tracking-tighter"
              >
                {data.personalInfo.fullName?.split(' ')[0]}<br />
                <span className="italic text-[#e8724a]">
@@ -63,7 +63,7 @@ export const PortfolioThemeMagazine = ({
              </motion.p>
           </div>
           
-          <div className="bg-[#f0e8dc] p-12 md:p-24 flex flex-col justify-center">
+          <div className="bg-[#f0e8dc] p-8 md:p-24 flex flex-col justify-center">
              <motion.blockquote initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="font-serif text-2xl md:text-3xl italic leading-relaxed text-[#2d1f0e] border-l-4 border-[#c4522a] pl-8 mb-12">
                "{data.summary || "Crafting digital narratives through sophisticated engineering and elegant design principles."}"
              </motion.blockquote>
@@ -71,7 +71,7 @@ export const PortfolioThemeMagazine = ({
              <div className="space-y-6 mb-12">
                {[
                  { k: "Role", v: data.personalInfo.jobTitle },
-                 { k: "Focus", v: data.skills.slice(0, 3).join(" · ") },
+                 { k: "Focus", v: data.skills.map(s => s.category).slice(0, 3).join(" · ") },
                  { k: "Location", v: data.personalInfo.location || "Remote Node" }
                ].map(item => (
                  <div key={item.k} className="flex items-baseline gap-6 py-3 border-b border-[#ddd5c8] first:border-t">
@@ -96,8 +96,8 @@ export const PortfolioThemeMagazine = ({
       {/* About Section */}
       <section id="about" className="py-32 px-6">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex items-start gap-12 mb-20">
-             <div className="font-serif text-8xl font-light text-[#ddd5c8] leading-none">01</div>
+          <div className="flex items-start gap-6 md:gap-12 mb-16 md:mb-20">
+             <div className="font-serif text-6xl md:text-8xl font-light text-[#ddd5c8] leading-none">01</div>
              <div className="pt-4">
                 <p className="text-[#c4522a] text-[10px] tracking-[4px] uppercase mb-2">Profile</p>
                 <h2 className="font-serif text-5xl md:text-6xl font-light leading-tight">About <em className="italic text-[#c4522a] font-normal">Me</em></h2>
@@ -132,8 +132,8 @@ export const PortfolioThemeMagazine = ({
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (
         <section id="skills" className="py-32 px-6 bg-[#f0e8dc]">
           <div className="max-w-[1400px] mx-auto">
-            <div className="flex items-start gap-12 mb-20">
-               <div className="font-serif text-8xl font-light text-[#ddd5c8] leading-none">02</div>
+            <div className="flex items-start gap-6 md:gap-12 mb-16 md:mb-20">
+               <div className="font-serif text-6xl md:text-8xl font-light text-[#ddd5c8] leading-none">02</div>
                <div className="pt-4">
                   <p className="text-[#c4522a] text-[10px] tracking-[4px] uppercase mb-2">Expertise</p>
                   <h2 className="font-serif text-5xl md:text-6xl font-light leading-tight">Technical <em className="italic text-[#c4522a] font-normal">Skills</em></h2>
@@ -145,16 +145,18 @@ export const PortfolioThemeMagazine = ({
                  "A curated selection of technical proficiencies developed through rigorous project execution and continuous learning."
                </p>
                <div className="md:col-span-2">
-                 <table className="w-full">
-                    <tbody>
-                      {data.skills.map((skill, i) => (
-                        <tr key={skill} className="border-b border-[#ddd5c8] first:border-t">
-                          <td className="py-6 text-[10px] tracking-[2px] uppercase font-bold text-[#9a8070] w-48">Skill_Node {i + 1}</td>
-                          <td className="py-6 text-sm font-medium text-[#1c1209]">{skill}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                 </table>
+                 <div className="space-y-12">
+                   {data.skills.map((skillGroup, i) => (
+                     <div key={skillGroup.category} className="border-t-2 border-[#1c1209] pt-6">
+                        <h3 className="text-[10px] tracking-[4px] uppercase font-bold text-[#c4522a] mb-6">{skillGroup.category}</h3>
+                        <div className="flex flex-wrap gap-x-8 gap-y-4">
+                           {skillGroup.items.map(skill => (
+                             <span key={skill} className="font-serif text-2xl italic text-[#1c1209]">{skill}</span>
+                           ))}
+                        </div>
+                     </div>
+                   ))}
+                 </div>
                </div>
             </div>
           </div>
@@ -165,8 +167,8 @@ export const PortfolioThemeMagazine = ({
       {pData.sectionsVisibility.projects && data.projects.length > 0 && (
         <section id="projects" className="py-32 px-6">
           <div className="max-w-[1400px] mx-auto">
-            <div className="flex items-start gap-12 mb-20">
-               <div className="font-serif text-8xl font-light text-[#ddd5c8] leading-none">03</div>
+            <div className="flex items-start gap-6 md:gap-12 mb-16 md:mb-20">
+               <div className="font-serif text-6xl md:text-8xl font-light text-[#ddd5c8] leading-none">03</div>
                <div className="pt-4">
                   <p className="text-[#c4522a] text-[10px] tracking-[4px] uppercase mb-2">Portfolio</p>
                   <h2 className="font-serif text-5xl md:text-6xl font-light leading-tight">Featured <em className="italic text-[#c4522a] font-normal">Works</em></h2>
@@ -175,7 +177,7 @@ export const PortfolioThemeMagazine = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#ddd5c8] border border-[#ddd5c8]">
               {data.projects.map((proj, i) => (
-                <motion.div key={i} {...fadeIn} className="bg-[#f8f4ee] p-12 hover:bg-[#f0e8dc] transition-colors group">
+                <motion.div key={i} {...fadeIn} className="bg-[#f8f4ee] p-8 md:p-12 hover:bg-[#f0e8dc] transition-colors group">
                    <p className="text-[#c4522a] text-[10px] tracking-[3px] uppercase font-bold mb-4">Article {i + 1}</p>
                    <h3 className="font-serif text-3xl font-light mb-6 text-[#1c1209] group-hover:italic transition-all">{proj.name}</h3>
                    <p className="text-sm text-[#9a8070] leading-relaxed mb-8 h-24 overflow-hidden">{proj.description}</p>
@@ -202,8 +204,8 @@ export const PortfolioThemeMagazine = ({
       {pData.sectionsVisibility.experience && data.experience.length > 0 && (
         <section id="experience" className="py-32 px-6 bg-[#f0e8dc]">
           <div className="max-w-[1400px] mx-auto">
-            <div className="flex items-start gap-12 mb-20">
-               <div className="font-serif text-8xl font-light text-[#ddd5c8] leading-none">04</div>
+            <div className="flex items-start gap-6 md:gap-12 mb-16 md:mb-20">
+               <div className="font-serif text-6xl md:text-8xl font-light text-[#ddd5c8] leading-none">04</div>
                <div className="pt-4">
                   <p className="text-[#c4522a] text-[10px] tracking-[4px] uppercase mb-2">Career</p>
                   <h2 className="font-serif text-5xl md:text-6xl font-light leading-tight">Work <em className="italic text-[#c4522a] font-normal">History</em></h2>
@@ -240,8 +242,8 @@ export const PortfolioThemeMagazine = ({
       {pData.sectionsVisibility.contact && (
         <section id="contact" className="py-40 px-6 bg-[#1c1209] text-white">
           <div className="max-w-[1400px] mx-auto">
-            <div className="flex items-start gap-12 mb-20">
-               <div className="font-serif text-8xl font-light text-white/5 leading-none">05</div>
+            <div className="flex items-start gap-6 md:gap-12 mb-16 md:mb-20">
+               <div className="font-serif text-6xl md:text-8xl font-light text-white/5 leading-none">05</div>
                <div className="pt-4">
                   <p className="text-[#e8724a] text-[10px] tracking-[4px] uppercase mb-2">Connect</p>
                   <h2 className="font-serif text-5xl md:text-6xl font-light leading-tight text-white">Get In <em className="italic text-[#e8724a] font-normal">Touch</em></h2>
@@ -272,7 +274,7 @@ export const PortfolioThemeMagazine = ({
                   </ul>
                </div>
                <div className="flex flex-col items-end">
-                  <a href={`mailto:${data.personalInfo.email}`} className="font-serif text-4xl md:text-6xl italic text-[#e8724a] hover:text-white transition-all border-b border-[#e8724a]/30 pb-4 mb-10 w-full text-right">
+                  <a href={`mailto:${data.personalInfo.email}`} className="font-serif text-3xl md:text-6xl italic text-[#e8724a] hover:text-white transition-all border-b border-[#e8724a]/30 pb-4 mb-10 w-full text-right break-all md:break-normal">
                     Say Hello →
                   </a>
                   <p className="text-[10px] text-[#9a8070] italic tracking-[1px] text-right">Prompt response guaranteed for professional inquiries.</p>

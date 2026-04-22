@@ -1,251 +1,413 @@
 "use client";
 
-import { useState } from "react";
-import { Navbar } from "@/components/landing/Navbar";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Save, Eye, Image as ImageIcon, Settings, Search, Check, Loader2, ShieldAlert } from "lucide-react";
-import { toast } from "sonner";
-import { motion, AnimatePresence } from "framer-motion";
-import { useUser } from "@clerk/nextjs";
+import { 
+  Plus, 
+  Sparkles, 
+  Search, 
+  ArrowLeft, 
+  Image as ImageIcon, 
+  Globe, 
+  BarChart, 
+  Type, 
+  AlignLeft,
+  ChevronRight,
+  Loader2,
+  Trash2,
+  Zap,
+  Tag,
+  ShieldCheck,
+  Activity,
+  Send
+} from "lucide-react";
+import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function BlogEditorPage() {
-  const { user } = useUser();
+export default function NewBlogPage() {
   const router = useRouter();
-  
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [featuredImage, setFeaturedImage] = useState("");
-  const [seoTitle, setSeoTitle] = useState("");
-  const [metaDescription, setMetaDescription] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-
+  const { user, isLoaded } = useUser();
   const isAdmin = user?.primaryEmailAddress?.emailAddress === "xyzg135@gmail.com";
+  
+  const [loading, setLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [pexelsLoading, setPexelsLoading] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    title: "",
+    content: "",
+    excerpt: "",
+    image_url: "",
+    category: "Technology",
+    slug: "",
+    meta_title: "",
+    meta_description: "",
+    keywords: ""
+  });
 
-  const handleSearchImages = async () => {
-    if (!searchQuery) return;
-    setIsSearching(true);
-    try {
-      const res = await fetch(`https://api.pexels.com/v1/search?query=${searchQuery}&per_page=6`, {
-        headers: {
-          Authorization: process.env.NEXT_PUBLIC_PEXELS_API_KEY || "",
-        }
-      });
-      const data = await res.json();
-      setSearchResults(data.photos || []);
-    } catch (error) {
-      toast.error("Failed to fetch images from Pexels.");
-    } finally {
-      setIsSearching(false);
+  const [prompt, setPrompt] = useState("");
+  const [pexelsQuery, setPexelsQuery] = useState("");
+  const [pexelsImages, setPexelsImages] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (isLoaded && !isAdmin) {
+      router.push("/dashboard");
     }
-  };
+  }, [isLoaded, isAdmin, router]);
 
-  const handleSave = async () => {
-    if (!title || !content) {
-      toast.error("Title and Content are required.");
+  // Update slug automatically from title
+  useEffect(() => {
+    if (formData.title) {
+      setFormData(prev => ({
+        ...prev,
+        slug: formData.title.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, ""),
+        meta_title: formData.title
+      }));
+    }
+  }, [formData.title]);
+
+  const generateContent = async () => {
+    if (!prompt) {
+      toast.error("Please enter a prompt for the AI");
       return;
     }
-    setIsSaving(true);
+    setAiLoading(true);
     try {
-      const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-      const { error } = await supabase
-        .from('blogs')
-        .insert({
-          title,
-          slug,
-          content,
-          featured_image: featuredImage,
-          seo_title: seoTitle || title,
-          seo_description: metaDescription,
-          is_published: true,
-          created_at: new Date().toISOString()
-        });
-      
-      if (error) throw error;
-      toast.success("Blog post published successfully!");
-      router.push("/dashboard");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to publish blog post.");
+      const res = await fetch("/api/ai/generate-blog", {
+        method: "POST",
+        body: JSON.stringify({ prompt }),
+      });
+      const data = await res.json();
+      if (data.blog) {
+        setFormData(prev => ({
+          ...prev,
+          title: data.blog.title,
+          content: data.blog.content,
+          excerpt: data.blog.excerpt,
+          meta_description: data.blog.excerpt
+        }));
+        toast.success("AI Content Generated!");
+      }
+    } catch (e) {
+      toast.error("AI Generation failed");
     } finally {
-      setIsSaving(false);
+      setAiLoading(false);
     }
   };
 
-  if (user && !isAdmin) {
+  const searchPexels = async () => {
+    if (!pexelsQuery) return;
+    setPexelsLoading(true);
+    try {
+      const res = await fetch(`/api/pexels?query=${encodeURIComponent(pexelsQuery)}`);
+      const data = await res.json();
+      setPexelsImages(data.photos || []);
+    } catch (e) {
+      toast.error("Image search failed");
+    } finally {
+      setPexelsLoading(false);
+    }
+  };
+
+  const handleSave = async (isPublished = false) => {
+    if (!formData.title || !formData.content) {
+      toast.error("Title and content are required");
+      return;
+    }
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("blogs").insert([{
+        ...formData,
+        is_published: isPublished
+      }]);
+
+      if (error) throw error;
+      toast.success(isPublished ? "Post Published!" : "Draft Saved!");
+      router.push("/dashboard/blog");
+    } catch (e: any) {
+      toast.error(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isLoaded || (isLoaded && !isAdmin)) {
     return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <Navbar />
-        <div className="flex-grow flex items-center justify-center p-6">
-          <div className="text-center space-y-4">
-            <ShieldAlert className="h-16 w-16 text-red-500 mx-auto" />
-            <h1 className="text-3xl font-black text-slate-900 tracking-tight">Unauthorized Area</h1>
-            <p className="text-slate-500">Only the platform administrator can create and publish blog posts.</p>
-            <Button asChild className="mt-4 bg-indigo-600 hover:bg-indigo-700 rounded-full font-bold">
-               <Link href="/dashboard">Return to Dashboard</Link>
-            </Button>
-          </div>
-        </div>
+      <div className="flex h-screen items-center justify-center bg-[#050505]">
+        <Loader2 className="h-10 w-10 animate-spin text-indigo-500" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="space-y-1">
-            <h1 className="text-3xl font-black text-slate-900 tracking-tight">Create Post</h1>
-            <p className="text-slate-500 font-medium">Craft a story that inspires your audience.</p>
-          </div>
-          <div className="flex gap-3">
-             <Button variant="outline" className="rounded-full gap-2 border-slate-200">
-                <Eye className="h-4 w-4" /> Preview
-             </Button>
-             <Button onClick={handleSave} disabled={isSaving} className="rounded-full bg-indigo-600 hover:bg-indigo-700 gap-2 shadow-lg shadow-indigo-100 px-8">
-                {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-                {isSaving ? "Publishing..." : "Publish"}
-             </Button>
-          </div>
-        </header>
+    <div className="space-y-12 pb-20">
+      {/* Background Gradients */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/5 blur-[120px] rounded-full" />
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Main Editor */}
-          <div className="lg:col-span-8 space-y-8">
-            <div className="space-y-4">
-              <Input 
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Post Title..." 
-                className="text-4xl md:text-5xl font-black h-auto py-6 border-none px-0 focus-visible:ring-0 placeholder:text-slate-200 tracking-tight"
-              />
-              <div className="h-px bg-slate-100 w-full" />
+      {/* Header with Save Controls */}
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 border-b border-white/5 pb-10">
+         <div className="flex items-center gap-6">
+            <Link href="/dashboard/blog">
+               <button className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all group">
+                  <ArrowLeft className="h-6 w-6 text-slate-400 group-hover:text-white group-hover:-translate-x-1 transition-all" />
+               </button>
+            </Link>
+            <div className="space-y-1">
+               <h1 className="text-4xl font-black text-white tracking-tight uppercase italic">Synthesize <span className="text-indigo-500">Asset</span></h1>
+               <div className="flex items-center gap-3 text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">
+                  <ShieldCheck className="h-3 w-3 text-emerald-500" /> Secure Protocol v4.0
+                  <Activity className="h-3 w-3 text-indigo-500 animate-pulse ml-2" /> Live Connection
+               </div>
             </div>
+         </div>
+         
+         <div className="flex items-center gap-4 w-full lg:w-auto">
+            <Button 
+               variant="ghost" 
+               className="flex-1 lg:flex-none h-16 rounded-2xl px-10 font-black text-[11px] uppercase tracking-widest text-slate-400 hover:text-white hover:bg-white/5 border border-white/5"
+               onClick={() => handleSave(false)}
+               disabled={loading}
+            >
+               {loading ? <Loader2 className="animate-spin h-5 w-5 mr-3" /> : "Store Local Draft"}
+            </Button>
+            <Button 
+               className="flex-1 lg:flex-none h-16 rounded-2xl px-12 bg-white text-black hover:bg-slate-200 font-black text-[11px] uppercase tracking-widest shadow-2xl shadow-white/5"
+               onClick={() => handleSave(true)}
+               disabled={loading}
+            >
+               {loading ? <Loader2 className="animate-spin h-5 w-5 mr-3" /> : <span className="flex items-center gap-3">Deploy Intel <Send className="h-4 w-4" /></span>}
+            </Button>
+         </div>
+      </div>
 
-            <Tabs defaultValue="content" className="w-full">
-               <TabsList className="bg-slate-50 p-1 mb-6 rounded-full w-fit">
-                  <TabsTrigger value="content" className="rounded-full px-6">Content</TabsTrigger>
-                  <TabsTrigger value="settings" className="rounded-full px-6"><Settings className="h-4 w-4 mr-2" /> SEO Settings</TabsTrigger>
-               </TabsList>
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-12">
+         {/* Main Editor Section */}
+         <div className="xl:col-span-8 space-y-10">
+            {/* Title & Excerpt */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-2xl p-12 space-y-12 relative overflow-hidden"
+            >
+               <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/5 blur-[80px] -mr-32 -mt-32" />
                
-               <TabsContent value="content" className="mt-0">
-                  <Textarea 
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="Start writing..."
-                    rows={20}
-                    className="text-lg leading-relaxed border-none px-0 focus-visible:ring-0 resize-none placeholder:text-slate-200"
-                  />
-               </TabsContent>
-
-               <TabsContent value="settings" className="space-y-6">
-                  <div className="p-8 border-2 border-dashed border-slate-100 rounded-[2rem] space-y-4 bg-slate-50/50">
-                     <div className="space-y-2">
-                        <Label className="font-bold text-slate-700 uppercase tracking-widest text-xs">SEO Title</Label>
-                        <Input 
-                          value={seoTitle}
-                          onChange={(e) => setSeoTitle(e.target.value)}
-                          placeholder="Enter a search-friendly title..." 
-                          className="rounded-xl border-slate-200" 
-                        />
-                     </div>
-                     <div className="space-y-2">
-                        <Label className="font-bold text-slate-700 uppercase tracking-widest text-xs">Meta Description</Label>
-                        <Textarea 
-                          value={metaDescription}
-                          onChange={(e) => setMetaDescription(e.target.value)}
-                          placeholder="Brief summary for search engines..." 
-                          className="rounded-xl border-slate-200" 
-                        />
-                     </div>
+               <div className="space-y-6 relative">
+                  <div className="flex items-center gap-3 text-slate-500">
+                     <Type className="h-4 w-4 text-indigo-400" />
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em]">Asset Headline</span>
                   </div>
-               </TabsContent>
-            </Tabs>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-4 space-y-8">
-            <div className="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 space-y-6">
-               <div className="flex items-center gap-2 text-slate-900 border-b border-slate-200 pb-4">
-                  <ImageIcon className="h-5 w-5" />
-                  <h2 className="font-black uppercase tracking-tight">Featured Image</h2>
+                  <input 
+                    type="text" 
+                    value={formData.title}
+                    onChange={(e) => setFormData({...formData, title: e.target.value})}
+                    placeholder="ENTER ASSET TITLE..." 
+                    className="w-full text-4xl md:text-5xl font-black text-white placeholder:text-white/5 bg-transparent focus:outline-none tracking-tighter uppercase italic"
+                  />
                </div>
 
-               {featuredImage ? (
-                 <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-indigo-600 shadow-xl shadow-indigo-500/10 mb-4">
-                    <img src={featuredImage} alt="Featured" className="w-full h-full object-cover" />
-                    <button 
-                      onClick={() => setFeaturedImage("")}
-                      className="absolute top-2 right-2 bg-white/90 p-1.5 rounded-full text-slate-900 shadow-lg"
-                    >
-                       <ImageIcon className="h-4 w-4" />
-                    </button>
-                 </div>
-               ) : (
-                 <div className="aspect-video bg-white rounded-2xl border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-300 gap-2 mb-4">
-                    <ImageIcon className="h-8 w-8" />
-                    <p className="text-xs font-bold uppercase tracking-widest">No image selected</p>
-                 </div>
-               )}
+               <div className="h-[1px] bg-white/5" />
 
-               <div className="space-y-4">
-                  <div className="relative">
-                    <Input 
-                      placeholder="Search Pexels..." 
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && handleSearchImages()}
-                      className="rounded-full bg-white border-slate-200 pl-10 h-11"
-                    />
-                    <Search className="absolute left-4 top-3.5 h-4 w-4 text-slate-400" />
+               <div className="space-y-6">
+                  <div className="flex items-center gap-3 text-slate-500">
+                     <AlignLeft className="h-4 w-4 text-purple-400" />
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em]">Contextual Summary</span>
                   </div>
+                  <textarea 
+                    value={formData.excerpt}
+                    onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
+                    placeholder="PROVIDE AN EXECUTIVE SUMMARY FOR GLOBAL DISSEMINATION..." 
+                    rows={3}
+                    className="w-full text-lg font-bold text-slate-400 placeholder:text-white/5 bg-transparent focus:outline-none resize-none uppercase tracking-widest leading-relaxed"
+                  />
+               </div>
+            </motion.section>
+
+            {/* Content Editor */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-2xl p-12 space-y-8 min-h-[700px] flex flex-col"
+            >
+               <div className="flex items-center justify-between border-b border-white/5 pb-8">
+                  <div className="flex items-center gap-4">
+                    <ChevronRight className="h-5 w-5 text-indigo-500" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">Narrative Buffer</span>
+                  </div>
+                  <div className="flex gap-2">
+                    {['BOLD', 'ITALIC', 'LINK', 'QUOTE'].map(tool => (
+                      <button key={tool} className="px-4 py-2 text-[9px] font-black text-slate-500 hover:text-white bg-white/5 rounded-xl border border-white/5 hover:bg-indigo-500 transition-all uppercase tracking-widest">
+                        {tool}
+                      </button>
+                    ))}
+                  </div>
+               </div>
+               
+               <textarea 
+                  value={formData.content}
+                  onChange={(e) => setFormData({...formData, content: e.target.value})}
+                  placeholder="BEGIN NARRATIVE SYNTHESIS... MARKDOWN PROTOCOLS ACTIVE."
+                  className="w-full flex-1 bg-transparent text-slate-400 font-bold text-xl leading-relaxed focus:outline-none min-h-[450px] resize-none placeholder:text-white/5 mt-6"
+               />
+
+               <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="flex gap-10">
+                     <div className="space-y-1">
+                        <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest">Entropy Level</p>
+                        <p className="text-[11px] font-black text-white uppercase">{(formData.content || "").split(/\s+/).filter(Boolean).length} WORDS</p>
+                     </div>
+                     <div className="space-y-1">
+                        <p className="text-[8px] font-black text-slate-600 uppercase tracking-widest">Transmission Time</p>
+                        <p className="text-[11px] font-black text-indigo-400 uppercase">EST. {Math.ceil((formData.content || "").split(/\s+/).length / 200)} MIN</p>
+                     </div>
+                  </div>
+                  <div className="flex items-center gap-3 px-6 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
+                     <div className="h-2 w-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]" />
+                     <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">Global Sync Locked</span>
+                  </div>
+               </div>
+            </motion.section>
+         </div>
+
+         {/* Sidebar Controls */}
+         <div className="xl:col-span-4 space-y-10">
+            {/* Visual Asset Section */}
+            <motion.section 
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-2xl p-10 space-y-10"
+            >
+               <h3 className="text-xl font-black text-white tracking-tight flex items-center gap-4 uppercase italic">
+                  <ImageIcon className="h-6 w-6 text-indigo-400" /> Visual Engine
+               </h3>
+
+               {formData.image_url ? (
+                  <div className="relative group rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/10">
+                     <img src={formData.image_url} alt="Featured" className="w-full aspect-square object-cover transition-transform duration-1000 group-hover:scale-110 opacity-60 group-hover:opacity-100" />
+                     <div className="absolute inset-0 bg-indigo-600/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <Button variant="ghost" className="h-16 w-16 rounded-full bg-white/10 backdrop-blur-xl text-white border border-white/20 hover:bg-red-500 transition-all shadow-2xl" onClick={() => setFormData({...formData, image_url: ""})}>
+                           <Trash2 className="h-6 w-6" />
+                        </Button>
+                     </div>
+                  </div>
+               ) : (
+                  <div className="space-y-8">
+                     <div className="relative">
+                        <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
+                        <input 
+                           type="text" 
+                           placeholder="SEARCH GLOBAL IMAGERY..." 
+                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-14 pr-24 text-[11px] font-black text-white focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-700"
+                           value={pexelsQuery}
+                           onChange={(e) => setPexelsQuery(e.target.value)}
+                           onKeyDown={(e) => e.key === 'Enter' && searchPexels()}
+                        />
+                        <button onClick={searchPexels} className="absolute right-3 top-1/2 -translate-y-1/2 h-10 px-6 bg-indigo-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-indigo-500 transition-all">SCAN</button>
+                     </div>
+                     
+                     <AnimatePresence>
+                        {pexelsImages.length > 0 && (
+                           <motion.div 
+                             initial={{ opacity: 0, height: 0 }}
+                             animate={{ opacity: 1, height: 'auto' }}
+                             className="grid grid-cols-2 gap-4"
+                           >
+                              {pexelsImages.slice(0, 4).map(img => (
+                                 <button key={img.id} onClick={() => setFormData({...formData, image_url: img.src.large})} className="rounded-2xl overflow-hidden border border-white/5 hover:border-indigo-500 transition-all group relative aspect-square">
+                                    <img src={img.src.medium} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity" />
+                                    <div className="absolute inset-0 bg-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                 </button>
+                              ))}
+                           </motion.div>
+                        )}
+                     </AnimatePresence>
+                  </div>
+               )}
+            </motion.section>
+
+            {/* AI Assistant */}
+            <motion.section 
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ delay: 0.1 }}
+               className="bg-indigo-600 rounded-[3rem] p-10 text-white space-y-8 relative overflow-hidden group shadow-2xl shadow-indigo-500/20"
+            >
+               <div className="relative z-10 space-y-8">
+                  <div className="flex items-center justify-between">
+                     <h3 className="text-xl font-black tracking-tight flex items-center gap-4 uppercase italic">
+                        <Sparkles className="h-6 w-6" /> AI Co-Pilot
+                     </h3>
+                     <Activity className="h-4 w-4 animate-pulse text-indigo-200" />
+                  </div>
+                  <textarea 
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder="DESCRIBE ASSET REQUIREMENTS OR SECTION TARGETS..." 
+                    className="w-full bg-black/20 border border-white/10 rounded-2xl p-6 text-sm font-bold focus:outline-none focus:ring-4 focus:ring-white/5 transition-all placeholder:text-indigo-200/30 resize-none h-40 uppercase tracking-widest leading-relaxed"
+                  />
                   <Button 
-                    onClick={handleSearchImages} 
-                    disabled={isSearching}
-                    variant="secondary" 
-                    className="w-full rounded-full font-bold bg-white border border-slate-200"
+                     className="w-full h-16 rounded-2xl bg-white text-indigo-600 hover:bg-slate-50 font-black text-[11px] uppercase tracking-widest transition-all hover:scale-105 shadow-2xl active:scale-95"
+                     onClick={generateContent}
+                     disabled={aiLoading}
                   >
-                    {isSearching ? <Loader2 className="h-4 w-4 animate-spin" /> : "Search Photos"}
+                     {aiLoading ? <Loader2 className="animate-spin h-6 w-6" /> : (
+                        <span className="flex items-center gap-3">Run Synthesis <Zap className="h-4 w-4 fill-indigo-600" /></span>
+                     )}
                   </Button>
                </div>
+               <div className="absolute top-0 right-0 w-80 h-80 bg-white/10 blur-[100px] rounded-full -mr-40 -mt-40 group-hover:bg-white/20 transition-all duration-1000" />
+            </motion.section>
 
-               <div className="grid grid-cols-2 gap-3 pt-4">
-                  <AnimatePresence>
-                    {searchResults.map((photo) => (
-                      <motion.button
-                        key={photo.id}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        onClick={() => setFeaturedImage(photo.src.large)}
-                        className={`aspect-square rounded-xl overflow-hidden border-2 transition-all relative ${
-                          featuredImage === photo.src.large ? "border-indigo-600 ring-2 ring-indigo-100" : "border-transparent opacity-70 hover:opacity-100"
-                        }`}
-                      >
-                        <img src={photo.src.small} className="w-full h-full object-cover" alt="Search result" />
-                        {featuredImage === photo.src.large && (
-                          <div className="absolute inset-0 bg-indigo-600/20 flex items-center justify-center">
-                             <Check className="h-6 w-6 text-white bg-indigo-600 rounded-full p-1" />
-                          </div>
-                        )}
-                      </motion.button>
-                    ))}
-                  </AnimatePresence>
+            {/* SEO Matrix */}
+            <motion.section 
+               initial={{ opacity: 0, x: 20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ delay: 0.2 }}
+               className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-2xl p-10 space-y-10"
+            >
+               <h3 className="text-xl font-black text-white tracking-tight flex items-center gap-4 uppercase italic">
+                  <BarChart className="h-6 w-6 text-indigo-400" /> SEO Optimization
+               </h3>
+               
+               <div className="space-y-8">
+                  <div className="space-y-4">
+                     <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500">Asset Permalink</Label>
+                     <div className="relative group">
+                        <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-600 font-black text-[10px] tracking-widest">/BLOG/</div>
+                        <input 
+                           type="text" 
+                           value={formData.slug}
+                           onChange={(e) => setFormData({...formData, slug: e.target.value})}
+                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 pl-20 pr-6 text-[10px] font-black text-white focus:border-indigo-500 focus:outline-none transition-all uppercase tracking-[0.2em]"
+                        />
+                     </div>
+                  </div>
+
+                  <div className="space-y-4">
+                     <div className="flex justify-between items-center">
+                        <Label className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500">Global Metadata</Label>
+                        <span className="text-[8px] font-black text-slate-700 tracking-widest">{(formData.meta_description || "").length}/160</span>
+                     </div>
+                     <textarea 
+                        value={formData.meta_description}
+                        onChange={(e) => setFormData({...formData, meta_description: e.target.value})}
+                        placeholder="OPTIMIZE FOR SEARCH ENGINE DISCOVERY..." 
+                        rows={4}
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-6 text-[10px] font-black text-white focus:border-indigo-500 focus:outline-none transition-all resize-none uppercase tracking-[0.2em] leading-relaxed placeholder:text-slate-800"
+                     />
+                  </div>
                </div>
-            </div>
-          </div>
-        </div>
+            </motion.section>
+         </div>
       </div>
     </div>
   );

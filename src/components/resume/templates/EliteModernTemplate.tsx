@@ -71,10 +71,14 @@ export const EliteModernTemplate = ({ data }: { data: ResumeData }) => {
               </h2>
               <div className="space-y-3">
                 {data.skills.map((skill, i) => (
-                  <div key={i} className="flex justify-between items-center gap-2">
-                    <span className="text-[11px] font-bold tracking-wider uppercase text-slate-200">{skill}</span>
-                    <div className="h-1 flex-1 bg-slate-700/50 ml-2 rounded-full overflow-hidden">
-                      <div className="h-full bg-[#d4af37]" style={{ width: `${80 + (Math.random() * 20)}%` }}></div>
+                  <div key={i} className="mb-4">
+                    <p className="text-[10px] text-[#d4af37] font-black uppercase tracking-widest mb-2 italic opacity-70">{skill.category}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {skill.items.map((item, j) => (
+                        <span key={j} className="text-[11px] font-bold tracking-wider uppercase text-slate-200 bg-slate-700/30 px-2 py-0.5 rounded">
+                          {item}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 ))}
