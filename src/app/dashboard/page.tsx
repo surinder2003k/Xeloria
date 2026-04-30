@@ -11,14 +11,17 @@ import {
   FileText,
   User,
   Layout,
+  LayoutDashboard,
   MoreVertical,
   Trash2,
   Edit3,
   Eye,
   Loader2,
   Sparkles,
-  Search
+  Search,
+  Layers
 } from "lucide-react";
+import { XeloriaLogo } from "@/components/BrandLogo";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
@@ -150,21 +153,24 @@ export default function DashboardPage() {
 
       {/* Header Section */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-        <div>
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 text-indigo-400 bg-indigo-500/10 w-fit px-4 py-2 rounded-full mb-4 border border-indigo-500/20"
-          >
-            <Activity className="h-4 w-4" />
-            <span className="text-[10px] font-black uppercase tracking-widest">System Status: Optimal</span>
-          </motion.div>
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none uppercase">
-            Main <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Portal</span>
-          </h1>
-          <p className="text-slate-500 font-bold text-xs uppercase tracking-[0.3em] mt-4">
-            {isAdmin ? "ADMINISTRATOR" : "CREATOR"} CONTROL CENTER // {portfolios.length} ACTIVE ASSETS
-          </p>
+        <div className="flex items-center gap-6">
+            <XeloriaLogo className="h-16 w-16 drop-shadow-2xl group-hover:scale-110 transition-all" />
+           <div>
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-2 text-indigo-400 bg-indigo-500/10 w-fit px-4 py-2 rounded-full mb-3 border border-indigo-500/20"
+              >
+                <Activity className="h-4 w-4" />
+                <span className="text-[10px] font-black uppercase tracking-widest">System Status: Optimal</span>
+              </motion.div>
+              <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none uppercase">
+                Main <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Portal</span>
+              </h1>
+              <p className="text-slate-500 font-bold text-xs uppercase tracking-[0.3em] mt-3">
+                {isAdmin ? "ADMINISTRATOR" : "CREATOR"} CONTROL CENTER // {portfolios.length} ACTIVE ASSETS
+              </p>
+           </div>
         </div>
 
         <div className="flex gap-4">
@@ -173,7 +179,7 @@ export default function DashboardPage() {
             className="h-16 px-10 rounded-2xl bg-white text-black hover:bg-slate-200 font-black text-lg shadow-2xl shadow-white/10 group transition-all"
            >
             <Plus className="md:mr-3 h-5 w-5 md:h-6 md:w-6 group-hover:rotate-90 transition-transform" />
-            <span className="hidden md:inline">CREATE NEW</span>
+            <span className="hidden md:inline">CREATE YOUR PORTFOLIO</span>
             <span className="md:hidden">CREATE</span>
            </Button>
         </div>
@@ -256,18 +262,19 @@ export default function DashboardPage() {
           className="relative z-10 pt-12 border-t border-white/10"
         >
           <div className="flex items-center gap-4 mb-10">
-            <div className="h-12 w-12 bg-purple-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-purple-500/20">
-              <Zap className="h-6 w-6" />
-            </div>
+            <XeloriaLogo className="h-12 w-12 group-hover:scale-110 transition-all drop-shadow-2xl" />
             <div>
               <h2 className="text-3xl font-black tracking-tight uppercase">Admin <span className="text-purple-400">Operations</span></h2>
-              <p className="text-slate-500 font-bold text-[10px] uppercase tracking-widest">Privileged Access Mode</p>
+              <div className="flex items-center gap-2 mt-2">
+                <Zap className="h-3 w-3 text-purple-400" />
+                <p className="text-slate-500 font-bold text-[10px] uppercase tracking-widest">Privileged Access Mode // Multi-Node Control</p>
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Link href="/dashboard/blog" className="bg-white/5 backdrop-blur-xl p-8 rounded-[2.5rem] border border-white/10 hover:bg-white/10 transition-all group">
-              <FileText className="h-10 w-10 text-purple-400 mb-6 group-hover:scale-110 transition-transform" />
+              <Layers className="h-10 w-10 text-purple-400 mb-6 group-hover:scale-110 transition-transform" />
               <h4 className="font-black uppercase tracking-tight text-lg">Manage Blog</h4>
               <p className="text-xs text-slate-500 mt-2">Editorial pipeline & content sync.</p>
             </Link>

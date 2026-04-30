@@ -26,7 +26,7 @@ export const PremiumProTemplate = ({ data }: { data: ResumeData }) => {
               {data.personalInfo.email && (
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] font-bold text-slate-400 uppercase">Email</span>
-                  <p className="font-bold text-slate-700">{data.personalInfo.email}</p>
+                  <a href={`mailto:${data.personalInfo.email}`} className="font-bold text-slate-700 hover:text-indigo-600 transition-colors">{data.personalInfo.email}</a>
                 </div>
               )}
               {data.personalInfo.phone && (
@@ -39,6 +39,30 @@ export const PremiumProTemplate = ({ data }: { data: ResumeData }) => {
                 <div className="flex flex-col gap-1">
                   <span className="text-[9px] font-bold text-slate-400 uppercase">Address</span>
                   <p className="font-bold text-slate-700">{data.personalInfo.location}</p>
+                </div>
+              )}
+              {data.personalInfo.website && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase">Website</span>
+                  <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="font-bold text-slate-700 hover:text-indigo-600 transition-colors">Portfolio</a>
+                </div>
+              )}
+              {data.personalInfo.linkedin && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase">LinkedIn</span>
+                  <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="font-bold text-slate-700 hover:text-indigo-600 transition-colors">Profile</a>
+                </div>
+              )}
+              {data.personalInfo.github && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase">GitHub</span>
+                  <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="font-bold text-slate-700 hover:text-indigo-600 transition-colors">Repositories</a>
+                </div>
+              )}
+              {data.personalInfo.twitter && (
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase">Twitter</span>
+                  <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="font-bold text-slate-700 hover:text-indigo-600 transition-colors">Feed</a>
                 </div>
               )}
             </div>

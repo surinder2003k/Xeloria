@@ -260,9 +260,21 @@ export const PortfolioThemeGlass = ({
                 {data.personalInfo.email}
               </a>
               <div className="flex justify-center gap-6 pt-10 border-t border-white/10">
-                 {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin} className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-[#64748b] hover:text-[#60a5fa] hover:bg-white/10 transition-all"><Linkedin size={18} /></a>}
-                 {pData.socialLinks.github && <a href={pData.socialLinks.github} className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-[#64748b] hover:text-[#60a5fa] hover:bg-white/10 transition-all"><Github size={18} /></a>}
-                 {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter} className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-[#64748b] hover:text-[#60a5fa] hover:bg-white/10 transition-all"><Twitter size={18} /></a>}
+                 {pData.socialLinks.linkedin && (
+                   <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-[#64748b] hover:text-[#60a5fa] hover:bg-white/10 transition-all">
+                     <Linkedin size={18} />
+                   </a>
+                 )}
+                 {pData.socialLinks.github && (
+                   <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-[#64748b] hover:text-[#60a5fa] hover:bg-white/10 transition-all">
+                     <Github size={18} />
+                   </a>
+                 )}
+                 {pData.socialLinks.twitter && (
+                   <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 text-[#64748b] hover:text-[#60a5fa] hover:bg-white/10 transition-all">
+                     <Twitter size={18} />
+                   </a>
+                 )}
               </div>
            </motion.div>
         </section>

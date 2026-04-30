@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Navbar } from "@/components/landing/Navbar";
-import { Github, Twitter, Linkedin, Sparkles, ArrowRight } from "lucide-react";
+import { Github, Twitter, Linkedin, Sparkles, ArrowRight, LayoutDashboard } from "lucide-react";
 import Link from "next/link";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
@@ -66,7 +66,9 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-16 pb-16 border-b border-white/5">
         <div className="col-span-1 md:col-span-2 space-y-6">
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="h-10 w-10 bg-indigo-600 rounded-xl flex items-center justify-center font-black group-hover:scale-110 group-hover:rotate-6 transition-all shadow-xl shadow-indigo-600/20">X</div>
+            <div className="h-10 w-10 bg-indigo-600 rounded-xl flex items-center justify-center font-black group-hover:scale-110 group-hover:rotate-6 transition-all shadow-xl shadow-indigo-600/20">
+              <LayoutDashboard className="h-6 w-6 text-white" />
+            </div>
             <span className="text-3xl font-black tracking-tighter uppercase italic">XEL<span className="text-indigo-500">ORIA</span></span>
           </Link>
           <p className="text-slate-500 max-w-sm text-sm font-bold uppercase tracking-widest leading-relaxed">
@@ -88,7 +90,7 @@ const Footer = () => (
         <div>
           <h3 className="text-[10px] font-black text-white uppercase tracking-[0.4em] mb-8">Asset Core</h3>
           <ul className="space-y-4">
-            <li><Link href="/templates" className="text-slate-500 hover:text-indigo-400 text-xs font-black uppercase tracking-widest transition-colors">Design Systems</Link></li>
+            <li><Link href="/" className="text-slate-500 hover:text-indigo-400 text-xs font-black uppercase tracking-widest transition-colors">Nexus Home</Link></li>
             <li><Link href="/blog" className="text-slate-500 hover:text-indigo-400 text-xs font-black uppercase tracking-widest transition-colors">Intel Feed</Link></li>
             <li><Link href="/dashboard" className="text-slate-500 hover:text-indigo-400 text-xs font-black uppercase tracking-widest transition-colors">Command Center</Link></li>
           </ul>

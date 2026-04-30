@@ -1,5 +1,5 @@
 import { ResumeData } from "@/lib/store";
-import { Mail, Phone, MapPin, Globe, Linkedin, Award, Briefcase, GraduationCap, User } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Linkedin, Github, Twitter, Award, Briefcase, GraduationCap, User } from "lucide-react";
 
 export const CreativeTemplate = ({ data }: { data: ResumeData }) => {
   return (
@@ -23,16 +23,39 @@ export const CreativeTemplate = ({ data }: { data: ResumeData }) => {
             <h2 className="text-sm font-bold uppercase tracking-widest text-indigo-400 mb-4 border-b border-white/10 pb-2">Contact</h2>
             <div className="space-y-3 text-xs">
               {data.personalInfo.email && (
-                <div className="flex items-center gap-2"><Mail className="h-3 w-3" /> {data.personalInfo.email}</div>
+                <a href={`mailto:${data.personalInfo.email}`} className="flex items-center gap-2 hover:text-indigo-400 transition-colors">
+                  <Mail className="h-3 w-3" /> {data.personalInfo.email}
+                </a>
               )}
               {data.personalInfo.phone && (
-                <div className="flex items-center gap-2"><Phone className="h-3 w-3" /> {data.personalInfo.phone}</div>
+                <div className="flex items-center gap-2">
+                  <Phone className="h-3 w-3" /> {data.personalInfo.phone}
+                </div>
               )}
               {data.personalInfo.location && (
-                <div className="flex items-center gap-2"><MapPin className="h-3 w-3" /> {data.personalInfo.location}</div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-3 w-3" /> {data.personalInfo.location}
+                </div>
+              )}
+              {data.personalInfo.website && (
+                <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-400 transition-colors">
+                  <Globe className="h-3 w-3" /> Website
+                </a>
               )}
               {data.personalInfo.linkedin && (
-                <div className="flex items-center gap-2"><Linkedin className="h-3 w-3" /> {data.personalInfo.linkedin}</div>
+                <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-400 transition-colors">
+                  <Linkedin className="h-3 w-3" /> LinkedIn
+                </a>
+              )}
+              {data.personalInfo.github && (
+                <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-400 transition-colors">
+                  <Github className="h-3 w-3" /> GitHub
+                </a>
+              )}
+              {data.personalInfo.twitter && (
+                <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-indigo-400 transition-colors">
+                  <Twitter className="h-3 w-3" /> Twitter
+                </a>
               )}
             </div>
           </section>

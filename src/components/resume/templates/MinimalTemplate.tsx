@@ -18,8 +18,26 @@ export const MinimalTemplate = ({ data }: { data: ResumeData }) => {
             <h2 className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300 mb-4">Contact</h2>
             <div className="space-y-2 text-xs">
               <p className="font-medium text-slate-500">{data.personalInfo.phone}</p>
-              <p className="font-medium text-slate-500">{data.personalInfo.website}</p>
-              <p className="font-medium text-slate-500">{data.personalInfo.linkedin}</p>
+              {data.personalInfo.website && (
+                <p className="font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                  <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer">Website</a>
+                </p>
+              )}
+              {data.personalInfo.linkedin && (
+                <p className="font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                  <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </p>
+              )}
+              {data.personalInfo.github && (
+                <p className="font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                  <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer">GitHub</a>
+                </p>
+              )}
+              {data.personalInfo.twitter && (
+                <p className="font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                  <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer">Twitter</a>
+                </p>
+              )}
             </div>
           </section>
 

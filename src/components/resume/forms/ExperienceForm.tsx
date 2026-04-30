@@ -25,7 +25,7 @@ export const ExperienceForm = () => {
   return (
     <div className="space-y-10">
       <AnimatePresence>
-        {data.experience.map((exp, index) => (
+        {data?.experience?.map((exp, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}

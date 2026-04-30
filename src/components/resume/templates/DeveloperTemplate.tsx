@@ -15,8 +15,19 @@ export const DeveloperTemplate = ({ data }: { data: ResumeData }) => {
             <p className="text-sm text-slate-400 mt-1"># {data.personalInfo.jobTitle || "Full Stack Developer"}</p>
           </div>
           <div className="text-right text-[10px] space-y-1">
-            <p>{data.personalInfo.email}</p>
-            <p>{data.personalInfo.website}</p>
+            <p><a href={`mailto:${data.personalInfo.email}`} className="hover:text-indigo-400">{data.personalInfo.email}</a></p>
+            {data.personalInfo.website && (
+              <p><a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400">{data.personalInfo.website}</a></p>
+            )}
+            {data.personalInfo.linkedin && (
+              <p><a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400">linkedin.com/in/{data.personalInfo.linkedin.split('/').pop()}</a></p>
+            )}
+            {data.personalInfo.github && (
+              <p><a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400">github.com/{data.personalInfo.github.split('/').pop()}</a></p>
+            )}
+            {data.personalInfo.twitter && (
+              <p><a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400">twitter.com/{data.personalInfo.twitter.split('/').pop()}</a></p>
+            )}
             <p>{data.personalInfo.location}</p>
           </div>
         </div>
@@ -66,7 +77,11 @@ export const DeveloperTemplate = ({ data }: { data: ResumeData }) => {
                   <div key={i} className="p-4 bg-slate-50 border border-slate-100 rounded-lg">
                     <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2">
                        {proj.name} 
-                       {proj.link && <span className="text-[10px] font-normal text-indigo-500 underline">link</span>}
+                       {proj.link && (
+                         <a href={proj.link.startsWith('http') ? proj.link : `https://${proj.link}`} target="_blank" rel="noopener noreferrer" className="text-[10px] font-normal text-indigo-500 hover:text-indigo-600 underline ml-2">
+                           View Project
+                         </a>
+                       )}
                     </h3>
                     <p className="text-xs text-slate-600 mt-1">{proj.description}</p>
                   </div>

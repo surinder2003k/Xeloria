@@ -13,9 +13,29 @@ export const EliteMinimalTemplate = ({ data }: { data: ResumeData }) => {
         </p>
 
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] font-sans text-[#666] tracking-widest uppercase">
-          {data.personalInfo.email && <span>{data.personalInfo.email}</span>}
+          {data.personalInfo.email && <a href={`mailto:${data.personalInfo.email}`} className="hover:text-black transition-colors">{data.personalInfo.email}</a>}
           {data.personalInfo.phone && <span>• {data.personalInfo.phone}</span>}
           {data.personalInfo.location && <span>• {data.personalInfo.location}</span>}
+          {data.personalInfo.website && (
+            <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+              • Website
+            </a>
+          )}
+          {data.personalInfo.linkedin && (
+            <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+              • LinkedIn
+            </a>
+          )}
+          {data.personalInfo.github && (
+            <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+              • GitHub
+            </a>
+          )}
+          {data.personalInfo.twitter && (
+            <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">
+              • Twitter
+            </a>
+          )}
         </div>
       </header>
 

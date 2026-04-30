@@ -6,13 +6,41 @@ export const StandardPDFTemplate = ({ data }: { data: ResumeData }) => {
       <header className="text-center mb-8 border-b-2 border-slate-100 pb-6">
         <h1 className="text-4xl font-bold text-slate-900 mb-3 underline-offset-8">{data.personalInfo.fullName || "Your Name"}</h1>
         <p className="text-xl text-slate-700 font-medium mb-4">{data.personalInfo.location || "Location"}</p>
-        <div className="text-sm text-slate-500">
-           {[
-             data.personalInfo.phone,
-             data.personalInfo.email,
-             data.personalInfo.website,
-             data.personalInfo.linkedin
-           ].filter(Boolean).join("  |  ")}
+        <div className="text-sm text-slate-500 flex flex-wrap justify-center items-center gap-x-2">
+          {data.personalInfo.phone && <span>{data.personalInfo.phone}</span>}
+          {data.personalInfo.phone && (data.personalInfo.email || data.personalInfo.website || data.personalInfo.linkedin || data.personalInfo.github || data.personalInfo.twitter) && <span>|</span>}
+          
+          {data.personalInfo.email && (
+            <>
+              <a href={`mailto:${data.personalInfo.email}`} className="hover:text-black">{data.personalInfo.email}</a>
+              {(data.personalInfo.website || data.personalInfo.linkedin || data.personalInfo.github || data.personalInfo.twitter) && <span>|</span>}
+            </>
+          )}
+
+          {data.personalInfo.website && (
+            <>
+              <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-black">Website</a>
+              {(data.personalInfo.linkedin || data.personalInfo.github || data.personalInfo.twitter) && <span>|</span>}
+            </>
+          )}
+
+          {data.personalInfo.linkedin && (
+            <>
+              <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-black">LinkedIn</a>
+              {(data.personalInfo.github || data.personalInfo.twitter) && <span>|</span>}
+            </>
+          )}
+
+          {data.personalInfo.github && (
+            <>
+              <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-black">GitHub</a>
+              {data.personalInfo.twitter && <span>|</span>}
+            </>
+          )}
+
+          {data.personalInfo.twitter && (
+            <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-black">Twitter</a>
+          )}
         </div>
       </header>
 
@@ -72,9 +100,13 @@ export const StandardPDFTemplate = ({ data }: { data: ResumeData }) => {
       {(data.skills && data.skills.length > 0) && (
         <section className="mb-8">
           <h2 className="text-lg font-bold text-slate-900 mb-3 border-b-2 border-slate-100 pb-1 uppercase tracking-wide">Technical Skills</h2>
-          <p className="text-[13px] text-slate-700 leading-relaxed">
-            {data.skills.join(", ")}
-          </p>
+          <div className="space-y-2">
+            {data.skills.map((skill, i) => (
+              <div key={i} className="text-[13px] text-slate-700 leading-relaxed">
+                <span className="font-bold">{skill.category}:</span> {skill.items.join(", ")}
+              </div>
+            ))}
+          </div>
         </section>
       )}
 

@@ -32,10 +32,21 @@ export const MinimalProTemplate = ({ data }: { data: ResumeData }) => {
           <section>
             <h2 className="text-[10px] font-black uppercase tracking-[0.2em] mb-6 text-slate-300">Contact</h2>
             <div className="space-y-4 text-xs font-bold leading-relaxed">
-              {data.personalInfo.email && <p>{data.personalInfo.email}</p>}
+              {data.personalInfo.email && <p><a href={`mailto:${data.personalInfo.email}`} className="hover:text-indigo-600 transition-colors">{data.personalInfo.email}</a></p>}
               {data.personalInfo.phone && <p>{data.personalInfo.phone}</p>}
               {data.personalInfo.location && <p>{data.personalInfo.location}</p>}
-              {data.personalInfo.linkedin && <p className="text-indigo-600">linkedin.com/in/user</p>}
+              {data.personalInfo.website && (
+                <p><a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors">Website</a></p>
+              )}
+              {data.personalInfo.linkedin && (
+                <p><a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors">LinkedIn</a></p>
+              )}
+              {data.personalInfo.github && (
+                <p><a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors">GitHub</a></p>
+              )}
+              {data.personalInfo.twitter && (
+                <p><a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-700 transition-colors">Twitter</a></p>
+              )}
             </div>
           </section>
 

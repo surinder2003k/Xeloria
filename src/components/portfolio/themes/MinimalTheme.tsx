@@ -57,8 +57,8 @@ export const PortfolioThemeMinimal = ({
                 View Projects
               </a>
               <div className="flex gap-4 items-center px-4">
-                {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin} className="text-slate-400 hover:text-slate-900 transition-colors"><Linkedin size={24}/></a>}
-                {pData.socialLinks.github && <a href={pData.socialLinks.github} className="text-slate-400 hover:text-slate-900 transition-colors"><Github size={24}/></a>}
+                {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 transition-colors"><Linkedin size={24}/></a>}
+                {pData.socialLinks.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 transition-colors"><Github size={24}/></a>}
               </div>
             </div>
           </motion.div>
@@ -145,9 +145,9 @@ export const PortfolioThemeMinimal = ({
             {data.personalInfo.email}
           </a>
           <div className="mt-20 flex justify-center gap-12 text-slate-400 font-medium">
-             {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter} className="hover:text-slate-900 transition-colors">Twitter</a>}
-             {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin} className="hover:text-slate-900 transition-colors">LinkedIn</a>}
-             {pData.socialLinks.github && <a href={pData.socialLinks.github} className="hover:text-slate-900 transition-colors">GitHub</a>}
+             {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">Twitter</a>}
+             {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">LinkedIn</a>}
+             {pData.socialLinks.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">GitHub</a>}
           </div>
         </section>
       )}

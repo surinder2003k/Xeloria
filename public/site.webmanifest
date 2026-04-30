@@ -1,0 +1,16 @@
+{
+  "name": "Xeloria",
+  "short_name": "Xeloria",
+  "description": "Architect Your Professional DNA — AI-powered portfolio and resume builder.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

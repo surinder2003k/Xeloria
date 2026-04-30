@@ -12,6 +12,7 @@ export interface ResumeData {
     linkedin: string;
     jobTitle: string;
     github?: string;
+    twitter?: string;
     avatar?: string;
   };
   summary: string;
@@ -78,7 +79,7 @@ interface ResumeState {
 
 const emptyData: ResumeData = {
   personalInfo: {
-    fullName: "", email: "", phone: "", location: "", website: "", linkedin: "", jobTitle: "", github: "", avatar: "",
+    fullName: "", email: "", phone: "", location: "", website: "", linkedin: "", jobTitle: "", github: "", twitter: "", avatar: "",
   },
   summary: "",
   education: [],
@@ -98,6 +99,7 @@ const dummyData: ResumeData = {
     linkedin: "linkedin.com/in/alexjohnson",
     jobTitle: "Senior Software Engineer",
     github: "github.com/alexj",
+    twitter: "twitter.com/alexj",
     avatar: "",
   },
   summary: "Passionate software engineer with 5+ years of experience building scalable web applications. Proven track record of leading cross-functional teams and delivering high-impact products used by millions of users.",

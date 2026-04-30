@@ -72,10 +72,6 @@ export const Hero = () => {
                 Initialize Synthesis <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/templates" className="text-[10px] font-black leading-6 text-slate-400 uppercase tracking-widest flex items-center gap-3 hover:text-white transition-all group px-8 py-5 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 shadow-2xl">
-              <Layers className="h-4 w-4 text-indigo-400 group-hover:rotate-12 transition-transform" />
-              Design Architectures
-            </Link>
           </motion.div>
         </div>
 

@@ -16,15 +16,13 @@ import {
   Sparkles,
   Palette
 } from "lucide-react";
+import { XeloriaLogo } from "@/components/BrandLogo";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 
 const commonItems = [
   { label: "Main Portal", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Portfolio Builder", href: "/dashboard/portfolio-builder", icon: FileText },
-  { label: "Pick Theme", href: "/dashboard/templates", icon: Palette },
-  { label: "My Portfolio", href: "/dashboard/portfolio", icon: Globe },
 ];
 
 const adminOnlyItems = [
@@ -61,11 +59,11 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
           {/* Header */}
           <div className="flex items-center justify-between mb-12 px-2">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="h-10 w-10 bg-indigo-600 rounded-2xl flex items-center justify-center text-white font-black group-hover:scale-110 group-hover:rotate-6 transition-all shadow-xl shadow-indigo-600/20">X</div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-black tracking-tight text-white leading-none">XELORIA</span>
-                <span className="text-[10px] font-black tracking-[0.4em] text-indigo-500 uppercase mt-1">NEXUS CORE</span>
-              </div>
+               <XeloriaLogo className="h-12 w-12 group-hover:scale-110 group-hover:rotate-6 transition-all drop-shadow-2xl" />
+               <div className="flex flex-col">
+                 <span className="text-2xl font-black tracking-tight text-white leading-none">XELORIA</span>
+                 <span className="text-[10px] font-black tracking-[0.4em] text-indigo-500 uppercase mt-1">NEXUS CORE</span>
+               </div>
             </Link>
             <button onClick={onClose} className="lg:hidden p-2 text-slate-500 hover:text-white transition-colors">
               <X className="h-6 w-6" />

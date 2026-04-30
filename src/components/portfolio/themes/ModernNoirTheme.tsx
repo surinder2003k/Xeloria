@@ -72,9 +72,19 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
         </motion.div>
         
         <div className="absolute bottom-12 flex gap-4 opacity-20">
-            <Github className="h-4 w-4" />
-            <Linkedin className="h-4 w-4" />
-            <Mail className="h-4 w-4" />
+            {pData?.socialLinks?.github && (
+              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4" />
+              </a>
+            )}
+            {pData?.socialLinks?.linkedin && (
+              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
+                <Linkedin className="h-4 w-4" />
+              </a>
+            )}
+            <a href={`mailto:${personalInfo.email}`}>
+              <Mail className="h-4 w-4" />
+            </a>
         </div>
       </section>
 
@@ -187,9 +197,15 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
       <footer className="p-12 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-black uppercase tracking-[0.5em] opacity-20">
         <p>&copy; {new Date().getFullYear()} {username} // All Systems Nominal</p>
         <div className="flex gap-12">
-            <a href="#">Github</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">Terminal</a>
+            {pData?.socialLinks?.github && (
+              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">Github</a>
+            )}
+            {pData?.socialLinks?.linkedin && (
+              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            )}
+            {pData?.socialLinks?.twitter && (
+              <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer">Twitter</a>
+            )}
         </div>
       </footer>
     </div>

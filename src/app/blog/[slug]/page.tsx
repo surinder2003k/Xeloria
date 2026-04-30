@@ -11,19 +11,59 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+const BASE_URL = "https://summitcv.io";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const { data: post } = await supabase
-    .from('blogs')
-    .select('title, meta_description')
-    .eq('slug', slug)
+    .from("blogs")
+    .select("title, meta_description, featured_image, created_at, updated_at, category")
+    .eq("slug", slug)
     .single();
 
   if (!post) return { title: "Post Not Found" };
 
+  const postUrl = `${BASE_URL}/blog/${slug}`;
+  const description = post.meta_description || "Expert career advice, portfolio tips, and professional development guides from Xeloria.";
+  const image = post.featured_image || `${BASE_URL}/og-image.png`;
+
   return {
-    title: `${post.title} | Xeloria Blog`,
-    description: post.meta_description || "Expert career advice and tips.",
+    title: post.title,
+    description,
+    keywords: [post.category, "career advice", "portfolio tips", "professional development", "Xeloria blog"].filter(Boolean),
+    alternates: {
+      canonical: postUrl,
+    },
+    openGraph: {
+      type: "article",
+      url: postUrl,
+      title: post.title,
+      description,
+      siteName: "Xeloria",
+      publishedTime: post.created_at,
+      modifiedTime: post.updated_at || post.created_at,
+      authors: ["Xeloria Editorial Unit"],
+      tags: [post.category].filter(Boolean),
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description,
+      images: [image],
+      site: "@xeloriaio",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -31,15 +71,54 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
 
   const { data: post, error } = await supabase
-    .from('blogs')
-    .select('*')
-    .eq('slug', slug)
+    .from("blogs")
+    .select("*")
+    .eq("slug", slug)
     .single();
 
   if (error || !post) notFound();
 
+  const postUrl = `${BASE_URL}/blog/${slug}`;
+
+  // JSON-LD structured data for blog post
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.meta_description || "",
+    image: post.featured_image || `${BASE_URL}/og-image.png`,
+    url: postUrl,
+    datePublished: post.created_at,
+    dateModified: post.updated_at || post.created_at,
+    author: {
+      "@type": "Organization",
+      name: "Xeloria Editorial Unit",
+      url: BASE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Xeloria",
+      url: BASE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/og-image.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+    keywords: post.category || "",
+    articleSection: post.category || "General",
+    inLanguage: "en-US",
+  };
+
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-indigo-500 selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       
       {/* Background Glows */}
@@ -88,12 +167,14 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {post.image_url && (
+        {post.featured_image && (
           <div className="aspect-[21/10] rounded-[3.5rem] overflow-hidden border border-white/10 mb-20 shadow-2xl bg-white/5">
              <img 
-              src={post.image_url} 
+              src={post.featured_image} 
               alt={post.title} 
               className="w-full h-full object-cover opacity-80"
+              width={1200}
+              height={571}
              />
           </div>
         )}

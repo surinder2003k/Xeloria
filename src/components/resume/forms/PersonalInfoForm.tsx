@@ -4,7 +4,7 @@ import { useResumeStore } from "@/lib/store";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { User, Mail, Phone, MapPin, Globe, Linkedin, Github } from "lucide-react";
+import { User, Mail, Phone, MapPin, Globe, Linkedin, Github, Twitter } from "lucide-react";
 
 export const PersonalInfoForm = () => {
   const { data, updatePersonalInfo, updateSummary } = useResumeStore();
@@ -23,7 +23,7 @@ export const PersonalInfoForm = () => {
           </Label>
           <Input
             name="fullName"
-            value={data.personalInfo.fullName}
+            value={data?.personalInfo?.fullName || ""}
             onChange={handleChange}
             placeholder="John Doe"
             className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
@@ -36,7 +36,7 @@ export const PersonalInfoForm = () => {
           <Input
             name="email"
             type="email"
-            value={data.personalInfo.email}
+            value={data?.personalInfo?.email || ""}
             onChange={handleChange}
             placeholder="john@example.com"
             className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
@@ -48,7 +48,7 @@ export const PersonalInfoForm = () => {
           </Label>
           <Input
             name="phone"
-            value={data.personalInfo.phone}
+            value={data?.personalInfo?.phone || ""}
             onChange={handleChange}
             placeholder="+1 (555) 000-0000"
             className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
@@ -60,7 +60,7 @@ export const PersonalInfoForm = () => {
           </Label>
           <Input
             name="location"
-            value={data.personalInfo.location}
+            value={data?.personalInfo?.location || ""}
             onChange={handleChange}
             placeholder="New York, NY"
             className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
@@ -72,7 +72,7 @@ export const PersonalInfoForm = () => {
           </Label>
           <Input
             name="linkedin"
-            value={data.personalInfo.linkedin}
+            value={data?.personalInfo?.linkedin || ""}
             onChange={handleChange}
             placeholder="linkedin.com/in/johndoe"
             className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
@@ -84,9 +84,33 @@ export const PersonalInfoForm = () => {
           </Label>
           <Input
             name="github"
-            value={data.personalInfo.github}
+            value={data?.personalInfo?.github || ""}
             onChange={handleChange}
             placeholder="github.com/johndoe"
+            className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
+          />
+        </div>
+        <div className="space-y-3">
+          <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+            <Twitter className="h-3 w-3" /> Twitter Profile
+          </Label>
+          <Input
+            name="twitter"
+            value={data?.personalInfo?.twitter || ""}
+            onChange={handleChange}
+            placeholder="twitter.com/johndoe"
+            className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
+          />
+        </div>
+        <div className="space-y-3">
+          <Label className="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+            <Globe className="h-3 w-3" /> Portfolio Website
+          </Label>
+          <Input
+            name="website"
+            value={data?.personalInfo?.website || ""}
+            onChange={handleChange}
+            placeholder="johndoe.dev"
             className="bg-white/5 border-white/10 text-white placeholder:text-slate-700 h-14 rounded-2xl focus:ring-indigo-500"
           />
         </div>

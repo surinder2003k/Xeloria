@@ -18,8 +18,10 @@ import {
   ArrowRight,
   ShieldCheck,
   Activity,
-  ArrowLeft
+  ArrowLeft,
+  LayoutDashboard
 } from "lucide-react";
+import { XeloriaLogo } from "@/components/BrandLogo";
 import { toast } from "sonner";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
@@ -188,12 +190,18 @@ function PortfolioPortalContent() {
       {/* Header Section */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
          <div className="space-y-4">
-            <Link href="/dashboard" className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-[10px] font-black uppercase tracking-widest">
-               <ArrowLeft className="h-3 w-3" /> Dashboard
+            <Link href="/dashboard" className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-[10px] font-black uppercase tracking-widest mb-2">
+               <LayoutDashboard className="h-3.5 w-3.5" /> Back to Portal
             </Link>
-            <div>
-               <h1 className="text-3xl md:text-4xl font-black tracking-tight uppercase">Live <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Settings</span></h1>
-               <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Satellite: {portfolioName} // Broadcast Mode: ACTIVE</p>
+            <div className="flex items-center gap-4">
+               <XeloriaLogo className="h-12 w-12 group-hover:scale-110 transition-all drop-shadow-2xl" />
+               <div>
+                  <h1 className="text-3xl md:text-4xl font-black tracking-tight uppercase">Live <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Settings</span></h1>
+                  <div className="flex items-center gap-2 mt-2">
+                     <Globe className="h-3 w-3 text-slate-500" />
+                     <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Satellite: {portfolioName} // Broadcast Mode: ACTIVE</p>
+                  </div>
+               </div>
             </div>
          </div>
                   <div className="flex flex-wrap items-center gap-3 md:gap-4 w-full md:w-auto">

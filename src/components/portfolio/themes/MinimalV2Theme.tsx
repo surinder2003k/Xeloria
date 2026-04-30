@@ -139,7 +139,7 @@ export const PortfolioThemeMinimalV2 = ({
                 <div key={idx} className="space-y-6">
                   <h3 className="text-indigo-600 text-[10px] font-bold tracking-[4px] uppercase">{skillGroup.category}</h3>
                   <div className="flex flex-wrap gap-x-8 gap-y-4">
-                    {skillGroup.items.map(item => (
+                    {skillGroup.items?.map(item => (
                       <span key={item} className="text-2xl font-serif font-light italic text-[#1a1a1a]">{item}</span>
                     ))}
                   </div>
@@ -237,9 +237,9 @@ export const PortfolioThemeMinimalV2 = ({
            </div>
            
            <div className="flex justify-center gap-12 pt-24">
-              {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin} className="text-[11px] font-bold tracking-[3px] text-[#888] uppercase hover:text-white transition-colors">LinkedIn</a>}
-              {pData.socialLinks.github && <a href={pData.socialLinks.github} className="text-[11px] font-bold tracking-[3px] text-[#888] uppercase hover:text-white transition-colors">GitHub</a>}
-              {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter} className="text-[11px] font-bold tracking-[3px] text-[#888] uppercase hover:text-white transition-colors">Twitter</a>}
+              {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold tracking-[3px] text-[#888] uppercase hover:text-white transition-colors">LinkedIn</a>}
+              {pData.socialLinks.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold tracking-[3px] text-[#888] uppercase hover:text-white transition-colors">GitHub</a>}
+              {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold tracking-[3px] text-[#888] uppercase hover:text-white transition-colors">Twitter</a>}
            </div>
 
            <div className="pt-32 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold tracking-[2px] text-[#444] uppercase">

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles, Terminal } from "lucide-react";
+import { Sparkles, Terminal, Menu, X, LayoutDashboard } from "lucide-react";
+import { XeloriaLogo } from "../BrandLogo";
 
 export const Navbar = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -31,16 +32,19 @@ export const Navbar = () => {
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-6 lg:px-12">
         <Link href="/" className="flex items-center space-x-3 group">
-          <img src="/logo.svg" alt="Logo" className="h-10 w-10 group-hover:scale-110 transition-all drop-shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
+          <XeloriaLogo className="h-10 w-10 group-hover:scale-110 group-hover:rotate-6 transition-all drop-shadow-2xl" />
           <span className="text-2xl font-black tracking-tighter text-white uppercase italic">XEL<span className="text-indigo-500">ORIA</span></span>
         </Link>
 
         <div className="hidden md:flex items-center space-x-10">
-          <Link href="/blog" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all flex items-center gap-2">
-            <Terminal className="h-3 w-3 text-indigo-500" /> Intel Feed
+          <Link href="/" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all">
+            Home
           </Link>
-          <Link href="/#features" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all flex items-center gap-2">
-            <Sparkles className="h-3 w-3 text-purple-500" /> Protocols
+          <Link href="/blog" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all">
+            Blog
+          </Link>
+          <Link href="/about" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all">
+            About Us
           </Link>
         </div>
 

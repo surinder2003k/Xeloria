@@ -195,11 +195,23 @@ export const PortfolioThemeNova = ({
                  </button>
               </a>
 
-              <div className="flex justify-center gap-10 pt-20">
-                 <div className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors cursor-pointer"><Github className="w-5 h-5" /></div>
-                 <div className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors cursor-pointer"><Linkedin className="w-5 h-5" /></div>
-                 <div className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors cursor-pointer"><Twitter className="w-5 h-5" /></div>
-              </div>
+               <div className="flex justify-center gap-10 pt-20">
+                  {pData?.socialLinks?.github && (
+                    <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors">
+                      <Github className="w-5 h-5" />
+                    </a>
+                  )}
+                  {pData?.socialLinks?.linkedin && (
+                    <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors">
+                      <Linkedin className="w-5 h-5" />
+                    </a>
+                  )}
+                  {pData?.socialLinks?.twitter && (
+                    <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors">
+                      <Twitter className="w-5 h-5" />
+                    </a>
+                  )}
+               </div>
            </div>
 
            <div className="mt-32 flex flex-col md:row justify-between items-center gap-10 pt-10 border-t border-white/5 text-[10px] font-black uppercase tracking-[4px] text-slate-600">

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Sidebar } from "@/components/dashboard/Sidebar";
-import { Search, Bell, Menu, Sparkles } from "lucide-react";
+import { Search, Bell, Menu, Sparkles, LayoutDashboard } from "lucide-react";
+import { XeloriaLogo } from "@/components/BrandLogo";
 import { UserButton } from "@clerk/nextjs";
 
 export default function DashboardLayout({
@@ -20,12 +21,17 @@ export default function DashboardLayout({
         {/* Top Header */}
         <header className="h-20 md:h-24 bg-[#050505]/60 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-4 md:px-10 sticky top-0 z-50">
           <div className="flex items-center gap-6 flex-1">
-             <button 
-               onClick={() => setSidebarOpen(true)}
-               className="lg:hidden p-3 text-slate-400 hover:bg-white/5 rounded-2xl transition-all"
-             >
-                <Menu className="h-6 w-6" />
-             </button>
+             <div className="flex items-center gap-4">
+               <button 
+                 onClick={() => setSidebarOpen(true)}
+                 className="lg:hidden p-3 text-slate-400 hover:bg-white/5 rounded-2xl transition-all"
+               >
+                  <Menu className="h-6 w-6" />
+               </button>
+               <div className="lg:hidden flex items-center gap-2">
+                 <XeloriaLogo className="h-8 w-8 drop-shadow-xl" />
+               </div>
+             </div>
              
              {/* Search Bar - Stylized */}
              <div className="max-w-md w-full relative hidden md:block group">

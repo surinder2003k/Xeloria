@@ -53,9 +53,9 @@ export default async function BlogArchivePage() {
               <article key={post.id} className="group cursor-pointer">
                 <Link href={`/blog/${post.slug}`}>
                   <div className="aspect-[16/10] rounded-[3.5rem] overflow-hidden border border-white/10 mb-10 relative bg-white/5 shadow-2xl transition-all duration-500 group-hover:border-indigo-500/30">
-                    {post.image_url ? (
+                    {post.featured_image ? (
                       <img 
-                        src={post.image_url} 
+                        src={post.featured_image} 
                         alt={post.title} 
                         className="w-full h-full object-cover group-hover:scale-110 grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60 group-hover:opacity-100"
                       />

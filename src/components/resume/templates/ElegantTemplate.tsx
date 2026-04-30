@@ -7,7 +7,19 @@ export const ElegantTemplate = ({ data }: { data: ResumeData }) => (
       <div className="h-0.5 w-16 bg-slate-300 mx-auto mb-4" />
       <p className="text-sm font-medium tracking-widest uppercase text-slate-400">{data.personalInfo.jobTitle}</p>
       <p className="text-[10px] mt-4 tracking-tighter text-slate-400">
-        {data.personalInfo.email} • {data.personalInfo.phone} • {data.personalInfo.location}
+        <a href={`mailto:${data.personalInfo.email}`} className="hover:text-slate-800 transition-colors">{data.personalInfo.email}</a> • {data.personalInfo.phone} • {data.personalInfo.location}
+        {data.personalInfo.website && (
+          <> • <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-800 transition-colors">{data.personalInfo.website}</a></>
+        )}
+        {data.personalInfo.linkedin && (
+          <> • <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-800 transition-colors">LinkedIn</a></>
+        )}
+        {data.personalInfo.github && (
+          <> • <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-800 transition-colors">GitHub</a></>
+        )}
+        {data.personalInfo.twitter && (
+          <> • <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-800 transition-colors">Twitter</a></>
+        )}
       </p>
     </header>
 
@@ -81,9 +93,21 @@ export const BoldTemplate = ({ data }: { data: ResumeData }) => (
         <section>
           <h2 className="text-xs font-black uppercase text-indigo-600 mb-4 tracking-widest">Contact</h2>
           <div className="text-sm space-y-2 font-bold">
-            <p>{data.personalInfo.email}</p>
+            <p><a href={`mailto:${data.personalInfo.email}`} className="hover:text-indigo-200 transition-colors">{data.personalInfo.email}</a></p>
             <p>{data.personalInfo.phone}</p>
             <p>{data.personalInfo.location}</p>
+            {data.personalInfo.website && (
+              <p><a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition-colors">Website</a></p>
+            )}
+            {data.personalInfo.linkedin && (
+              <p><a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition-colors">LinkedIn</a></p>
+            )}
+            {data.personalInfo.github && (
+              <p><a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition-colors">GitHub</a></p>
+            )}
+            {data.personalInfo.twitter && (
+              <p><a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-200 transition-colors">Twitter</a></p>
+            )}
           </div>
         </section>
         <section>

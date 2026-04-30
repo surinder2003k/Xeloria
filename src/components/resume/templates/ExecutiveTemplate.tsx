@@ -7,10 +7,22 @@ export const ExecutiveTemplate = ({ data }: { data: ResumeData }) => {
         <h1 className="text-4xl font-serif font-bold text-slate-900 tracking-tight">{data.personalInfo.fullName || "Your Name"}</h1>
         <p className="text-xl text-slate-500 font-serif italic mt-1">{data.personalInfo.jobTitle || "Executive Professional / Director"}</p>
         
-        <div className="flex gap-6 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 text-xs font-semibold uppercase tracking-widest text-slate-400">
           <span>{data.personalInfo.location}</span>
-          <span>{data.personalInfo.email}</span>
+          <a href={`mailto:${data.personalInfo.email}`} className="hover:text-slate-900 transition-colors">{data.personalInfo.email}</a>
           <span>{data.personalInfo.phone}</span>
+          {data.personalInfo.website && (
+            <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">Website</a>
+          )}
+          {data.personalInfo.linkedin && (
+            <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">LinkedIn</a>
+          )}
+          {data.personalInfo.github && (
+            <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">GitHub</a>
+          )}
+          {data.personalInfo.twitter && (
+            <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">Twitter</a>
+          )}
         </div>
       </header>
 

@@ -13,8 +13,11 @@ import {
   Loader2,
   ArrowRight,
   Cpu,
-  Layers
+  Layers,
+  LayoutDashboard,
+  FileText
 } from "lucide-react";
+import { XeloriaLogo } from "@/components/BrandLogo";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUser } from "@clerk/nextjs";
@@ -106,15 +109,17 @@ function DashboardTemplatesContent() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
               <div className="space-y-4">
                   <Link href={portfolioId ? `/dashboard/portfolio-builder?id=${portfolioId}` : "/dashboard"} className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-[10px] font-black uppercase tracking-widest mb-2">
-                      <ArrowLeft className="h-3 w-3" /> Step 1: Back to Info
+                      {portfolioId ? <FileText className="h-3 w-3" /> : <LayoutDashboard className="h-3 w-3" />} 
+                      {portfolioId ? "Step 1: Back to Info" : "Back to Portal"}
                   </Link>
                   <div className="flex items-center gap-4">
-                     <div className="h-12 w-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 shadow-2xl">
-                        <Palette className="h-6 w-6 text-indigo-400" />
-                     </div>
+                     <XeloriaLogo className="h-12 w-12 group-hover:scale-110 transition-all drop-shadow-2xl" />
                      <div>
                         <h1 className="text-4xl font-black tracking-tight uppercase">Pick <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Theme</span></h1>
-                        <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Satellite Config // Aesthetic Selection Mode</p>
+                        <div className="flex items-center gap-2 mt-2">
+                           <Palette className="h-3 w-3 text-slate-500" />
+                           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Satellite Config // Aesthetic Selection Mode</p>
+                        </div>
                      </div>
                   </div>
               </div>

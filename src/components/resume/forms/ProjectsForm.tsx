@@ -23,7 +23,7 @@ export const ProjectsForm = () => {
   return (
     <div className="space-y-10">
       <AnimatePresence mode="popLayout">
-        {data.projects.map((project, index) => (
+        {data?.projects?.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, scale: 0.95, y: 20 }}

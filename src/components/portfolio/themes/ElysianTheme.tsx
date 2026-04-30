@@ -200,9 +200,15 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
       <footer className="py-20 border-t border-[#8e7f74]/10 px-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-bold uppercase tracking-[0.4em] text-[#8e7f74]">
         <p>&copy; 2024 {personalInfo.fullName} // Designed for distinction</p>
         <div className="flex gap-12">
-            <a href="#" className="hover:text-[#1a1a1a]">LinkedIn</a>
-            <a href="#" className="hover:text-[#1a1a1a]">Twitter</a>
-            <a href="#" className="hover:text-[#1a1a1a]">Studio</a>
+            {pData?.socialLinks?.linkedin && (
+              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">LinkedIn</a>
+            )}
+            {pData?.socialLinks?.twitter && (
+              <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">Twitter</a>
+            )}
+            {pData?.socialLinks?.github && (
+              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">GitHub</a>
+            )}
         </div>
       </footer>
     </div>

@@ -1,5 +1,5 @@
 import { ResumeData } from "@/lib/store";
-import { Mail, Phone, MapPin, Globe, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Globe, Linkedin, Github, Twitter } from "lucide-react";
 
 export const ModernTemplate = ({ data }: { data: ResumeData }) => {
   return (
@@ -18,9 +18,9 @@ export const ModernTemplate = ({ data }: { data: ResumeData }) => {
           
           <div className="flex flex-wrap gap-y-2 gap-x-4 mt-6 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
             {data.personalInfo.email && (
-              <div className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
+              <a href={`mailto:${data.personalInfo.email}`} className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
                 <Mail className="h-3.5 w-3.5" /> {data.personalInfo.email}
-              </div>
+              </a>
             )}
             {data.personalInfo.phone && (
               <div className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
@@ -31,6 +31,26 @@ export const ModernTemplate = ({ data }: { data: ResumeData }) => {
               <div className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
                 <MapPin className="h-3.5 w-3.5" /> {data.personalInfo.location}
               </div>
+            )}
+            {data.personalInfo.website && (
+              <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
+                <Globe className="h-3.5 w-3.5" /> Website
+              </a>
+            )}
+            {data.personalInfo.linkedin && (
+              <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
+                <Linkedin className="h-3.5 w-3.5" /> LinkedIn
+              </a>
+            )}
+            {data.personalInfo.github && (
+              <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
+                <Github className="h-3.5 w-3.5" /> GitHub
+              </a>
+            )}
+            {data.personalInfo.twitter && (
+              <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors">
+                <Twitter className="h-3.5 w-3.5" /> Twitter
+              </a>
             )}
           </div>
         </div>

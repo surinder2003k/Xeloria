@@ -267,8 +267,9 @@ export const PortfolioThemeMagazine = ({
                      <li className="flex gap-10 border-b border-white/5 pb-4">
                         <span className="text-white w-20">Social</span>
                         <div className="flex gap-4">
-                           {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin} className="text-[#f0e8dc] hover:text-[#e8724a]">IN</a>}
-                           {pData.socialLinks.github && <a href={pData.socialLinks.github} className="text-[#f0e8dc] hover:text-[#e8724a]">GH</a>}
+                           {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-[#f0e8dc] hover:text-[#e8724a]">IN</a>}
+                           {pData.socialLinks.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="text-[#f0e8dc] hover:text-[#e8724a]">GH</a>}
+                           {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="text-[#f0e8dc] hover:text-[#e8724a]">TW</a>}
                         </div>
                      </li>
                   </ul>

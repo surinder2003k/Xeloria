@@ -233,9 +233,21 @@ export const PortfolioThemeAura = ({
            </motion.div>
 
            <div className="flex justify-center gap-16 pt-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-              <Github className="w-6 h-6" />
-              <Linkedin className="w-6 h-6" />
-              <Twitter className="w-6 h-6" />
+              {pData.socialLinks.github && (
+                <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 transition-colors">
+                  <Github className="w-6 h-6" />
+                </a>
+              )}
+              {pData.socialLinks.linkedin && (
+                <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 transition-colors">
+                  <Linkedin className="w-6 h-6" />
+                </a>
+              )}
+              {pData.socialLinks.twitter && (
+                <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-400 transition-colors">
+                  <Twitter className="w-6 h-6" />
+                </a>
+              )}
            </div>
 
            <div className="pt-32 flex flex-col md:row justify-between items-center gap-8 text-[10px] uppercase tracking-[4px] font-bold text-white/20">

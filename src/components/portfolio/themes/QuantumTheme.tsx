@@ -16,7 +16,8 @@ import {
   Mail,
   Phone,
   MapPin,
-  Linkedin
+  Linkedin,
+  Twitter
 } from "lucide-react";
 import { useRef } from "react";
 
@@ -101,8 +102,16 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
               INIT_OPERATIONS
             </a>
             <div className="flex items-center gap-4 px-6 h-14 border border-cyan-500/20 rounded-sm">
-                <Github className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 cursor-pointer" />
-                <Linkedin className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 cursor-pointer" />
+                {pData?.socialLinks?.github && (
+                  <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
+                    <Github className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400" />
+                  </a>
+                )}
+                {pData?.socialLinks?.linkedin && (
+                  <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400" />
+                  </a>
+                )}
                 <Share2 className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 cursor-pointer" />
             </div>
           </div>
@@ -257,9 +266,21 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
                OPEN_PORT
              </a>
              <div className="flex justify-center md:justify-start gap-8">
-                <Github className="h-6 w-6 hover:scale-125 transition-transform cursor-pointer" />
-                <Linkedin className="h-6 w-6 hover:scale-125 transition-transform cursor-pointer" />
-                <Share2 className="h-6 w-6 hover:scale-125 transition-transform cursor-pointer" />
+                {pData?.socialLinks?.github && (
+                  <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
+                    <Github className="h-6 w-6 hover:scale-125 transition-transform" />
+                  </a>
+                )}
+                {pData?.socialLinks?.linkedin && (
+                  <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
+                    <Linkedin className="h-6 w-6 hover:scale-125 transition-transform" />
+                  </a>
+                )}
+                {pData?.socialLinks?.twitter && (
+                  <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer">
+                    <Twitter className="h-6 w-6 hover:scale-125 transition-transform" />
+                  </a>
+                )}
              </div>
           </div>
         </div>

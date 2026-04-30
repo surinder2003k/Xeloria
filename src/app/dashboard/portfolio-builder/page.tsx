@@ -11,8 +11,9 @@ import { Button } from "@/components/ui/button";
 import {
   User, Briefcase, GraduationCap,
   Code, FolderGit2, Loader2, ArrowRight, CheckCircle2,
-  ChevronRight, Save, Layout, ArrowLeft
+  ChevronRight, Save, FileText, ArrowLeft, LayoutDashboard
 } from "lucide-react";
+import { XeloriaLogo } from "@/components/BrandLogo";
 import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
@@ -138,19 +139,20 @@ function BuilderContent() {
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
          <div className="space-y-4">
             <Link href="/dashboard" className="flex items-center gap-2 text-slate-500 hover:text-white transition-colors text-[10px] font-black uppercase tracking-widest mb-2">
-               <ArrowLeft className="h-3 w-3" /> Back to Dashboard
+               <LayoutDashboard className="h-3.5 w-3.5" /> Back to Portal
             </Link>
             <div className="flex items-center gap-4">
-               <div className="h-12 w-12 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10">
-                  <Layout className="h-6 w-6 text-indigo-400" />
-               </div>
+               <XeloriaLogo className="h-12 w-12 group-hover:scale-110 transition-all drop-shadow-2xl" />
                <div>
                   <h1 className="text-4xl font-black tracking-tight uppercase">Portfolio <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Builder</span></h1>
-                  <input 
-                    value={portfolioName}
-                    onChange={(e) => setPortfolioName(e.target.value)}
-                    className="bg-transparent border-none text-[10px] font-bold text-slate-500 uppercase tracking-widest focus:outline-none p-0 w-full"
-                  />
+                  <div className="flex items-center gap-2 mt-2">
+                    <FileText className="h-3 w-3 text-slate-500" />
+                    <input 
+                      value={portfolioName}
+                      onChange={(e) => setPortfolioName(e.target.value)}
+                      className="bg-transparent border-none text-[10px] font-bold text-slate-500 uppercase tracking-widest focus:outline-none p-0 w-full"
+                    />
+                  </div>
                </div>
             </div>
          </div>

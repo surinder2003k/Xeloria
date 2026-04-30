@@ -4,10 +4,27 @@ export const ProfessionalTemplate = ({ data }: { data: ResumeData }) => (
   <div className="bg-white p-10 shadow-lg min-h-[1122px] w-[794px] text-slate-800 border border-slate-200">
     <div className="text-center border-b-2 border-slate-900 pb-6 mb-8">
       <h1 className="text-3xl font-bold uppercase tracking-widest">{data.personalInfo.fullName}</h1>
-      <p className="text-sm mt-2 text-slate-500 font-medium">
-        {data.personalInfo.email} | {data.personalInfo.phone} | {data.personalInfo.location}
-      </p>
-      {data.personalInfo.linkedin && <p className="text-xs mt-1 text-indigo-600 font-bold">{data.personalInfo.linkedin}</p>}
+      <div className="text-sm mt-2 text-slate-500 font-medium flex flex-wrap justify-center items-center gap-2">
+        <a href={`mailto:${data.personalInfo.email}`} className="hover:text-slate-900 transition-colors">{data.personalInfo.email}</a>
+        <span>|</span>
+        <span>{data.personalInfo.phone}</span>
+        <span>|</span>
+        <span>{data.personalInfo.location}</span>
+      </div>
+      <div className="flex flex-wrap justify-center gap-3 mt-2">
+        {data.personalInfo.website && (
+          <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="text-xs text-indigo-600 font-bold hover:text-indigo-800 transition-colors">Website</a>
+        )}
+        {data.personalInfo.linkedin && (
+          <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-xs text-indigo-600 font-bold hover:text-indigo-800 transition-colors">LinkedIn</a>
+        )}
+        {data.personalInfo.github && (
+          <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="text-xs text-indigo-600 font-bold hover:text-indigo-800 transition-colors">GitHub</a>
+        )}
+        {data.personalInfo.twitter && (
+          <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="text-xs text-indigo-600 font-bold hover:text-indigo-800 transition-colors">Twitter</a>
+        )}
+      </div>
     </div>
 
     <div className="space-y-10">

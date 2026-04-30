@@ -239,8 +239,19 @@ export const PortfolioThemeBrutalist = ({
              >
                {data.personalInfo.email}
              </a>
-             <div className="font-mono text-xl font-bold group-hover:text-[#ffe600]">
+             <div className="font-mono text-xl font-bold group-hover:text-[#ffe600] mb-8">
                 {data.personalInfo.phone || "NODE_COMM_INACTIVE"}
+             </div>
+             <div className="flex gap-8 pt-8 border-t border-black/10 group-hover:border-[#ffe600]/20">
+                {pData.socialLinks.github && (
+                  <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] font-bold uppercase hover:underline">Github</a>
+                )}
+                {pData.socialLinks.linkedin && (
+                  <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] font-bold uppercase hover:underline">LinkedIn</a>
+                )}
+                {pData.socialLinks.twitter && (
+                  <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] font-bold uppercase hover:underline">Twitter</a>
+                )}
              </div>
           </div>
         </section>

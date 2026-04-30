@@ -12,7 +12,8 @@ import {
   ExternalLink,
   Github,
   Mail,
-  Linkedin
+  Linkedin,
+  Twitter
 } from "lucide-react";
 
 interface ThemeProps {
@@ -189,11 +190,23 @@ export const PortfolioThemeTitan = ({ username, data, pData }: ThemeProps) => {
                 <a href={`mailto:${personalInfo.email}`} className="h-24 bg-white text-black flex items-center justify-center font-black text-2xl uppercase tracking-widest hover:bg-[#ff5500] hover:text-white transition-all">
                     OPEN_CONTRACT
                 </a>
-                <div className="flex gap-4 h-16">
-                    <div className="flex-1 border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all"><Github /></div>
-                    <div className="flex-1 border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all"><Linkedin /></div>
-                    <div className="flex-1 border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all"><Mail /></div>
-                </div>
+                 <div className="flex gap-4 h-16">
+                    {pData?.socialLinks?.github && (
+                      <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="flex-1 border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all">
+                        <Github />
+                      </a>
+                    )}
+                    {pData?.socialLinks?.linkedin && (
+                      <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="flex-1 border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all">
+                        <Linkedin />
+                      </a>
+                    )}
+                    {pData?.socialLinks?.twitter && (
+                      <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="flex-1 border border-white/10 flex items-center justify-center hover:bg-white/5 transition-all">
+                        <Twitter />
+                      </a>
+                    )}
+                 </div>
             </div>
         </div>
       </footer>

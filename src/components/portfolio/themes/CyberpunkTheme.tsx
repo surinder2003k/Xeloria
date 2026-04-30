@@ -257,9 +257,9 @@ export const PortfolioThemeCyberpunk = ({
                {data.personalInfo.email}
              </a>
              <div className="flex justify-center gap-10 text-[10px] font-bold text-[#1a4d1a] tracking-[4px] uppercase border-t border-[#0d3d0d] pt-12">
-                {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin} className="hover:text-[#00ff41] transition-all">linkedin</a>}
-                {pData.socialLinks.github && <a href={pData.socialLinks.github} className="hover:text-[#00ffff] transition-all">github</a>}
-                {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter} className="hover:text-pink-500 transition-all">twitter</a>}
+                {pData.socialLinks.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#00ff41] transition-all">linkedin</a>}
+                {pData.socialLinks.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#00ffff] transition-all">github</a>}
+                {pData.socialLinks.twitter && <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-all">twitter</a>}
              </div>
            </div>
         </section>

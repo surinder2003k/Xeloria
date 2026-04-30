@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import NProgress from "nprogress";
 import { useEffect } from "react";
 
+
 export function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     NProgress.configure({ 
@@ -13,34 +14,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
       trickleSpeed: 200,
       minimum: 0.3
     });
-
-    // Fix for legacy addListener/removeListener issues in some libraries (like Clerk)
-    if (typeof window !== 'undefined') {
-      if (!window.matchMedia) {
-        (window as any).matchMedia = (query: string) => ({
-          matches: false,
-          media: query,
-          onchange: null,
-          addListener: () => {},
-          removeListener: () => {},
-          addEventListener: () => {},
-          removeEventListener: () => {},
-          dispatchEvent: () => false,
-        });
-      } else {
-        const matchMedia = window.matchMedia;
-        window.matchMedia = (query) => {
-          const mql = matchMedia(query);
-          if (mql && !mql.addListener) {
-            (mql as any).addListener = (fn: any) => mql.addEventListener('change', fn);
-          }
-          if (mql && !mql.removeListener) {
-            (mql as any).removeListener = (fn: any) => mql.removeEventListener('change', fn);
-          }
-          return mql;
-        };
-      }
-    }
   }, []);
 
   return (

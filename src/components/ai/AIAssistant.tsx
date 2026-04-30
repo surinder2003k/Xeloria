@@ -58,6 +58,27 @@ export const AIAssistant = () => {
         case "addProject":
           store.addProject(action.payload);
           break;
+        case "addSummary":
+          store.updateSummary(action.payload);
+          break;
+        case "updateEducation":
+          if (typeof action.index === 'number') {
+            store.updateEducation(action.index, action.payload);
+          }
+          break;
+        case "updateExperience":
+          if (typeof action.index === 'number') {
+            store.updateExperience(action.index, action.payload);
+          }
+          break;
+        case "updateProject":
+          if (typeof action.index === 'number') {
+            store.updateProject(action.index, action.payload);
+          }
+          break;
+        case "removeAllProjects":
+          store.updateData({ projects: [] });
+          break;
         case "updateSkills":
           store.updateSkills(action.payload);
           break;
@@ -180,20 +201,25 @@ export const AIAssistant = () => {
               )}
             </div>
 
-            {/* Input Area */}
             <div className="p-6 border-t border-white/5 bg-white/[0.02]">
               <div className="relative">
-                <input
+                <textarea
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSend();
+                    }
+                  }}
                   placeholder="Tell me your details..."
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-xs focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-600 pr-14"
+                  rows={1}
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-xs focus:outline-none focus:border-indigo-500 transition-all placeholder:text-slate-600 pr-14 resize-none min-h-[56px] max-h-32 overflow-y-auto"
                 />
                 <button 
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
-                  className="absolute right-2 top-2 h-10 w-10 bg-indigo-600 rounded-xl flex items-center justify-center hover:bg-indigo-500 transition-all disabled:opacity-50 shadow-lg shadow-indigo-600/20"
+                  className="absolute right-2 bottom-2 h-10 w-10 bg-indigo-600 rounded-xl flex items-center justify-center hover:bg-indigo-500 transition-all disabled:opacity-50 shadow-lg shadow-indigo-600/20"
                 >
                   <Send className="h-4 w-4 text-white" />
                 </button>

@@ -23,7 +23,7 @@ export const EducationForm = () => {
   return (
     <div className="space-y-10">
       <AnimatePresence>
-        {data.education.map((edu, index) => (
+        {data?.education?.map((edu, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}

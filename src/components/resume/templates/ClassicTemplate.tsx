@@ -11,8 +11,26 @@ export const ClassicTemplate = ({ data }: { data: ResumeData }) => {
           {data.personalInfo.email && <span>• {data.personalInfo.email}</span>}
         </div>
         <div className="flex justify-center gap-3 text-sm mt-1">
-          {data.personalInfo.website && <span>{data.personalInfo.website}</span>}
-          {data.personalInfo.linkedin && <span>• {data.personalInfo.linkedin}</span>}
+          {data.personalInfo.website && (
+            <a href={data.personalInfo.website.startsWith('http') ? data.personalInfo.website : `https://${data.personalInfo.website}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">
+              {data.personalInfo.website}
+            </a>
+          )}
+          {data.personalInfo.linkedin && (
+            <a href={data.personalInfo.linkedin.startsWith('http') ? data.personalInfo.linkedin : `https://${data.personalInfo.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">
+              • LinkedIn
+            </a>
+          )}
+          {data.personalInfo.github && (
+            <a href={data.personalInfo.github.startsWith('http') ? data.personalInfo.github : `https://${data.personalInfo.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">
+              • GitHub
+            </a>
+          )}
+          {data.personalInfo.twitter && (
+            <a href={data.personalInfo.twitter.startsWith('http') ? data.personalInfo.twitter : `https://${data.personalInfo.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">
+              • Twitter
+            </a>
+          )}
         </div>
       </header>
 
@@ -66,10 +84,14 @@ export const ClassicTemplate = ({ data }: { data: ResumeData }) => {
       {data.skills.length > 0 && (
         <section className="mb-6">
           <h2 className="text-lg font-bold border-b-2 border-black mb-2 uppercase italic">Skills</h2>
-          <p className="text-sm leading-6">
-            <span className="font-bold">Core Competencies: </span>
-            {data.skills.join(", ")}
-          </p>
+          <div className="space-y-2">
+            {data.skills.map((skillGroup, i) => (
+              <p key={i} className="text-sm leading-6">
+                <span className="font-bold">{skillGroup.category}: </span>
+                {skillGroup.items.join(", ")}
+              </p>
+            ))}
+          </div>
         </section>
       )}
     </div>
