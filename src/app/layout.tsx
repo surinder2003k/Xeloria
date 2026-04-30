@@ -79,6 +79,9 @@ export const metadata: Metadata = {
   verification: {
     google: "7DDDhNUg6jYfqTlpcjhcRviMdzzUvxJd2Y-rKmNEqdk",
   },
+  other: {
+    "google-adsense-account": "ca-pub-XXXXXXXXXXXXXXXX", // The user will replace this with their actual Publisher ID
+  },
 };
 
 export default function RootLayout({
