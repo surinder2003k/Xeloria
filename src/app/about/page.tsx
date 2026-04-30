@@ -1,3 +1,5 @@
+"use client";
+
 import { Navbar } from "@/components/landing/Navbar";
 import { Sparkles, Target, Users, Zap, Terminal, ShieldCheck, Activity } from "lucide-react";
 import { motion } from "framer-motion";
