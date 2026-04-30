@@ -28,7 +28,7 @@ export async function POST(req: Request) {
               <li>Launch a professional portfolio with custom themes.</li>
               <li>Read expert career advice on our blog.</li>
             </ul>
-            <a href="https://summitcv.io/dashboard" style="display: inline-block; background: #4f46e5; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">Get Started Now</a>
+            <a href="https://xeloria.vercel.app/dashboard" style="display: inline-block; background: #4f46e5; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px;">Get Started Now</a>
           </div>
           <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 40px;">&copy; 2024 Xeloria. All rights reserved.</p>
         </div>

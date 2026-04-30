@@ -8,7 +8,7 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-const BASE_URL = "https://summitcv.io";
+const BASE_URL = "https://xeloria.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

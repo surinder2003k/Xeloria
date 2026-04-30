@@ -26,7 +26,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/"],
       },
     ],
-    sitemap: "https://summitcv.io/sitemap.xml",
-    host: "https://summitcv.io",
+    sitemap: "https://xeloria.vercel.app/sitemap.xml",
+    host: "https://xeloria.vercel.app",
   };
 }

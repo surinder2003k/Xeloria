@@ -26,7 +26,7 @@ interface Props {
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const BASE_URL = "https://summitcv.io";
+const BASE_URL = "https://xeloria.vercel.app";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { username } = await params;

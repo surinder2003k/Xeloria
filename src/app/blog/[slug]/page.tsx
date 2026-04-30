@@ -11,7 +11,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-const BASE_URL = "https://summitcv.io";
+const BASE_URL = "https://xeloria.vercel.app";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
