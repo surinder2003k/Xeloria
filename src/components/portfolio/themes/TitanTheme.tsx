@@ -27,14 +27,13 @@ export const PortfolioThemeTitan = ({ username, data, pData }: ThemeProps) => {
   const experiences = data.experience || [];
   const projects = data.projects || [];
   const skills = data.skills || [];
-  const sections = pData?.sections || { hero: true, experience: true, education: true, skills: true, projects: true };
+  const sections = pData?.sectionsVisibility || { hero: true, experience: true, education: true, skills: true, projects: true, contact: true };
 
   return (
-    <div className="bg-[#111111] text-[#eeeeee] min-h-screen font-sans selection:bg-[#ff5500] selection:text-white">
-      {/* Heavy Grid Background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:100px_100px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)]" />
+    <div className="bg-[#0a0a0c] text-white min-h-screen font-sans selection:bg-[#ff5500] selection:text-white relative overflow-hidden">
+      {/* Industrial Grid */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
       {/* Industrial Accents */}
@@ -42,31 +41,39 @@ export const PortfolioThemeTitan = ({ username, data, pData }: ThemeProps) => {
       <div className="fixed bottom-0 left-0 w-full h-1 bg-[#ff5500] z-[100]" />
 
       {/* Header */}
-      <header className="relative z-10 px-8 py-12 flex justify-between items-center border-b border-white/10">
-        <div className="flex items-center gap-4">
-          <div className="h-10 w-10 bg-[#ff5500] flex items-center justify-center">
-            <Shield className="h-6 w-6 text-white" />
+      <header className="relative z-50 px-4 md:px-8 py-8 flex justify-between items-center border-b border-white/10 bg-[#0a0a0c]/80 backdrop-blur-md">
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="h-8 md:h-10 w-8 md:w-10 bg-[#ff5500] flex items-center justify-center shrink-0">
+            <Shield className="h-5 md:h-6 w-5 md:w-6 text-white" />
           </div>
-          <span className="text-2xl font-black uppercase tracking-tighter">TITAN_NODE // {username}</span>
+          <span className="text-lg md:text-2xl font-black uppercase tracking-tighter truncate max-w-[120px] md:max-w-none">TITAN_NODE // {username}</span>
         </div>
-        <div className="flex gap-4">
-            <div className="px-4 py-2 border border-[#ff5500] text-[#ff5500] text-[10px] font-black uppercase tracking-widest">
-                HEAVY_LOAD: ACTIVE
-            </div>
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-3 md:gap-8 text-[8px] md:text-[10px] font-black uppercase tracking-wider md:tracking-[0.2em] text-[#888888]">
+            {sections.hero && <a href="#hero" className="hover:text-[#ff5500] transition-colors hidden sm:block">START</a>}
+            {sections.experience && <a href="#experience" className="hover:text-[#ff5500] transition-colors hidden sm:block">RECORDS</a>}
+            {sections.projects && <a href="#projects" className="hover:text-[#ff5500] transition-colors hidden sm:block">BUILDS</a>}
+            {sections.skills && <a href="#skills" className="hover:text-[#ff5500] transition-colors hidden sm:block">SPECS</a>}
+          </div>
+          <a href="#contact" className="px-3 md:px-4 py-2 border border-[#ff5500] text-[#ff5500] text-[8px] md:text-[10px] font-black uppercase tracking-widest shrink-0">
+             COMM_INIT
+          </a>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative z-10 py-40 px-8 max-w-7xl mx-auto">
+      {/* Hero Section */}
+      {sections.hero && (
+        <section id="hero" className="relative z-10 py-24 md:py-40 px-6 md:px-8 max-w-7xl mx-auto flex flex-col justify-center min-h-[calc(100vh-80px)]">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          className="space-y-12"
+          className="space-y-8 md:space-y-12"
         >
-          <h1 className="text-8xl md:text-[14rem] font-black uppercase leading-[0.8] tracking-tighter">
+          <h1 className="text-5xl md:text-8xl lg:text-[12rem] font-black uppercase leading-[0.8] tracking-tighter break-words">
             INDUSTRIAL<br/>
             <span className="text-[#ff5500]">STRENGTH</span>
           </h1>
+
           <div className="flex flex-col md:flex-row gap-12 items-start">
             <div className="max-w-xl space-y-6">
                 <p className="text-xl font-bold uppercase tracking-tight text-[#888888]">
@@ -91,6 +98,7 @@ export const PortfolioThemeTitan = ({ username, data, pData }: ThemeProps) => {
           </div>
         </motion.div>
       </section>
+      )}
 
       {/* Construction History (Experience) */}
       {sections.experience && (
@@ -177,7 +185,8 @@ export const PortfolioThemeTitan = ({ username, data, pData }: ThemeProps) => {
       )}
 
       {/* Footer / Contact */}
-      <footer className="relative z-10 py-40 px-8 max-w-7xl mx-auto">
+      {sections.contact && (
+        <footer id="contact" className="relative z-10 py-20 md:py-40 px-8 max-w-7xl mx-auto border-t border-white/5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
             <div className="space-y-8">
                 <h2 className="text-6xl font-black uppercase tracking-tighter">LOAD_BEARING<br/>COMMUNICATIONS</h2>
@@ -210,6 +219,7 @@ export const PortfolioThemeTitan = ({ username, data, pData }: ThemeProps) => {
             </div>
         </div>
       </footer>
+      )}
 
       <style jsx global>{`
         @keyframes spin-slow {

@@ -35,11 +35,12 @@ export const PortfolioThemeGlass = ({
           <span className="font-bold text-sm bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">
             {username.toUpperCase()}
           </span>
-          <div className="hidden md:flex items-center gap-6 text-[10px] font-bold tracking-[2px] text-[#64748b] uppercase">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-white transition-colors">Start</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-white transition-colors">Nodes</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-white transition-colors">Deploy</a>}
-            {pData.sectionsVisibility.contact && <a href="#contact" className="hover:text-white transition-colors">Ping</a>}
+          <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[10px] font-bold tracking-[1px] md:tracking-[2px] text-[#64748b] uppercase">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Start</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Matrix</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Nodes</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Deploy</a>}
+            <a href="#contact" className="hover:text-white transition-colors px-3 py-1.5 border border-white/10 rounded-full">Ping</a>
           </div>
         </div>
       </nav>
@@ -117,7 +118,8 @@ export const PortfolioThemeGlass = ({
       )}
 
       {/* About Section */}
-      <section id="about" className="py-32 px-6">
+      {pData.sectionsVisibility.hero && (
+        <section id="about" className="py-20 md:py-32 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Core Metadata</div>
           <h2 className="text-4xl font-extrabold mb-12">Who Am <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">I?</span></h2>
@@ -144,6 +146,7 @@ export const PortfolioThemeGlass = ({
           </div>
         </div>
       </section>
+      )}
 
       {/* Skills Bento */}
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (
@@ -237,6 +240,35 @@ export const PortfolioThemeGlass = ({
                   </motion.div>
                 ))}
              </div>
+          </div>
+        </section>
+      )}
+
+      {/* Skills Section */}
+      {pData.sectionsVisibility.skills && data.skills && data.skills.length > 0 && (
+        <section id="skills" className="py-32 px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Expertise</div>
+            <h2 className="text-4xl font-extrabold mb-12">Core <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Competencies</span></h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {data.skills.map((group: any, i: number) => (
+                <motion.div 
+                  key={i}
+                  {...fadeIn}
+                  className="p-8 bg-white/[0.02] border border-white/5 rounded-3xl backdrop-blur-xl"
+                >
+                  <h3 className="text-sm font-bold text-[#60a5fa] uppercase tracking-[3px] mb-8 border-b border-white/10 pb-4">{group.category}</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {group.items.map((skill: string, sid: number) => (
+                      <span key={sid} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-medium hover:bg-white/10 transition-colors">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
       )}

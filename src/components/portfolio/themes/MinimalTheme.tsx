@@ -29,11 +29,12 @@ export const PortfolioThemeMinimal = ({
           <span className="font-bold text-lg tracking-tight">
             {data.personalInfo.fullName || username}
           </span>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-slate-900 transition-colors">Home</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-slate-900 transition-colors">Experience</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-slate-900 transition-colors">Projects</a>}
-            {pData.sectionsVisibility.contact && <a href="#contact" className="hover:text-slate-900 transition-colors">Contact</a>}
+          <div className="flex items-center gap-4 md:gap-8 text-[11px] md:text-sm font-medium text-slate-500">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-slate-900 transition-colors hidden sm:block">Home</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-slate-900 transition-colors hidden sm:block">Experience</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-slate-900 transition-colors hidden sm:block">Projects</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-slate-900 transition-colors hidden sm:block">Expertise</a>}
+            <a href="#contact" className="hover:text-slate-900 transition-colors px-4 py-1.5 border border-slate-900 rounded-full">Hire</a>
           </div>
         </div>
       </nav>

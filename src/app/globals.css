@@ -71,37 +71,50 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
   * {
     @apply border-white/5 outline-none;
   }
+  
   body {
-    @apply bg-[#050505] text-white;
+    @apply bg-[#050505] text-white overflow-x-hidden antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - High Performance */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  transition: all 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(99, 102, 241, 0.5);
 }
 
 /* Glassmorphism Utilities */
 .glass {
-  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  @apply bg-white/[0.02] backdrop-blur-3xl border border-white/10;
 }
 
 .glass-card {
-  @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10 shadow-2xl;
+  @apply bg-white/[0.01] backdrop-blur-2xl border border-white/10 shadow-2xl;
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+  will-change: transform;
 }
 
 /* 3D Effects */
@@ -122,4 +135,11 @@
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+/* Mobile Responsiveness Fixes */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
 }

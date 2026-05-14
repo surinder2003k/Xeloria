@@ -143,53 +143,51 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white p-4 md:p-12 space-y-8 md:space-y-12">
+    <div className="min-h-screen bg-[#050505] text-white p-4 md:p-8 lg:p-12 space-y-8 md:space-y-12">
       {/* Dynamic Background Glows */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/20 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/20 blur-[120px] rounded-full" />
-        <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-orange-600/10 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full" />
       </div>
 
       {/* Header Section */}
-      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-        <div className="flex items-center gap-6">
-            <XeloriaLogo className="h-16 w-16 drop-shadow-2xl group-hover:scale-110 transition-all" />
+      <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+        <div className="flex items-center gap-4 md:gap-6">
+            <XeloriaLogo className="h-12 w-12 md:h-16 md:w-16 drop-shadow-2xl transition-all" />
            <div>
               <motion.div 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-2 text-indigo-400 bg-indigo-500/10 w-fit px-4 py-2 rounded-full mb-3 border border-indigo-500/20"
+                className="flex items-center gap-2 text-indigo-400 bg-indigo-500/10 w-fit px-3 py-1.5 rounded-full mb-2 md:mb-3 border border-indigo-500/20"
               >
-                <Activity className="h-4 w-4" />
-                <span className="text-[10px] font-black uppercase tracking-widest">System Status: Optimal</span>
+                <Activity className="h-3 w-3" />
+                <span className="text-[9px] font-black uppercase tracking-widest">Portal Status: Active</span>
               </motion.div>
-              <h1 className="text-5xl md:text-6xl font-black tracking-tight leading-none uppercase">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-none uppercase">
                 Main <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-500">Portal</span>
               </h1>
-              <p className="text-slate-500 font-bold text-xs uppercase tracking-[0.3em] mt-3">
-                {isAdmin ? "ADMINISTRATOR" : "CREATOR"} CONTROL CENTER // {portfolios.length} ACTIVE ASSETS
+              <p className="text-slate-500 font-bold text-[9px] md:text-[10px] uppercase tracking-[0.2em] mt-2">
+                {isAdmin ? "SYSTEM ADMINISTRATOR" : "ASSET CREATOR"} // {portfolios.length} NODES
               </p>
            </div>
         </div>
 
-        <div className="flex gap-4">
+        <div className="w-full sm:w-auto">
            <Button 
             onClick={createNewPortfolio}
-            className="h-16 px-10 rounded-2xl bg-white text-black hover:bg-slate-200 font-black text-lg shadow-2xl shadow-white/10 group transition-all"
+            className="w-full sm:w-auto h-14 md:h-16 px-8 md:px-10 rounded-2xl bg-white text-black hover:bg-slate-200 font-black text-sm md:text-lg shadow-2xl shadow-white/10 group transition-all"
            >
-            <Plus className="md:mr-3 h-5 w-5 md:h-6 md:w-6 group-hover:rotate-90 transition-transform" />
-            <span className="hidden md:inline">CREATE YOUR PORTFOLIO</span>
-            <span className="md:hidden">CREATE</span>
+            <Plus className="mr-2 md:mr-3 h-5 w-5 md:h-6 md:w-6 group-hover:rotate-90 transition-transform" />
+            <span>CREATE PORTFOLIO</span>
            </Button>
         </div>
       </div>
 
       {/* Portfolios Grid */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {loading ? (
           Array(3).fill(0).map((_, i) => (
-            <div key={i} className="h-64 bg-white/5 rounded-[3rem] border border-white/10 animate-pulse" />
+            <div key={i} className="h-64 bg-white/5 rounded-[2.5rem] border border-white/10 animate-pulse" />
           ))
         ) : portfolios.length > 0 ? (
           portfolios.map((p, i) => (
@@ -200,7 +198,7 @@ export default function DashboardPage() {
               transition={{ delay: i * 0.1 }}
               className="group relative"
             >
-              <div className="bg-white/5 backdrop-blur-xl rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 border border-white/10 hover:border-indigo-500/50 transition-all h-full flex flex-col justify-between overflow-hidden relative shadow-2xl">
+              <div className="bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-6 md:p-8 border border-white/10 hover:border-indigo-500/50 transition-all h-full flex flex-col justify-between overflow-hidden relative shadow-2xl">
                 {/* Gradient Inner Glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
                 

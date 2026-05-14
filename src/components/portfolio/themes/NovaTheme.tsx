@@ -34,10 +34,12 @@ export const PortfolioThemeNova = ({
              </div>
              <span className="font-black text-xl tracking-[4px] text-white uppercase italic">NOVA.</span>
           </div>
-          <div className="hidden md:flex items-center gap-10 text-[10px] font-black uppercase tracking-[3px] text-slate-500">
-            <a href="#projects" className="hover:text-cyan-400 transition-colors">Nodes</a>
-            <a href="#experience" className="hover:text-cyan-400 transition-colors">Core</a>
-            <a href="#contact" className="hover:text-cyan-400 transition-colors">Comms</a>
+          <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[10px] font-black uppercase tracking-[1px] md:tracking-[3px] text-slate-500">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-cyan-400 transition-colors hidden sm:block">Origin</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors hidden sm:block">Stack</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors hidden sm:block">Nodes</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors hidden sm:block">Core</a>}
+            <a href="#contact" className="hover:text-cyan-400 transition-colors px-3 py-1.5 border border-white/10 rounded-full">Comms</a>
           </div>
         </div>
       </nav>
@@ -180,8 +182,40 @@ export const PortfolioThemeNova = ({
         </section>
       )}
 
+      {/* Skills - Skill Nodes */}
+      {pData.sectionsVisibility.skills && data.skills && data.skills.length > 0 && (
+        <section id="skills" className="relative z-10 py-32 px-6">
+           <div className="max-w-6xl mx-auto space-y-24">
+              <div className="text-center">
+                 <h2 className="text-6xl font-black text-white italic tracking-tighter uppercase underline decoration-violet-500 decoration-8 underline-offset-12 inline-block">Skill_Nodes.</h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                 {data.skills.map((group: any, i: number) => (
+                   <motion.div 
+                     key={i}
+                     initial={{ opacity: 0, y: 20 }}
+                     whileInView={{ opacity: 1, y: 0 }}
+                     className="p-8 bg-white/5 border border-white/10 rounded-[2rem] hover:border-cyan-500/50 transition-all group"
+                   >
+                      <h3 className="text-xs font-black text-cyan-500 tracking-[5px] uppercase mb-8 border-b border-white/5 pb-4 group-hover:text-violet-500 transition-colors">{group.category}</h3>
+                      <div className="flex flex-wrap gap-3">
+                         {group.items.map((skill: string, sid: number) => (
+                           <span key={sid} className="px-4 py-2 bg-black border border-white/10 rounded-full text-[10px] font-black uppercase tracking-[2px] hover:border-cyan-500 hover:text-cyan-500 transition-all">
+                             {skill}
+                           </span>
+                         ))}
+                      </div>
+                   </motion.div>
+                 ))}
+              </div>
+           </div>
+        </section>
+      )}
+
       {/* Footer / Connect */}
-      <footer id="contact" className="relative z-10 pt-44 pb-12 px-6">
+      {pData.sectionsVisibility.contact && (
+        <footer id="contact" className="relative z-10 pt-20 md:pt-44 pb-12 px-6">
         <div className="max-w-7xl mx-auto bg-gradient-to-br from-slate-900 to-[#020205] border border-white/5 rounded-[5rem] p-12 md:p-24 text-center overflow-hidden">
            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.5),transparent)]" />
            
@@ -221,6 +255,7 @@ export const PortfolioThemeNova = ({
            </div>
         </div>
       </footer>
+      )}
     </div>
   );
 };

@@ -32,24 +32,25 @@ export const PortfolioThemeCyberpunk = ({
           <span className="font-black text-sm tracking-[3px] text-[#00ff41] uppercase drop-shadow-[0_0_10px_rgba(0,255,65,0.4)]">
             {username.toUpperCase()}<span className="animate-pulse">_</span>EXE
           </span>
-          <div className="hidden md:flex items-center gap-8 text-[10px] font-bold tracking-[2px] text-[#1a4d1a] uppercase">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)]">{"> home"}</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)]">{"> exp"}</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)]">{"> projects"}</a>}
-            {pData.sectionsVisibility.contact && <a href="#contact" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)]">{"> contact"}</a>}
+          <div className="flex items-center gap-4 md:gap-8 text-[8px] md:text-[10px] font-bold tracking-[1px] md:tracking-[2px] text-[#1a4d1a] uppercase">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)] hidden sm:block">{"> home"}</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)] hidden sm:block">{"> exp"}</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)] hidden sm:block">{"> skills"}</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)] hidden sm:block">{"> projects"}</a>}
+            <a href="#contact" className="hover:text-[#00ff41] transition-all hover:drop-shadow-[0_0_5px_rgba(0,255,65,0.4)] px-3 py-1 border border-[#00ff41]">{"> contact"}</a>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
       {pData.sectionsVisibility.hero && (
-        <section id="hero" className="min-h-screen flex items-center pt-20 px-6 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto border border-[#00cc33] p-6 md:p-16 bg-black/50 relative">
+        <section id="hero" className="min-h-screen flex items-center pt-24 md:pt-32 px-4 md:px-6 relative overflow-hidden">
+          <div className="max-w-4xl mx-auto border border-[#00cc33] p-8 md:p-16 bg-black/50 relative w-full">
              <div className="absolute top-[-1px] left-4 bg-[#030a03] px-2 text-[10px] text-[#00ff41] tracking-[2px]">
                {username.toUpperCase()}.system_init
              </div>
              
-             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#00ffff] mb-4 text-xs font-bold drop-shadow-[0_0_8px_rgba(0,255,255,0.4)]">
+             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#00ffff] mb-4 text-[10px] md:text-xs font-bold drop-shadow-[0_0_8px_rgba(0,255,255,0.4)]">
                $ whoami
              </motion.div>
              
@@ -59,8 +60,9 @@ export const PortfolioThemeCyberpunk = ({
                className="text-4xl md:text-8xl font-black text-[#00ff41] leading-[1.1] md:leading-none mb-6 drop-shadow-[0_0_15px_rgba(0,255,65,0.4)] tracking-tighter"
              >
                {data.personalInfo.fullName?.split(' ')[0]}<br />
-               {data.personalInfo.fullName?.split(' ').slice(1).join(' ')}
+               <span className="text-[#00ffff]">{data.personalInfo.fullName?.split(' ').slice(1).join(' ')}</span>
              </motion.h1>
+
 
              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="text-[#00ffff] mb-8 text-xs font-bold tracking-[2px] drop-shadow-[0_0_8px_rgba(0,255,255,0.4)] uppercase">
                {">> "}{data.personalInfo.jobTitle || "Cyber Architect"}
@@ -84,7 +86,8 @@ export const PortfolioThemeCyberpunk = ({
       )}
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6">
+      {pData.sectionsVisibility.hero && (
+        <section id="about" className="py-24 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="mb-12">
             <p className="text-[#1a4d1a] text-[10px] tracking-[4px] uppercase mb-2">{"// "}log_01</p>
@@ -132,6 +135,7 @@ export const PortfolioThemeCyberpunk = ({
           </div>
         </div>
       </section>
+      )}
 
       {/* Skills Matrix */}
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (

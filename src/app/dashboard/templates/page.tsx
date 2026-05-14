@@ -84,14 +84,26 @@ function DashboardTemplatesContent() {
           .eq('user_id', user.id);
 
         if (error) throw error;
-        toast.success(`Theme ${themeId} synchronized!`);
-        router.push(`/dashboard/portfolio?id=${portfolioId}`);
+        
+        // Construct a clean URL handle from full name or username
+        const rawHandle = user.fullName || user.username || 'user';
+        const cleanHandle = rawHandle
+          .toLowerCase()
+          .trim()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '');
+          
+        const userHandle = `@${cleanHandle}`;
+        
+        toast.success("Theme preference synthesized.");
+        router.push(`/p/${userHandle}?theme=${themeId}&id=${portfolioId}`);
       } else {
         toast.info("Initializing context...");
         router.push("/dashboard");
       }
     } catch (err: any) {
-      toast.error(`Selection failed: ${err.message}`);
+      console.error("Theme selection error:", err);
+      toast.error("Process interrupted. Please try again.");
     } finally {
       setIsSelecting(null);
     }

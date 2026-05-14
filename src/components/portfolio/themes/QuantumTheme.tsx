@@ -45,7 +45,7 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
   const education = data.education || [];
   const skills = data.skills || [];
   const projects = data.projects || [];
-  const sections = pData?.sections || { hero: true, experience: true, education: true, skills: true, projects: true };
+  const sections = pData?.sectionsVisibility || { hero: true, experience: true, education: true, skills: true, projects: true, contact: true };
 
   return (
     <div ref={containerRef} className="bg-[#020205] text-cyan-50 min-h-screen font-mono selection:bg-cyan-500 selection:text-black">
@@ -62,57 +62,59 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-cyan-500/10 backdrop-blur-xl bg-black/50 px-8 py-4 flex justify-between items-center">
+      <nav className="fixed top-0 w-full z-50 border-b border-cyan-500/10 backdrop-blur-xl bg-black/50 px-4 md:px-8 py-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <div className="h-8 w-8 bg-cyan-500 flex items-center justify-center rounded-sm">
+          <div className="h-8 w-8 bg-cyan-500 flex items-center justify-center rounded-sm shrink-0">
             <Cpu className="h-5 w-5 text-black" />
           </div>
-          <span className="text-sm font-black uppercase tracking-[0.3em]">QUANTUM_NODE // {username.toUpperCase()}</span>
+          <span className="text-[10px] md:text-sm font-black uppercase tracking-[0.2em] md:tracking-[0.3em] truncate max-w-[150px] md:max-w-none">QUANTUM_NODE // {username.toUpperCase()}</span>
         </div>
-        <div className="hidden md:flex gap-8 text-[10px] font-bold text-cyan-500/60 uppercase tracking-widest">
-          {sections.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors">EXPERIENCE</a>}
-          {sections.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors">PROJECTS</a>}
-          {sections.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors">SKILLS</a>}
-          <a href="#contact" className="hover:text-cyan-400 transition-colors">CONTACT</a>
+        <div className="flex items-center gap-4 md:gap-8 text-[8px] md:text-[10px] font-bold text-cyan-500/60 uppercase tracking-wider md:tracking-widest">
+          {sections.hero && <a href="#hero" className="hover:text-cyan-400 transition-colors hidden sm:block">CORE</a>}
+          {sections.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors hidden sm:block">HISTORY</a>}
+          {sections.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors hidden sm:block">PROJECTS</a>}
+          {sections.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors hidden sm:block">SKILLS</a>}
+          <a href="#contact" className="hover:text-cyan-400 transition-colors px-3 py-1.5 border border-cyan-500/20 rounded-sm">LINK</a>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-8 max-w-7xl mx-auto z-10 min-h-screen flex flex-col justify-center">
+      {sections.hero && (
+        <section id="hero" className="relative pt-32 md:pt-40 pb-20 px-6 md:px-8 max-w-7xl mx-auto z-10 min-h-screen flex flex-col justify-center overflow-hidden">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-6"
+          className="space-y-6 md:space-y-8"
         >
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[10px] font-black uppercase tracking-[0.3em]">
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em]">
             <Activity className="h-3 w-3 animate-pulse" /> SYSTEM_ONLINE // BROADCAST_ACTIVE
           </div>
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase leading-none">
+          <h1 className="text-5xl md:text-9xl font-black tracking-tighter uppercase leading-[0.9] md:leading-none">
             {personalInfo.fullName?.split(' ')[0]}<br/>
-            <span className="text-transparent border-t border-b border-cyan-500/20 pb-4 mt-4 inline-block [-webkit-text-stroke:1px_#06b6d4]">
+            <span className="text-transparent border-t border-b border-cyan-500/20 pb-4 mt-2 md:mt-4 inline-block [-webkit-text-stroke:1px_#06b6d4]">
               {personalInfo.fullName?.split(' ').slice(1).join(' ')}
             </span>
           </h1>
-          <p className="max-w-2xl text-cyan-500/60 text-sm leading-relaxed uppercase tracking-widest border-l-2 border-cyan-500 pl-8 font-bold">
+          <p className="max-w-2xl text-cyan-500/60 text-xs md:text-sm leading-relaxed uppercase tracking-[0.1em] md:tracking-widest border-l-2 border-cyan-500 pl-6 md:pl-8 font-bold italic">
             {personalInfo.summary || "NO_SUMMARY_DATA_FOUND // INITIALIZING_DEFAULT_LOCUS"}
           </p>
           
-          <div className="pt-10 flex flex-wrap gap-4">
-            <a href="#projects" className="h-14 px-10 bg-cyan-500 text-black flex items-center justify-center font-black text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all rounded-sm shadow-xl shadow-cyan-500/20">
+          <div className="pt-6 md:pt-10 flex flex-wrap gap-4">
+            <a href="#projects" className="h-12 md:h-14 px-8 md:px-10 bg-cyan-500 text-black flex items-center justify-center font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all rounded-sm shadow-xl shadow-cyan-500/20">
               INIT_OPERATIONS
             </a>
-            <div className="flex items-center gap-4 px-6 h-14 border border-cyan-500/20 rounded-sm">
+            <div className="flex items-center gap-4 px-6 h-12 md:h-14 border border-cyan-500/20 rounded-sm bg-black/20">
                 {pData?.socialLinks?.github && (
                   <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400" />
+                    <Github className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 transition-colors" />
                   </a>
                 )}
                 {pData?.socialLinks?.linkedin && (
                   <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400" />
+                    <Linkedin className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 transition-colors" />
                   </a>
                 )}
-                <Share2 className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 cursor-pointer" />
+                <Share2 className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 cursor-pointer transition-colors" />
             </div>
           </div>
         </motion.div>
@@ -137,6 +139,7 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
             ))}
         </div>
       </section>
+      )}
 
       {/* Experience Section */}
       {sections.experience && (
@@ -253,7 +256,8 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
       )}
 
       {/* Contact Section */}
-      <section id="contact" className="py-40 px-8 max-w-7xl mx-auto z-10">
+      {sections.contact && (
+        <section id="contact" className="py-20 md:py-40 px-8 max-w-7xl mx-auto z-10">
         <div className="bg-cyan-500 p-12 md:p-20 flex flex-col md:flex-row justify-between items-center gap-12 rounded-sm shadow-[0_0_100px_rgba(6,182,212,0.15)] text-black">
           <div className="space-y-6 max-w-xl text-center md:text-left">
             <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">ESTABLISH_LINK</h2>
@@ -285,6 +289,7 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
           </div>
         </div>
       </section>
+      )}
 
       {/* Footer */}
       <footer className="py-20 border-t border-cyan-500/10 px-8 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black text-cyan-500/40 uppercase tracking-[0.3em]">

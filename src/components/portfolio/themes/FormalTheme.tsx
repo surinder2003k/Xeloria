@@ -29,11 +29,12 @@ export const PortfolioThemeFormal = ({
           <span className="font-serif text-lg tracking-[2px] text-[#c9a84c] uppercase font-bold">
             {data.personalInfo.fullName || username}
           </span>
-          <div className="hidden md:flex items-center gap-6 lg:gap-10 text-[10px] font-bold tracking-[2px] text-[#8899aa] uppercase">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#c9a84c] transition-colors">Home</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#c9a84c] transition-colors">Career</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#c9a84c] transition-colors">Portfolio</a>}
-            {pData.sectionsVisibility.contact && <a href="#contact" className="hover:text-[#c9a84c] transition-colors">Contact</a>}
+          <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[10px] font-bold tracking-[1px] md:tracking-[2px] text-[#8899aa] uppercase">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#c9a84c] transition-colors hidden sm:block">Home</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-[#c9a84c] transition-colors hidden sm:block">Expertise</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#c9a84c] transition-colors hidden sm:block">Career</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#c9a84c] transition-colors hidden sm:block">Portfolio</a>}
+            <a href="#contact" className="hover:text-[#c9a84c] transition-colors px-3 py-1.5 border border-[#2a3d52] rounded-sm">Contact</a>
           </div>
         </div>
       </nav>
@@ -94,7 +95,8 @@ export const PortfolioThemeFormal = ({
       )}
 
       {/* About Section */}
-      <section id="about" className="py-32 px-6 bg-[#0d1b2a]">
+      {pData.sectionsVisibility.hero && (
+        <section id="about" className="py-20 md:py-32 px-6 bg-[#0d1b2a]">
         <div className="max-w-[1400px] mx-auto">
           <p className="text-[#c9a84c] text-[10px] tracking-[4px] uppercase mb-4">Profile</p>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-8">About Me</h2>
@@ -127,6 +129,7 @@ export const PortfolioThemeFormal = ({
           </div>
         </div>
       </section>
+      )}
 
       {/* Experience Timeline */}
       {pData.sectionsVisibility.experience && data.experience.length > 0 && (

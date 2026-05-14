@@ -25,7 +25,7 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
   const experiences = data.experience || [];
   const projects = data.projects || [];
   const skills = data.skills || [];
-  const sections = pData?.sections || { hero: true, experience: true, education: true, skills: true, projects: true };
+  const sections = pData?.sectionsVisibility || { hero: true, experience: true, education: true, skills: true, projects: true, contact: true };
 
   return (
     <div className="bg-[#080808] text-white min-h-screen font-sans selection:bg-white selection:text-black">
@@ -38,21 +38,24 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 p-8 flex justify-between items-center mix-blend-difference">
-        <div className="flex items-center gap-4">
-          <Square className="h-4 w-4 fill-white" />
-          <span className="text-xs font-black uppercase tracking-[0.4em]">{username}</span>
+      <nav className="fixed top-0 w-full z-50 p-6 md:p-8 flex justify-between items-center mix-blend-difference bg-black/20 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none">
+        <div className="flex items-center gap-3 md:gap-4">
+          <Square className="h-4 w-4 fill-white shrink-0" />
+          <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] truncate max-w-[100px] md:max-w-none">{username}</span>
         </div>
-        <div className="flex gap-12 text-[9px] font-black uppercase tracking-[0.3em] opacity-40 hover:opacity-100 transition-opacity">
-          {sections.experience && <a href="#experience">History</a>}
-          {sections.projects && <a href="#projects">Work</a>}
-          {sections.skills && <a href="#skills">Stack</a>}
-          <a href="#contact">End</a>
+        <div className="flex items-center gap-4 md:gap-12 text-[8px] md:text-[9px] font-black uppercase tracking-[1px] md:tracking-[3em] opacity-60 hover:opacity-100 transition-opacity">
+          {sections.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Start</a>}
+          {sections.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">History</a>}
+          {sections.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Work</a>}
+          {sections.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Stack</a>}
+          <a href="#contact" className="hover:text-white transition-colors px-3 py-1.5 border border-white/20 rounded-sm">End</a>
         </div>
       </nav>
 
+
       {/* Hero */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-8 z-10">
+      {sections.hero && (
+        <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-8 z-10">
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,6 +90,7 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
             </a>
         </div>
       </section>
+      )}
 
       {/* Experience */}
       {sections.experience && (
@@ -175,7 +179,8 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
       )}
 
       {/* Contact */}
-      <section id="contact" className="py-60 px-8 text-center z-10 border-t border-white/[0.05]">
+      {sections.contact && (
+        <section id="contact" className="py-40 md:py-60 px-8 text-center z-10 border-t border-white/[0.05]">
         <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
@@ -192,6 +197,7 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
             </div>
         </motion.div>
       </section>
+      )}
 
       {/* Footer */}
       <footer className="p-12 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-black uppercase tracking-[0.5em] opacity-20">

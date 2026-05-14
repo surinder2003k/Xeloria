@@ -15,6 +15,7 @@ import { PortfolioThemeQuantum } from "@/components/portfolio/themes/QuantumThem
 import { PortfolioThemeElysian } from "@/components/portfolio/themes/ElysianTheme";
 import { PortfolioThemeTitan } from "@/components/portfolio/themes/TitanTheme";
 import { PortfolioThemeModernNoir } from "@/components/portfolio/themes/ModernNoirTheme";
+import { PortfolioThemeMinimal } from "@/components/portfolio/themes/MinimalTheme";
 import { ResumeData } from "@/lib/store";
 import { PortfolioData } from "@/lib/portfolio-store";
 
@@ -113,18 +114,41 @@ export default async function PortfolioPage({ params, searchParams }: Props) {
   const sParams = await searchParams;
   const urlId = sParams.id && sParams.id !== "undefined" && sParams.id !== "null" ? sParams.id : null;
   
-  const matchingResume = urlId 
-    ? resumes.find(r => r.id === urlId)
-    : resumes.find((r) => {
-        const data = (r.resume_data || r.content) as any;
-        const fullName = data?.personalInfo?.fullName || "";
-        const normalizedName = fullName
-          .toLowerCase()
-          .trim()
-          .replace(/\s+/g, "-")
-          .replace(/[^a-z0-9-]/g, "");
-        return normalizedName === cleanUsername;
-      });
+  let matchingResume;
+
+  if (urlId) {
+    const { data: idData, error: idError } = await supabase
+      .from("resumes")
+      .select("user_id, resume_data, content, template_id, id")
+      .eq("id", urlId)
+      .single();
+    
+    if (!idError && idData) {
+      matchingResume = idData;
+    }
+  }
+
+  if (!matchingResume) {
+    const { data: resumes, error: resError } = await supabase
+      .from("resumes")
+      .select("user_id, resume_data, content, template_id, id");
+
+    if (resError || !resumes) {
+      console.error("Fetch resumes error:", resError);
+      return notFound();
+    }
+
+    matchingResume = resumes.find((r) => {
+      const data = (r.resume_data || r.content) as any;
+      const fullName = data?.personalInfo?.fullName || "";
+      const normalizedName = fullName
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9-]/g, "");
+      return normalizedName === cleanUsername;
+    });
+  }
 
   if (!matchingResume) {
     console.warn(`No matching resume found for cleanUsername: "${cleanUsername}" or ID: "${urlId}"`);
@@ -210,6 +234,8 @@ export default async function PortfolioPage({ params, searchParams }: Props) {
         return <PortfolioThemeTitan {...props} />;
       case "modern_noir":
         return <PortfolioThemeModernNoir {...props} />;
+      case "minimal":
+        return <PortfolioThemeMinimal {...props} />;
       default:
         return <PortfolioThemeMinimalV2 {...props} />;
     }

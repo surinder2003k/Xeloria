@@ -27,27 +27,30 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
   const education = data.education || [];
   const skills = data.skills || [];
   const projects = data.projects || [];
-  const sections = pData?.sections || { hero: true, experience: true, education: true, skills: true, projects: true };
+  const sections = pData?.sectionsVisibility || { hero: true, experience: true, education: true, skills: true, projects: true, contact: true };
 
   return (
-    <div className="bg-[#fdfcfb] text-[#1a1a1a] min-h-screen font-serif selection:bg-[#e2d1c3] selection:text-[#1a1a1a]">
+    <div className="bg-[#fdfcfb] text-[#1a1a1a] min-h-screen font-serif selection:bg-[#e2d1c3] selection:text-[#1a1a1a] relative overflow-hidden">
       {/* Background Texture */}
       <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/fine-paper.png')]" />
       <div className="fixed inset-0 pointer-events-none bg-gradient-to-br from-[#fdfcfb] via-white to-[#e2d1c3]/20" />
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 px-12 py-8 flex justify-between items-center mix-blend-difference">
-        <span className="text-xl font-bold tracking-[0.2em] uppercase text-white">{username}</span>
-        <div className="hidden md:flex gap-12 text-[10px] font-bold uppercase tracking-[0.3em] text-white/70">
-          {sections.experience && <a href="#experience" className="hover:text-white transition-colors">Experience</a>}
-          {sections.projects && <a href="#projects" className="hover:text-white transition-colors">Curation</a>}
-          {sections.skills && <a href="#skills" className="hover:text-white transition-colors">Expertise</a>}
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+      <nav className="fixed top-0 w-full z-50 px-6 md:px-12 py-6 md:py-8 flex justify-between items-center mix-blend-difference bg-white/10 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
+        <span className="text-lg md:text-xl font-bold tracking-[0.2em] uppercase text-white truncate max-w-[150px] md:max-w-none">{username}</span>
+        <div className="flex items-center gap-4 md:gap-12 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/70">
+          {sections.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Origin</a>}
+          {sections.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Narrative</a>}
+          {sections.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Curation</a>}
+          {sections.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Expertise</a>}
+          <a href="#contact" className="hover:text-white transition-colors px-4 py-2 border border-white/20 rounded-full">Enquire</a>
         </div>
       </nav>
 
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-8 z-10">
+      {sections.hero && (
+        <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-8 z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,6 +76,7 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
           </motion.div>
         </motion.div>
       </section>
+      )}
 
       {/* Experience Section */}
       {sections.experience && (
@@ -177,7 +181,8 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
       )}
 
       {/* Contact Section */}
-      <section id="contact" className="py-60 px-12 text-center z-10 relative">
+      {sections.contact && (
+        <section id="contact" className="py-40 md:py-60 px-12 text-center z-10 relative">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -195,6 +200,7 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
           </div>
         </motion.div>
       </section>
+      )}
 
       {/* Footer */}
       <footer className="py-20 border-t border-[#8e7f74]/10 px-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-bold uppercase tracking-[0.4em] text-[#8e7f74]">

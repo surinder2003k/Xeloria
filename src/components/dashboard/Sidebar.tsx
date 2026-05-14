@@ -49,20 +49,20 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
       )}
 
       <aside className={cn(
-        "fixed top-0 left-0 h-screen w-80 bg-[#0a0a0a] border-r border-white/5 z-[70] transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-[20px_0_50px_-20px_rgba(0,0,0,0.5)]",
+        "fixed top-0 left-0 h-screen w-80 bg-[#0a0a0a] border-r border-white/5 z-[110] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] lg:translate-x-0 shadow-[20px_0_50px_-20px_rgba(0,0,0,0.5)]",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         {/* Background Accents */}
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-indigo-500/10 to-transparent pointer-events-none" />
 
-        <div className="flex flex-col h-full p-8 relative z-10">
+        <div className="flex flex-col h-full p-6 md:p-8 relative z-10">
           {/* Header */}
-          <div className="flex items-center justify-between mb-12 px-2">
+          <div className="flex items-center justify-between mb-10 px-2">
             <Link href="/" className="flex items-center gap-3 group">
-               <XeloriaLogo className="h-12 w-12 group-hover:scale-110 group-hover:rotate-6 transition-all drop-shadow-2xl" />
+               <XeloriaLogo className="h-10 w-10 md:h-12 md:w-12 group-hover:scale-110 group-hover:rotate-6 transition-all drop-shadow-2xl" />
                <div className="flex flex-col">
-                 <span className="text-2xl font-black tracking-tight text-white leading-none">XELORIA</span>
-                 <span className="text-[10px] font-black tracking-[0.4em] text-indigo-500 uppercase mt-1">NEXUS CORE</span>
+                 <span className="text-xl md:text-2xl font-black tracking-tight text-white leading-none">XELORIA</span>
+                 <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] text-indigo-500 uppercase mt-1">NEXUS CORE</span>
                </div>
             </Link>
             <button onClick={onClose} className="lg:hidden p-2 text-slate-500 hover:text-white transition-colors">
@@ -71,8 +71,8 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 space-y-2">
-            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-6 px-4">Navigation Flow</p>
+          <nav className="flex-1 space-y-1.5 overflow-y-auto no-scrollbar">
+            <p className="text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-4 px-4">Navigation Flow</p>
             {navigationItems.map((item) => {
               const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname?.startsWith(item.href));
               return (
@@ -81,7 +81,7 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "flex items-center gap-4 px-6 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all group relative overflow-hidden",
+                    "flex items-center gap-4 px-5 md:px-6 py-3.5 md:py-4 rounded-2xl text-[10px] md:text-[11px] font-black uppercase tracking-widest transition-all group relative overflow-hidden",
                     isActive 
                       ? "text-white bg-white/5 border border-white/10 shadow-2xl" 
                       : "text-slate-500 hover:text-slate-300 hover:bg-white/[0.02]"
@@ -89,12 +89,12 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                 >
                   {isActive && (
                     <motion.div 
-                      layoutId="active-pill"
+                      layoutId="sidebar-active-pill"
                       className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-indigo-500 rounded-full"
                     />
                   )}
                   <item.icon className={cn(
-                    "h-5 w-5 transition-transform duration-500",
+                    "h-4 w-4 md:h-5 md:w-5 transition-transform duration-500",
                     isActive ? "text-indigo-400" : "text-slate-600 group-hover:scale-110 group-hover:text-slate-400"
                   )} />
                   {item.label}

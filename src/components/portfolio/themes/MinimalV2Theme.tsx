@@ -30,13 +30,14 @@ export const PortfolioThemeMinimalV2 = ({
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-[#fafafafa]/80 backdrop-blur-xl border-b border-black/[0.03]">
         <div className="max-w-[1200px] mx-auto px-6 h-[72px] flex items-center justify-between">
-          <span className="font-sans text-xl tracking-tighter font-extrabold uppercase">
+          <span className="font-sans text-lg md:text-xl tracking-tighter font-extrabold uppercase">
             {data.personalInfo.fullName || username}
           </span>
-          <div className="hidden md:flex items-center gap-8 text-[11px] font-bold tracking-[2px] text-[#666] uppercase">
-            <a href="#about" className="hover:text-black transition-colors">About</a>
-            <a href="#work" className="hover:text-black transition-colors">Work</a>
-            <a href="#experience" className="hover:text-black transition-colors">History</a>
+          <div className="flex items-center gap-4 md:gap-8 text-[10px] md:text-[11px] font-bold tracking-[1px] md:tracking-[2px] text-[#666] uppercase">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-black transition-colors hidden sm:block">About</a>}
+            {pData.sectionsVisibility.projects && <a href="#work" className="hover:text-black transition-colors hidden sm:block">Work</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-black transition-colors hidden sm:block">History</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-black transition-colors hidden sm:block">Skills</a>}
             <a href="#contact" className="hover:text-black transition-colors">Contact</a>
           </div>
         </div>
@@ -58,7 +59,7 @@ export const PortfolioThemeMinimalV2 = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="font-sans text-[clamp(4rem,10vw,10rem)] leading-[0.85] font-black tracking-tighter mb-8"
+              className="font-sans text-[clamp(2.5rem,8vw,10rem)] leading-[0.85] font-black tracking-tighter mb-8"
             >
               {data.personalInfo.fullName?.split(' ')[0]}<br />
               <span className="text-black/30">{data.personalInfo.fullName?.split(' ').slice(1).join(' ')}</span>

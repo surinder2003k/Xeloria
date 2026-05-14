@@ -28,19 +28,20 @@ export const PortfolioThemeBrutalist = ({
         <span className="font-bebas text-2xl tracking-[3px] text-black">
           {username.toUpperCase()}
         </span>
-        <div className="hidden md:flex items-center h-full">
+        <div className="flex items-center gap-4 md:gap-0 h-full">
           {pData.sectionsVisibility.hero && (
-            <a href="#hero" className="h-full flex items-center px-6 border-l-2 border-black font-mono text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">Front</a>
+            <a href="#hero" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Front</a>
+          )}
+          {pData.sectionsVisibility.skills && (
+            <a href="#skills" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Stack</a>
           )}
           {pData.sectionsVisibility.experience && (
-            <a href="#experience" className="h-full flex items-center px-6 border-l-2 border-black font-mono text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">History</a>
+            <a href="#experience" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">History</a>
           )}
           {pData.sectionsVisibility.projects && (
-            <a href="#projects" className="h-full flex items-center px-6 border-l-2 border-black font-mono text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">Works</a>
+            <a href="#projects" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Works</a>
           )}
-          {pData.sectionsVisibility.contact && (
-            <a href="#contact" className="h-full flex items-center px-6 border-l-2 border-black font-mono text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">Ping</a>
-          )}
+          <a href="#contact" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">Ping</a>
         </div>
       </nav>
 
@@ -55,7 +56,7 @@ export const PortfolioThemeBrutalist = ({
                initial={{ opacity: 0, y: 30 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.2 }}
-               className="font-bebas text-7xl md:text-[12rem] leading-[0.85] tracking-[-2px] mb-12"
+               className="font-bebas text-5xl sm:text-7xl md:text-[12rem] leading-[0.85] tracking-[-2px] mb-12"
              >
                <span className="block border-text-white text-transparent" style={{ WebkitTextStroke: '2px #f5f5f0' }}>
                  {data.personalInfo.fullName?.split(' ')[0].toUpperCase()}
@@ -94,7 +95,8 @@ export const PortfolioThemeBrutalist = ({
       )}
 
       {/* About Section */}
-      <section id="about" className="py-32 px-[5%]">
+      {pData.sectionsVisibility.hero && (
+        <section id="about" className="py-32 px-[5%]">
         <div className="flex items-stretch border-2 border-[#f5f5f0] mb-16 overflow-hidden">
            <div className="bg-[#ffe600] text-black font-mono text-[10px] font-bold px-6 py-3 flex items-center border-r-2 border-[#f5f5f0]">01</div>
            <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Profile_Module</div>
@@ -126,6 +128,7 @@ export const PortfolioThemeBrutalist = ({
            </div>
         </div>
       </section>
+      )}
 
       {/* Skills Matrix */}
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (

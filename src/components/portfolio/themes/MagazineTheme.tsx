@@ -29,11 +29,12 @@ export const PortfolioThemeMagazine = ({
           <span className="font-serif text-2xl font-bold tracking-tight text-[#1c1209]">
             {data.personalInfo.fullName?.split(' ')[0]} <em className="not-italic text-[#c4522a]">{data.personalInfo.fullName?.split(' ').slice(1).join(' ')}</em>
           </span>
-          <div className="hidden md:flex items-center gap-10 text-[10px] font-bold tracking-[2px] text-[#9a8070] uppercase">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#c4522a] transition-colors">Front</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#c4522a] transition-colors">Feature</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#c4522a] transition-colors">Portfolio</a>}
-            {pData.sectionsVisibility.contact && <a href="#contact" className="hover:text-[#c4522a] transition-colors">Connect</a>}
+          <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[10px] font-bold tracking-[1px] md:tracking-[2px] text-[#9a8070] uppercase">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-[#c4522a] transition-colors hidden sm:block">Front</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-[#c4522a] transition-colors hidden sm:block">Expertise</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-[#c4522a] transition-colors hidden sm:block">Feature</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-[#c4522a] transition-colors hidden sm:block">Portfolio</a>}
+            <a href="#contact" className="hover:text-[#c4522a] transition-colors px-3 py-1.5 border border-[#1c1209] rounded-sm">Connect</a>
           </div>
         </div>
       </nav>
@@ -94,7 +95,8 @@ export const PortfolioThemeMagazine = ({
       )}
 
       {/* About Section */}
-      <section id="about" className="py-32 px-6">
+      {pData.sectionsVisibility.hero && (
+        <section id="about" className="py-20 md:py-32 px-6">
         <div className="max-w-[1400px] mx-auto">
           <div className="flex items-start gap-6 md:gap-12 mb-16 md:mb-20">
              <div className="font-serif text-6xl md:text-8xl font-light text-[#ddd5c8] leading-none">01</div>
@@ -127,6 +129,7 @@ export const PortfolioThemeMagazine = ({
           </div>
         </div>
       </section>
+      )}
 
       {/* Skills Layout */}
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (

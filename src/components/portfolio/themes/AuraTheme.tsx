@@ -65,21 +65,21 @@ export const PortfolioThemeAura = ({
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-8 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl z-50 px-8 h-16 flex items-center justify-between bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl shadow-indigo-500/10">
-        <span className="font-extrabold text-xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 drop-shadow-sm">
+      <nav className="fixed top-4 md:top-8 left-1/2 -translate-x-1/2 w-[95%] md:w-[90%] max-w-5xl z-50 px-4 md:px-8 h-14 md:h-16 flex items-center justify-between bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl shadow-indigo-500/10">
+        <span className="font-extrabold text-lg md:text-xl tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400 drop-shadow-sm">
           {data.personalInfo.fullName || username}.
         </span>
-        <div className="hidden md:flex items-center gap-10 text-[11px] font-bold tracking-[3px] text-white/50 uppercase">
-          <a href="#hero" className="hover:text-indigo-400 transition-colors">Surface</a>
-          <a href="#work" className="hover:text-indigo-400 transition-colors">Manifestations</a>
-          <a href="#journey" className="hover:text-indigo-400 transition-colors">Trajectory</a>
-          <a href="#contact" className="px-5 py-2 bg-indigo-500/20 border border-indigo-500/30 rounded-full hover:bg-indigo-500/40 transition-all text-white">Contact</a>
+        <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[11px] font-bold tracking-[2px] md:tracking-[3px] text-white/50 uppercase">
+          {pData.sectionsVisibility.projects && <a href="#work" className="hover:text-indigo-400 transition-colors hidden sm:block">Work</a>}
+          {pData.sectionsVisibility.experience && <a href="#journey" className="hover:text-indigo-400 transition-colors hidden sm:block">Journey</a>}
+          {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-indigo-400 transition-colors hidden sm:block">Skills</a>}
+          <a href="#contact" className="px-3 py-1.5 md:px-5 md:py-2 bg-indigo-500/20 border border-indigo-500/30 rounded-full hover:bg-indigo-500/40 transition-all text-white">Contact</a>
         </div>
       </nav>
 
       {/* Hero Section */}
       {pData.sectionsVisibility.hero && (
-        <section id="hero" className="relative z-10 min-h-screen flex items-center justify-center pt-32 px-6">
+        <section id="hero" className="relative z-10 min-h-screen flex items-center justify-center pt-24 md:pt-32 px-6">
           <div className="max-w-6xl mx-auto text-center space-y-12">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -93,7 +93,7 @@ export const PortfolioThemeAura = ({
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-7xl md:text-[8rem] font-black tracking-tighter leading-[0.85] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl"
+              className="text-5xl sm:text-7xl md:text-[8rem] font-black tracking-tighter leading-[0.85] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl"
             >
               Digital <br /> Ether.
             </motion.h1>
@@ -174,6 +174,41 @@ export const PortfolioThemeAura = ({
                 ))}
              </div>
           </div>
+        </section>
+      )}
+
+      {/* Skills Section */}
+      {pData.sectionsVisibility.skills && (
+        <section id="skills" className="relative z-10 py-32 px-6">
+          <div className="max-w-6xl mx-auto">
+             <header className="mb-24 text-center">
+                <p className="text-indigo-400 text-[10px] font-bold tracking-[6px] uppercase mb-4">Abilities</p>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Mastered <br/>Flux.</h2>
+             </header>
+
+             <div className="flex flex-wrap justify-center gap-6">
+                {data.skills.map((group: any, i: number) => (
+                  <div key={i} className="contents">
+                    {Array.isArray(group.items) ? group.items.map((skill: string, sid: number) => (
+                      <motion.div 
+                        key={`${i}-${sid}`}
+                        whileHover={{ scale: 1.1, rotate: 2 }}
+                        className="px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl group hover:border-indigo-500/50 transition-all"
+                      >
+                        <span className="text-xl font-bold uppercase tracking-tight group-hover:text-indigo-400">{skill}</span>
+                      </motion.div>
+                    )) : (
+                      <motion.div 
+                        key={i}
+                        whileHover={{ scale: 1.1, rotate: 2 }}
+                        className="px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl group hover:border-indigo-500/50 transition-all"
+                      >
+                        <span className="text-xl font-bold uppercase tracking-tight group-hover:text-indigo-400">{group}</span>
+                      </motion.div>
+                    )}
+                  </div>
+                ))}
+             </div>          </div>
         </section>
       )}
 
