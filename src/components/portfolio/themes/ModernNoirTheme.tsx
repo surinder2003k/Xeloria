@@ -44,11 +44,11 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
           <span className="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] truncate max-w-[100px] md:max-w-none">{username}</span>
         </div>
         <div className="flex items-center gap-4 md:gap-12 text-[8px] md:text-[9px] font-black uppercase tracking-[1px] md:tracking-[3em] opacity-60 hover:opacity-100 transition-opacity">
-          {sections.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Start</a>}
-          {sections.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">History</a>}
-          {sections.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Work</a>}
-          {sections.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Stack</a>}
-          <a href="#contact" className="hover:text-white transition-colors px-3 py-1.5 border border-white/20 rounded-sm">End</a>
+          {sections.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Home</a>}
+          {sections.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Experience</a>}
+          {sections.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Portfolio</a>}
+          {sections.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Expertise</a>}
+          <a href="#contact" className="hover:text-white transition-colors px-3 py-1.5 border border-white/20 rounded-sm">Contact</a>
         </div>
       </nav>
 
@@ -63,29 +63,29 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
           className="text-center space-y-12"
         >
           <div className="flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-[0.5em] opacity-30">
-            <Minus className="w-8" /> Established Presence <Minus className="w-8" />
+            <Minus className="w-8" /> Creative Professional <Minus className="w-8" />
           </div>
           <h1 className="text-[12vw] font-black leading-[0.8] tracking-tighter uppercase">
             {personalInfo.fullName?.split(' ')[0]}<br/>
             {personalInfo.fullName?.split(' ').slice(1).join(' ')}
           </h1>
           <p className="max-w-xl mx-auto text-sm font-bold uppercase tracking-[0.2em] leading-relaxed opacity-40 italic">
-            {personalInfo.summary || "Redefining the digital frontier through precision and purposeful design."}
+            {personalInfo.summary || "Crafting digital experiences through precision engineering and purposeful design."}
           </p>
         </motion.div>
         
         <div className="absolute bottom-12 flex gap-4 opacity-20">
             {pData?.socialLinks?.github && (
-              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
+              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
                 <Github className="h-4 w-4" />
               </a>
             )}
             {pData?.socialLinks?.linkedin && (
-              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
+              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition-opacity">
                 <Linkedin className="h-4 w-4" />
               </a>
             )}
-            <a href={`mailto:${personalInfo.email}`}>
+            <a href={`mailto:${personalInfo.email}`} className="hover:opacity-100 transition-opacity">
               <Mail className="h-4 w-4" />
             </a>
         </div>
@@ -97,8 +97,8 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
         <section id="experience" className="py-40 px-8 max-w-6xl mx-auto z-10 border-t border-white/[0.05]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-20">
             <div className="md:col-span-4 sticky top-40 h-fit">
-                <h2 className="text-6xl font-black uppercase tracking-tighter leading-none">Chronology</h2>
-                <p className="mt-4 text-[10px] font-black uppercase tracking-[0.3em] opacity-20">Professional Trajectory</p>
+                <h2 className="text-6xl font-black uppercase tracking-tighter leading-none">History</h2>
+                <p className="mt-4 text-[10px] font-black uppercase tracking-[0.3em] opacity-20">Professional Experience</p>
             </div>
             <div className="md:col-span-8 space-y-24">
               {experiences.map((exp: any, i: number) => (
@@ -125,8 +125,8 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
       {sections.projects && (
         <section id="projects" className="py-40 px-8 max-w-[90rem] mx-auto z-10">
           <div className="flex justify-between items-end mb-32 px-4">
-             <h2 className="text-8xl font-black uppercase tracking-tighter leading-none">Curation</h2>
-             <span className="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 mb-4">Selected Builds</span>
+             <h2 className="text-8xl font-black uppercase tracking-tighter leading-none">Portfolio</h2>
+             <span className="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 mb-4">Selected Work</span>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/5 border border-white/5">
@@ -134,13 +134,17 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
               <motion.div
                 key={i}
                 whileHover={{ backgroundColor: "rgba(255,255,255,0.03)" }}
-                className="p-16 space-y-12 transition-all cursor-none group"
+                className="p-16 space-y-12 transition-all cursor-default group"
               >
                 <div className="flex justify-between items-start">
                     <div className="h-16 w-16 border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
                         <span className="text-xl font-black">0{i+1}</span>
                     </div>
-                    <ArrowUpRight className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-all" />
+                    {project.link && (
+                      <a href={project.link} target="_blank" rel="noopener noreferrer">
+                        <ArrowUpRight className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-all hover:text-white" />
+                      </a>
+                    )}
                 </div>
                 <div className="space-y-6">
                     <h3 className="text-5xl font-black uppercase tracking-tighter">{project.name}</h3>
@@ -162,7 +166,7 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
       {/* Skills */}
       {sections.skills && (
         <section id="skills" className="py-40 px-8 max-w-6xl mx-auto z-10 text-center">
-            <h2 className="text-9xl font-black uppercase tracking-tighter opacity-5 mb-20">Specifications</h2>
+            <h2 className="text-9xl font-black uppercase tracking-tighter opacity-5 mb-20">Expertise</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
                 {skills.map((group: any, i: number) => (
                     <div key={i} className="space-y-8">
@@ -186,13 +190,13 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
             whileInView={{ scale: 1, opacity: 1 }}
             className="space-y-12"
         >
-            <h2 className="text-8xl md:text-[12rem] font-black uppercase tracking-tighter leading-none">Establish Link</h2>
+            <h2 className="text-8xl md:text-[12rem] font-black uppercase tracking-tighter leading-none">Get In Touch</h2>
             <div className="pt-12">
                 <a 
                     href={`mailto:${personalInfo.email}`}
                     className="inline-block h-24 px-20 bg-white text-black text-xl font-black uppercase tracking-[0.3em] hover:bg-transparent hover:text-white border-2 border-white transition-all flex items-center justify-center mx-auto w-fit"
                 >
-                    Initialize_Node
+                    Contact Me
                 </a>
             </div>
         </motion.div>
@@ -201,7 +205,7 @@ export const PortfolioThemeModernNoir = ({ username, data, pData }: ThemeProps) 
 
       {/* Footer */}
       <footer className="p-12 border-t border-white/[0.05] flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-black uppercase tracking-[0.5em] opacity-20">
-        <p>&copy; {new Date().getFullYear()} {username} // All Systems Nominal</p>
+        <p>&copy; {new Date().getFullYear()} {personalInfo.fullName} — Built with Xeloria Studio</p>
         <div className="flex gap-12">
             {pData?.socialLinks?.github && (
               <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">Github</a>

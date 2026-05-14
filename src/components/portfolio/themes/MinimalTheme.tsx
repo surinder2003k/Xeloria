@@ -34,7 +34,7 @@ export const PortfolioThemeMinimal = ({
             {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-slate-900 transition-colors hidden sm:block">Experience</a>}
             {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-slate-900 transition-colors hidden sm:block">Projects</a>}
             {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-slate-900 transition-colors hidden sm:block">Expertise</a>}
-            <a href="#contact" className="hover:text-slate-900 transition-colors px-4 py-1.5 border border-slate-900 rounded-full">Hire</a>
+            <a href="#contact" className="hover:text-slate-900 transition-colors px-4 py-1.5 border border-slate-900 rounded-full">Contact</a>
           </div>
         </div>
       </nav>
@@ -157,7 +157,7 @@ export const PortfolioThemeMinimal = ({
       <footer className="py-12 px-6 border-t border-slate-100">
         <div className="max-w-6xl mx-auto flex justify-between items-center text-sm text-slate-400">
           <p>© {new Date().getFullYear()} {data.personalInfo.fullName}</p>
-          <p>Xeloria Minimal</p>
+          <p>Built with Xeloria Studio</p>
         </div>
       </footer>
     </div>

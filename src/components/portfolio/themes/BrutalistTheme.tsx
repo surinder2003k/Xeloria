@@ -30,18 +30,18 @@ export const PortfolioThemeBrutalist = ({
         </span>
         <div className="flex items-center gap-4 md:gap-0 h-full">
           {pData.sectionsVisibility.hero && (
-            <a href="#hero" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Front</a>
+            <a href="#hero" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Home</a>
           )}
           {pData.sectionsVisibility.skills && (
-            <a href="#skills" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Stack</a>
+            <a href="#skills" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Skills</a>
           )}
           {pData.sectionsVisibility.experience && (
-            <a href="#experience" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">History</a>
+            <a href="#experience" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Experience</a>
           )}
           {pData.sectionsVisibility.projects && (
-            <a href="#projects" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Works</a>
+            <a href="#projects" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors hidden sm:flex">Portfolio</a>
           )}
-          <a href="#contact" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">Ping</a>
+          <a href="#contact" className="h-full flex items-center px-4 md:px-6 border-l-2 border-black font-mono text-[9px] md:text-[10px] font-bold text-black uppercase tracking-wider hover:bg-black/5 transition-colors">Contact</a>
         </div>
       </nav>
 
@@ -50,7 +50,7 @@ export const PortfolioThemeBrutalist = ({
         <section id="hero" className="min-h-screen grid grid-cols-1 md:grid-cols-[1fr_400px] border-b-[3px] border-[#f5f5f0]">
           <div className="pt-32 pb-20 px-[5%] border-r-[3px] border-[#f5f5f0] flex flex-col justify-center">
              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="font-mono text-[10px] tracking-[3px] text-[#ffe600] uppercase mb-6">
-               Software Developer & AI/ML Engineer
+               {data.personalInfo.jobTitle || "Software Professional"}
              </motion.p>
              <motion.h1 
                initial={{ opacity: 0, y: 30 }}
@@ -70,20 +70,20 @@ export const PortfolioThemeBrutalist = ({
              </motion.p>
              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex flex-wrap gap-0">
                 <a href="#projects" className="px-10 py-5 bg-[#ffe600] border-2 border-[#ffe600] text-black font-mono text-[11px] font-bold uppercase tracking-[2px] transition-all hover:bg-transparent hover:text-[#ffe600]">
-                  Browse Work
+                  Browse Portfolio
                 </a>
                 <a href="#contact" className="px-10 py-5 bg-transparent border-2 border-[#f5f5f0] text-[#f5f5f0] font-mono text-[11px] font-bold uppercase tracking-[2px] transition-all hover:bg-[#f5f5f0] hover:text-black">
-                  Establish Link
+                  Get In Touch
                 </a>
              </motion.div>
           </div>
           
           <div className="hidden md:flex flex-col justify-end p-10 space-y-0">
              {[
-               { val: "5+", label: "Regional Deployments" },
-               { val: "8+", label: "Tech Stacks" },
-               { val: "86%", label: "Top Optimization" },
-               { val: "99.9", label: "Logic Accuracy" }
+               { val: "5+", label: "Years Experience" },
+               { val: "20+", label: "Projects Completed" },
+               { val: "99%", label: "Client Satisfaction" },
+               { val: "24/7", label: "Studio Support" }
              ].map(stat => (
                <div key={stat.label} className="py-6 border-t font-bebas text-[#ffe600] bg-[#0a0a0a] group hover:bg-[#ffe600] hover:text-black transition-all">
                   <div className="text-6xl leading-none">{stat.val}</div>
@@ -99,7 +99,7 @@ export const PortfolioThemeBrutalist = ({
         <section id="about" className="py-32 px-[5%]">
         <div className="flex items-stretch border-2 border-[#f5f5f0] mb-16 overflow-hidden">
            <div className="bg-[#ffe600] text-black font-mono text-[10px] font-bold px-6 py-3 flex items-center border-r-2 border-[#f5f5f0]">01</div>
-           <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Profile_Module</div>
+           <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">About Me</div>
         </div>
         
         <h2 className="font-bebas text-6xl md:text-8xl leading-none mb-10">
@@ -115,10 +115,10 @@ export const PortfolioThemeBrutalist = ({
            
            <div className="border-t border-[#f5f5f0]/10">
               {[
-                { k: "Nodes", v: data.personalInfo.location || "REMOTE_NODE" },
+                { k: "Location", v: data.personalInfo.location || "Remote" },
                 { k: "Role", v: data.personalInfo.jobTitle },
-                { k: "Stack", v: "FULL_ENTERPRISE" },
-                { k: "Uptime", v: "AVAILABLE", color: "text-[#ffe600]" }
+                { k: "Focus", v: "Enterprise Solutions" },
+                { k: "Status", v: "Available", color: "text-[#ffe600]" }
               ].map(item => (
                 <div key={item.k} className="flex justify-between items-center py-5 border-b border-[#f5f5f0]/10 group">
                    <span className="font-mono text-[10px] tracking-[2px] uppercase text-[#ffe600] group-hover:pl-2 transition-all">{item.k}</span>
@@ -135,7 +135,7 @@ export const PortfolioThemeBrutalist = ({
         <section id="skills" className="py-32 px-[5%] bg-[#111]">
           <div className="flex items-stretch border-2 border-[#f5f5f0] mb-16 overflow-hidden">
              <div className="bg-[#ffe600] text-black font-mono text-[10px] font-bold px-6 py-3 flex items-center border-r-2 border-[#f5f5f0]">02</div>
-             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Expertise_Graph</div>
+             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Technical Stack</div>
           </div>
           
           <h2 className="font-bebas text-6xl md:text-8xl leading-none mb-10">
@@ -167,7 +167,7 @@ export const PortfolioThemeBrutalist = ({
         <section id="projects" className="py-32 px-[5%]">
            <div className="flex items-stretch border-2 border-[#f5f5f0] mb-16 overflow-hidden">
              <div className="bg-[#ffe600] text-black font-mono text-[10px] font-bold px-6 py-3 flex items-center border-r-2 border-[#f5f5f0]">03</div>
-             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Portfolio_Nodes</div>
+             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Selected Work</div>
           </div>
           
           <h2 className="font-bebas text-6xl md:text-8xl leading-none mb-10">
@@ -188,7 +188,7 @@ export const PortfolioThemeBrutalist = ({
                   </div>
                   {proj.link && (
                     <a href={proj.link} className="inline-flex items-center gap-3 font-mono text-[10px] font-black uppercase text-white hover:text-[#ffe600] transition-all">
-                      View Deployment <ArrowRight size={14} />
+                      View Case Study <ArrowRight size={14} />
                     </a>
                   )}
                </motion.div>
@@ -202,7 +202,7 @@ export const PortfolioThemeBrutalist = ({
         <section id="experience" className="py-32 px-[5%] bg-[#111]">
            <div className="flex items-stretch border-2 border-[#f5f5f0] mb-16 overflow-hidden">
              <div className="bg-[#ffe600] text-black font-mono text-[10px] font-bold px-6 py-3 flex items-center border-r-2 border-[#f5f5f0]">04</div>
-             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Work_History</div>
+             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-[#888] flex items-center">Experience</div>
           </div>
 
           <div className="space-y-px bg-[#f5f5f0] border-2 border-[#f5f5f0]">
@@ -210,7 +210,7 @@ export const PortfolioThemeBrutalist = ({
                 <motion.div key={i} {...fadeIn} className="grid grid-cols-1 md:grid-cols-[200px_1fr] bg-[#0a0a0a]">
                    <div className="p-10 border-r-2 border-[#f5f5f0] bg-[#111] flex flex-col justify-center">
                       <div className="font-bebas text-5xl text-[#ffe600] leading-none mb-2">{exp.startDate.split(' ')[1] || exp.startDate}</div>
-                      <div className="font-mono text-[10px] uppercase text-[#888]">Deployment_{i+1}</div>
+                      <div className="font-mono text-[10px] uppercase text-[#888]">{exp.endDate}</div>
                    </div>
                    <div className="p-12">
                       <h3 className="font-bebas text-3xl mb-1 text-white">{exp.position}</h3>
@@ -228,7 +228,7 @@ export const PortfolioThemeBrutalist = ({
         <section id="contact" className="py-48 px-[5%] bg-[#ffe600] text-black">
            <div className="flex items-stretch border-2 border-black mb-16 overflow-hidden">
              <div className="bg-black text-[#ffe600] font-mono text-[10px] font-bold px-6 py-3 flex items-center border-r-2 border-black">05</div>
-             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-black/60 flex items-center">Link_Protocol</div>
+             <div className="px-6 py-3 font-mono text-[9px] tracking-[2px] uppercase text-black/60 flex items-center">Get In Touch</div>
           </div>
           
           <h2 className="font-bebas text-6xl md:text-8xl leading-none mb-16">
@@ -243,7 +243,7 @@ export const PortfolioThemeBrutalist = ({
                {data.personalInfo.email}
              </a>
              <div className="font-mono text-xl font-bold group-hover:text-[#ffe600] mb-8">
-                {data.personalInfo.phone || "NODE_COMM_INACTIVE"}
+                {data.personalInfo.phone || "Professional Inquiry"}
              </div>
              <div className="flex gap-8 pt-8 border-t border-black/10 group-hover:border-[#ffe600]/20">
                 {pData.socialLinks.github && (
@@ -262,8 +262,8 @@ export const PortfolioThemeBrutalist = ({
 
       {/* Footer */}
       <footer className="py-12 px-[5%] border-t-[3px] border-[#f5f5f0] flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-[10px] text-[#888] uppercase tracking-[2px]">
-         <span>{data.personalInfo.fullName} // PORTFOLIO_SUMMIT // © {new Date().getFullYear()}</span>
-         <span className="text-[#ffe600]">SYSTEM_ORIGIN: BRUTALIST_ARCHITECTURE</span>
+         <span>{data.personalInfo.fullName} — © {new Date().getFullYear()} — Built with Xeloria Studio</span>
+         <span className="text-[#ffe600]">Professional Portfolio</span>
       </footer>
     </div>
   );

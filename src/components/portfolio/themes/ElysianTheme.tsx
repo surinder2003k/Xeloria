@@ -39,11 +39,11 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
       <nav className="fixed top-0 w-full z-50 px-6 md:px-12 py-6 md:py-8 flex justify-between items-center mix-blend-difference bg-white/10 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none">
         <span className="text-lg md:text-xl font-bold tracking-[0.2em] uppercase text-white truncate max-w-[150px] md:max-w-none">{username}</span>
         <div className="flex items-center gap-4 md:gap-12 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/70">
-          {sections.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Origin</a>}
-          {sections.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Narrative</a>}
-          {sections.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Curation</a>}
+          {sections.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Home</a>}
+          {sections.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Experience</a>}
+          {sections.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Portfolio</a>}
           {sections.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Expertise</a>}
-          <a href="#contact" className="hover:text-white transition-colors px-4 py-2 border border-white/20 rounded-full">Enquire</a>
+          <a href="#contact" className="hover:text-white transition-colors px-4 py-2 border border-white/20 rounded-full">Contact</a>
         </div>
       </nav>
 
@@ -58,14 +58,14 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
           className="space-y-12 max-w-5xl"
         >
           <div className="flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.4em] text-[#8e7f74]">
-            <Circle className="h-1.5 w-1.5 fill-current" /> Available for exclusive ventures
+            <Circle className="h-1.5 w-1.5 fill-current" /> Creative Professional
           </div>
           <h1 className="text-7xl md:text-[10rem] font-medium leading-[0.85] tracking-tighter italic">
             {personalInfo.fullName}
           </h1>
           <div className="h-20 w-px bg-[#8e7f74]/30 mx-auto" />
           <p className="text-xl md:text-2xl text-[#5a5a5a] max-w-2xl mx-auto leading-relaxed font-light italic">
-            {personalInfo.summary || "Architecting digital elegance and functional sophistication."}
+            {personalInfo.summary || "Designing and building high-performance digital experiences with a focus on elegance and precision."}
           </p>
           <motion.div 
              animate={{ y: [0, 10, 0] }}
@@ -82,8 +82,8 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
       {sections.experience && (
         <section id="experience" className="py-40 px-12 max-w-7xl mx-auto z-10 relative">
           <div className="space-y-4 mb-32">
-            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#8e7f74]">The Narrative</span>
-            <h2 className="text-5xl md:text-7xl font-medium italic">Professional Tenure</h2>
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#8e7f74]">The Journey</span>
+            <h2 className="text-5xl md:text-7xl font-medium italic">Professional History</h2>
           </div>
           
           <div className="space-y-32">
@@ -118,7 +118,7 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
           
           <div className="max-w-7xl mx-auto px-12 relative z-10">
             <div className="space-y-4 mb-32">
-              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/40">The Curation</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/40">Portfolio</span>
               <h2 className="text-5xl md:text-7xl font-medium italic">Selected Works</h2>
             </div>
             
@@ -162,7 +162,7 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-20">
             <div className="md:col-span-4 space-y-4">
               <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#8e7f74]">Expertise</span>
-              <h2 className="text-5xl font-medium italic leading-tight">Mastered Domains</h2>
+              <h2 className="text-5xl font-medium italic leading-tight">Technical Skills</h2>
             </div>
             <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-16">
               {skills.map((group: any, i: number) => (
@@ -188,14 +188,14 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
           whileInView={{ opacity: 1 }}
           className="space-y-12 max-w-3xl mx-auto"
         >
-          <h2 className="text-6xl md:text-[8rem] font-medium italic leading-none">Let's Converse.</h2>
-          <p className="text-xl text-[#8e7f74] font-light italic">Currently accepting new inquiries for visionary projects.</p>
+          <h2 className="text-6xl md:text-[8rem] font-medium italic leading-none">Get In Touch.</h2>
+          <p className="text-xl text-[#8e7f74] font-light italic">Currently open for professional collaborations and inquiries.</p>
           <div className="pt-12">
             <a 
               href={`mailto:${personalInfo.email}`}
               className="inline-flex items-center gap-4 text-2xl font-medium italic border-b-2 border-[#1a1a1a] pb-2 hover:text-[#8e7f74] hover:border-[#8e7f74] transition-all"
             >
-              Reach out <ArrowRight className="h-6 w-6" />
+              Contact Me <ArrowRight className="h-6 w-6" />
             </a>
           </div>
         </motion.div>
@@ -204,7 +204,19 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
 
       {/* Footer */}
       <footer className="py-20 border-t border-[#8e7f74]/10 px-12 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-bold uppercase tracking-[0.4em] text-[#8e7f74]">
-        <p>&copy; 2024 {personalInfo.fullName} // Designed for distinction</p>
+        <p>&copy; {new Date().getFullYear()} {personalInfo.fullName} — Built with Xeloria Studio</p>
+        <div className="flex gap-12">
+            {pData?.socialLinks?.linkedin && (
+              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">LinkedIn</a>
+            )}
+            {pData?.socialLinks?.twitter && (
+              <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">Twitter</a>
+            )}
+            {pData?.socialLinks?.github && (
+              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">GitHub</a>
+            )}
+        </div>
+      </footer>
         <div className="flex gap-12">
             {pData?.socialLinks?.linkedin && (
               <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">LinkedIn</a>

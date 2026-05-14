@@ -13,74 +13,76 @@ export const Navbar = () => {
   const { scrollY } = useScroll();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
-  const backgroundColor = useTransform(
+  const navBackground = useTransform(
     scrollY,
-    [0, 100],
-    ["rgba(5, 5, 5, 0)", "rgba(5, 5, 5, 0.9)"]
+    [0, 50],
+    ["rgba(3, 3, 3, 0)", "rgba(3, 3, 3, 0.8)"]
   );
   
-  const backdropBlur = useTransform(
+  const navBorder = useTransform(
     scrollY,
-    [0, 100],
-    ["blur(0px)", "blur(24px)"]
+    [0, 50],
+    ["rgba(255, 255, 255, 0)", "rgba(255, 255, 255, 0.05)"]
   );
 
   return (
     <>
       <motion.nav 
-        style={{ backgroundColor, backdropFilter: backdropBlur as any }}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className="fixed top-0 left-0 z-[100] w-full border-b border-white/5 h-20"
+        style={{ backgroundColor: navBackground, borderBottomColor: navBorder as any }}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="fixed top-0 left-0 z-[100] w-full border-b border-transparent h-20 backdrop-blur-md transition-colors"
       >
-        <div className="container mx-auto flex h-full items-center justify-between px-6 lg:px-12">
+        <div className="container mx-auto flex h-full items-center justify-between px-6 lg:px-10">
           <Link href="/" className="flex items-center space-x-3 group shrink-0">
-            <XeloriaLogo className="h-10 w-10 group-hover:scale-110 group-hover:rotate-6 transition-all drop-shadow-2xl" />
-            <span className="text-2xl font-black tracking-tighter text-white uppercase italic">XEL<span className="text-indigo-500">ORIA</span></span>
+            <XeloriaLogo className="h-9 w-9 group-hover:scale-105 transition-transform" />
+            <span className="text-xl font-bold tracking-tight text-white">Xeloria</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-10">
-            <Link href="/" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all">
+          <div className="hidden md:flex items-center space-x-8">
+            <Link href="/" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
               Home
             </Link>
-            <Link href="/blog" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all">
-              Blog
+            <Link href="/blog" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
+              Journal
             </Link>
-            <Link href="/about" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-all">
-              About Us
+            <Link href="/about" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
+              Our Story
             </Link>
           </div>
 
-          <div className="flex items-center space-x-4 md:space-x-6">
+          <div className="flex items-center space-x-4">
             {!isLoaded ? (
-              <div className="h-10 w-24 bg-white/5 animate-pulse rounded-xl" />
+              <div className="h-9 w-20 bg-white/5 animate-pulse rounded-lg" />
             ) : !isSignedIn ? (
               <div className="flex items-center gap-4">
                 <SignInButton mode="modal">
-                  <button className="hidden sm:block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors">Authorize</button>
+                   <button className="hidden sm:block text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Sign In</button>
                 </SignInButton>
                 <SignInButton mode="modal">
-                  <Button className="h-10 md:h-11 px-4 md:px-8 rounded-xl bg-white text-black hover:bg-slate-200 text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-white/10 transition-all active:scale-95">
-                    Get Access
+                  <Button className="h-10 px-6 rounded-lg bg-indigo-500 text-white hover:bg-indigo-400 text-[11px] font-bold uppercase tracking-widest shadow-lg shadow-indigo-500/20 transition-all active:scale-95">
+                    Start Creating
                   </Button>
                 </SignInButton>
               </div>
             ) : (
               <div className="flex items-center gap-4">
                 <Link href="/dashboard" className="hidden sm:block">
-                  <Button variant="ghost" className="h-11 px-8 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 text-[10px] font-black uppercase tracking-widest transition-all">
-                    Command Center
+                  <Button variant="ghost" className="h-10 px-6 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 text-[11px] font-bold uppercase tracking-widest transition-all">
+                    Dashboard
                   </Button>
                 </Link>
-                <div className="p-1 bg-white/5 rounded-xl border border-white/10 shadow-2xl">
-                   <UserButton 
-                      appearance={{
-                          elements: {
-                              avatarBox: "h-8 w-8 md:h-9 md:w-9 rounded-lg"
-                          }
-                      }}
-                   />
+                <div className="p-0.5 bg-gradient-to-br from-indigo-500/50 to-purple-500/50 rounded-full shadow-lg">
+                   <div className="bg-[#030303] rounded-full p-0.5">
+                      <UserButton 
+                        appearance={{
+                            elements: {
+                                avatarBox: "h-8 w-8 rounded-full"
+                            }
+                        }}
+                      />
+                   </div>
                 </div>
               </div>
             )}
@@ -90,7 +92,7 @@ export const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-slate-400 hover:text-white transition-colors"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -100,45 +102,44 @@ export const Navbar = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[90] md:hidden bg-[#050505]/95 backdrop-blur-2xl flex flex-col pt-32 px-10 space-y-8"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed inset-0 z-[90] md:hidden bg-[#030303]/98 backdrop-blur-xl flex flex-col pt-24 px-8 space-y-6"
           >
             <Link 
               href="/" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-3xl font-black uppercase tracking-tighter text-slate-500 hover:text-indigo-500 transition-all"
+              className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
             >
               Home
             </Link>
             <Link 
               href="/blog" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-3xl font-black uppercase tracking-tighter text-slate-500 hover:text-indigo-500 transition-all"
+              className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
             >
-              Blog
+              Journal
             </Link>
             <Link 
               href="/about" 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-3xl font-black uppercase tracking-tighter text-slate-500 hover:text-indigo-500 transition-all"
+              className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
             >
-              About Us
+              Our Story
             </Link>
             {isSignedIn && (
               <Link 
                 href="/dashboard" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-3xl font-black uppercase tracking-tighter text-indigo-500"
+                className="text-2xl font-bold text-indigo-400"
               >
-                Command Center
+                Go to Dashboard
               </Link>
             )}
             {!isSignedIn && (
                <SignInButton mode="modal">
-                 <button className="text-3xl font-black uppercase tracking-tighter text-white text-left">Get Access</button>
+                 <button className="text-2xl font-bold text-white text-left">Start Creating</button>
                </SignInButton>
             )}
           </motion.div>

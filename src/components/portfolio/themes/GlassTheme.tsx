@@ -36,11 +36,11 @@ export const PortfolioThemeGlass = ({
             {username.toUpperCase()}
           </span>
           <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[10px] font-bold tracking-[1px] md:tracking-[2px] text-[#64748b] uppercase">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Start</a>}
-            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Matrix</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Nodes</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Deploy</a>}
-            <a href="#contact" className="hover:text-white transition-colors px-3 py-1.5 border border-white/10 rounded-full">Ping</a>
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-white transition-colors hidden sm:block">Home</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-white transition-colors hidden sm:block">Expertise</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-white transition-colors hidden sm:block">Experience</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-white transition-colors hidden sm:block">Portfolio</a>}
+            <a href="#contact" className="hover:text-white transition-colors px-3 py-1.5 border border-white/10 rounded-full">Get In Touch</a>
           </div>
         </div>
       </nav>
@@ -54,7 +54,7 @@ export const PortfolioThemeGlass = ({
                animate={{ opacity: 1, scale: 1 }}
                className="inline-block px-4 py-1.5 mb-8 bg-[#3b82f6]/10 border border-[#3b82f6]/30 rounded-full text-[#60a5fa] text-[10px] font-bold tracking-[2px] uppercase"
             >
-               🚀 SYSTEM STATUS: OPERATIONAL
+               ✨ Creative Professional
             </motion.div>
             
             <motion.h1 
@@ -77,7 +77,7 @@ export const PortfolioThemeGlass = ({
                transition={{ delay: 0.4 }}
                className="text-[#64748b] text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-12"
             >
-               {data.personalInfo.jobTitle || "Next-gen Software Architect focusing on scalable digital infrastructure."}
+               {data.personalInfo.jobTitle || "Crafting high-performance digital experiences through elegant architecture and creative engineering."}
             </motion.p>
 
             <motion.div 
@@ -87,10 +87,10 @@ export const PortfolioThemeGlass = ({
                className="flex flex-wrap justify-center gap-4"
             >
                <a href="#projects" className="px-8 py-3.5 bg-[#3b82f6] text-white rounded-xl text-sm font-bold shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transition-all hover:-translate-y-1">
-                 Initialize View
+                 View Portfolio
                </a>
                <a href="#contact" className="px-8 py-3.5 bg-white/5 border border-white/10 text-white rounded-xl text-sm font-bold backdrop-blur-lg hover:bg-white/10 transition-all hover:-translate-y-1">
-                 Establish Link
+                 Let&apos;s Talk
                </a>
             </motion.div>
 
@@ -121,21 +121,21 @@ export const PortfolioThemeGlass = ({
       {pData.sectionsVisibility.hero && (
         <section id="about" className="py-20 md:py-32 px-6">
         <div className="max-w-[1400px] mx-auto">
-          <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Core Metadata</div>
+          <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">About Me</div>
           <h2 className="text-4xl font-extrabold mb-12">Who Am <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">I?</span></h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div className="space-y-6 text-[#94a3b8] text-base leading-relaxed">
-               <p>{data.summary || "Infiltrating technological sectors with advanced automation and precision-crafted codebases."}</p>
-               <p>Specializing in full-cycle enterprise development, I build systems that don't just work—they scale predictably and perform exceptionally.</p>
+               <p>{data.summary || "Crafting digital experiences with precision and a focus on high-performance codebases."}</p>
+               <p>I specialize in developing scalable enterprise solutions, building systems that are both reliable and exceptionally performant.</p>
             </div>
             
             <div className="space-y-3">
                {[
                  { k: "Role", v: data.personalInfo.jobTitle },
-                 { k: "Base", v: data.personalInfo.location || "REMOTE_NODE" },
-                 { k: "Stack", v: "FULL_ENTERPRISE" },
-                 { k: "Status", v: "AVAILABLE", color: "text-[#2dd4bf]" }
+                 { k: "Location", v: data.personalInfo.location || "Remote" },
+                 { k: "Focus", v: "Full-Cycle Development" },
+                 { k: "Status", v: "Available for Projects", color: "text-[#2dd4bf]" }
                ].map(item => (
                  <div key={item.k} className="flex justify-between items-center p-4 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md">
                     <span className="text-[10px] tracking-[2px] uppercase font-bold text-[#64748b]">{item.k}</span>
@@ -152,7 +152,7 @@ export const PortfolioThemeGlass = ({
       {pData.sectionsVisibility.skills && data.skills.length > 0 && (
         <section id="skills" className="py-32 px-6 bg-white/[0.01]">
           <div className="max-w-[1400px] mx-auto">
-             <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Capabilities Matrix</div>
+             <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Core Expertise</div>
              <h2 className="text-4xl font-extrabold mb-12">Tech <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Stack</span></h2>
 
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -163,7 +163,7 @@ export const PortfolioThemeGlass = ({
                     className="p-8 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md group hover:bg-white/10 transition-all hover:border-[#3b82f6]/30"
                   >
                     <div className="text-[10px] text-[#60a5fa] mb-6 font-bold tracking-[3px] uppercase">
-                      CAT_{String(groupIdx + 1).padStart(2, '0')} // {skillGroup.category}
+                       {skillGroup.category}
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {skillGroup.items.map((skill) => (
@@ -171,45 +171,37 @@ export const PortfolioThemeGlass = ({
                           {skill}
                         </span>
                       ))}
-                    </div>
-                  </motion.div>
-                ))}
-             </div>
-          </div>
-        </section>
-      )}
-
       {/* Projects Grid */}
       {pData.sectionsVisibility.projects && data.projects.length > 0 && (
         <section id="projects" className="py-32 px-6">
           <div className="max-w-[1400px] mx-auto">
-             <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Project Logs</div>
-             <h2 className="text-4xl font-extrabold mb-12">Deployed <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Infrastructure</span></h2>
+             <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Portfolio</div>
+             <h2 className="text-4xl font-extrabold mb-12">Selected <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Works</span></h2>
 
              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               {data.projects.map((proj, i) => (
-                 <motion.div 
-                   key={i} 
-                   {...fadeIn}
-                   className="p-6 md:p-10 bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-3xl backdrop-blur-2xl relative overflow-hidden group hover:bg-white/[0.04] transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_40px_rgba(59,130,246,0.1)]"
-                 >
-                   <div className="absolute inset-0 border border-white/10 rounded-3xl pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, white, transparent)' }} />
-                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#3b82f6] to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
-                   <div className="text-[9px] font-bold text-[#64748b] uppercase tracking-[3px] mb-6 relative z-10">PROJECT_REF // {i + 1}</div>
-                   <h3 className="text-2xl font-extrabold mb-4 group-hover:text-[#60a5fa] transition-colors relative z-10">{proj.name}</h3>
-                   <p className="text-sm text-[#94a3b8] leading-relaxed mb-8 h-20 overflow-hidden line-clamp-3">{proj.description}</p>
-                   <div className="flex flex-wrap gap-2 mb-8">
-                     {proj.technologies.map(tech => (
-                       <span key={tech} className="px-3 py-1 bg-[#3b82f6]/10 border border-[#3b82f6]/20 rounded-lg text-[9px] text-[#60a5fa] font-bold uppercase">{tech}</span>
-                     ))}
-                   </div>
-                   {proj.link && (
-                     <a href={proj.link} className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[2px] uppercase text-white hover:text-[#60a5fa] transition-all">
-                       Initialize Root <ExternalLink size={14} />
-                     </a>
-                   )}
-                 </motion.div>
-               ))}
+                {data.projects.map((proj, i) => (
+                  <motion.div 
+                    key={i} 
+                    {...fadeIn}
+                    className="p-6 md:p-10 bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-3xl backdrop-blur-2xl relative overflow-hidden group hover:bg-white/[0.04] transition-all duration-500 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_40px_rgba(59,130,246,0.1)]"
+                  >
+                    <div className="absolute inset-0 border border-white/10 rounded-3xl pointer-events-none" style={{ maskImage: 'linear-gradient(to bottom, white, transparent)' }} />
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#3b82f6] to-transparent opacity-50 group-hover:opacity-100 transition-opacity" />
+                    <div className="text-[9px] font-bold text-[#64748b] uppercase tracking-[3px] mb-6 relative z-10">Project {String(i + 1).padStart(2, '0')}</div>
+                    <h3 className="text-2xl font-extrabold mb-4 group-hover:text-[#60a5fa] transition-colors relative z-10">{proj.name}</h3>
+                    <p className="text-sm text-[#94a3b8] leading-relaxed mb-8 h-20 overflow-hidden line-clamp-3">{proj.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {proj.technologies.map(tech => (
+                        <span key={tech} className="px-3 py-1 bg-[#3b82f6]/10 border border-[#3b82f6]/20 rounded-lg text-[9px] text-[#60a5fa] font-bold uppercase">{tech}</span>
+                      ))}
+                    </div>
+                    {proj.link && (
+                      <a href={proj.link} className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[2px] uppercase text-white hover:text-[#60a5fa] transition-all">
+                        Explore Project <ExternalLink size={14} />
+                      </a>
+                    )}
+                  </motion.div>
+                ))}
              </div>
           </div>
         </section>
@@ -219,8 +211,8 @@ export const PortfolioThemeGlass = ({
       {pData.sectionsVisibility.experience && data.experience.length > 0 && (
         <section id="experience" className="py-32 px-6 bg-white/[0.01]">
           <div className="max-w-4xl mx-auto">
-             <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Career Timeline</div>
-             <h2 className="text-4xl font-extrabold mb-12">Professional <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">History</span></h2>
+             <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Professional Path</div>
+             <h2 className="text-4xl font-extrabold mb-12">Career <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">History</span></h2>
 
              <div className="space-y-4">
                 {data.experience.map((exp, i) => (
@@ -234,9 +226,9 @@ export const PortfolioThemeGlass = ({
                           <h3 className="text-xl font-bold">{exp.position}</h3>
                           <p className="text-sm bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent font-bold mt-1 uppercase tracking-widest">{exp.company}</p>
                        </div>
-                       <span className="px-4 py-1.5 bg-[#3b82f6]/10 border border-[#3b82f6]/20 rounded-full text-[10px] font-bold text-[#60a5fa]">{exp.startDate} — {exp.current ? "ACTIVE" : exp.endDate}</span>
+                       <span className="px-4 py-1.5 bg-[#3b82f6]/10 border border-[#3b82f6]/20 rounded-full text-[10px] font-bold text-[#60a5fa]">{exp.startDate} — {exp.current ? "Present" : exp.endDate}</span>
                     </div>
-                    <p className="text-sm text-[#94a3b8] leading-relaxed italic">"{exp.description}"</p>
+                    <p className="text-sm text-[#94a3b8] leading-relaxed font-medium italic">"{exp.description}"</p>
                   </motion.div>
                 ))}
              </div>
@@ -271,9 +263,7 @@ export const PortfolioThemeGlass = ({
             </div>
           </div>
         </section>
-      )}
-
-      {/* Contact Section */}
+            {/* Contact Section */}
       {pData.sectionsVisibility.contact && (
         <section id="contact" className="py-48 px-6 text-center">
            <motion.div 
@@ -283,8 +273,8 @@ export const PortfolioThemeGlass = ({
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 p-3 bg-[#020817] border border-white/10 rounded-2xl shadow-xl">
                  <Mail size={24} className="text-[#60a5fa]" />
               </div>
-              <h2 className="text-3xl font-extrabold mb-6 mt-4">Establish <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Link</span></h2>
-              <p className="text-[#64748b] text-sm mb-10">Currently open for architectural partnerships and professional inquiries.</p>
+              <h2 className="text-3xl font-extrabold mb-6 mt-4">Connect With <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Me</span></h2>
+              <p className="text-[#64748b] text-sm mb-10">Open for collaborations, partnerships, and professional inquiries.</p>
               <a 
                 href={`mailto:${data.personalInfo.email}`} 
                 className="text-xl md:text-2xl font-black text-white hover:text-[#60a5fa] transition-all block mb-10 overflow-hidden text-ellipsis"
@@ -314,8 +304,12 @@ export const PortfolioThemeGlass = ({
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-white/10 text-center font-bold text-[9px] text-[#64748b] tracking-[4px] uppercase relative z-10">
-        {data.personalInfo.fullName} // PORTFOLIO_V2 // © {new Date().getFullYear()} // POWERED BY SUMMITPORTFOLIO
+        {data.personalInfo.fullName} — © {new Date().getFullYear()} — Built with Xeloria Studio
       </footer>
+    </div>
+  );
+};
+ter>
     </div>
   );
 };

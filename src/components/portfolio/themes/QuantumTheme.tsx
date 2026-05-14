@@ -62,159 +62,121 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-cyan-500/10 backdrop-blur-xl bg-black/50 px-4 md:px-8 py-4 flex justify-between items-center">
+      <nav className="fixed top-0 w-full z-50 border-b border-cyan-500/10 backdrop-blur-xl bg-black/40 px-6 md:px-12 py-5 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <div className="h-8 w-8 bg-cyan-500 flex items-center justify-center rounded-sm shrink-0">
+          <div className="h-8 w-8 bg-cyan-500 flex items-center justify-center rounded-lg">
             <Cpu className="h-5 w-5 text-black" />
           </div>
-          <span className="text-[10px] md:text-sm font-black uppercase tracking-[0.2em] md:tracking-[0.3em] truncate max-w-[150px] md:max-w-none">QUANTUM_NODE // {username.toUpperCase()}</span>
+          <span className="text-xs font-bold uppercase tracking-[0.4em] text-white">
+            {username.toLowerCase()} studio
+          </span>
         </div>
-        <div className="flex items-center gap-4 md:gap-8 text-[8px] md:text-[10px] font-bold text-cyan-500/60 uppercase tracking-wider md:tracking-widest">
-          {sections.hero && <a href="#hero" className="hover:text-cyan-400 transition-colors hidden sm:block">CORE</a>}
-          {sections.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors hidden sm:block">HISTORY</a>}
-          {sections.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors hidden sm:block">PROJECTS</a>}
-          {sections.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors hidden sm:block">SKILLS</a>}
-          <a href="#contact" className="hover:text-cyan-400 transition-colors px-3 py-1.5 border border-cyan-500/20 rounded-sm">LINK</a>
+        <div className="flex items-center gap-8 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+          {sections.hero && <a href="#hero" className="hover:text-cyan-400 transition-colors hidden sm:block">Home</a>}
+          {sections.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors hidden sm:block">Experience</a>}
+          {sections.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors hidden sm:block">Projects</a>}
+          {sections.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors hidden sm:block">Skills</a>}
+          <a href="#contact" className="hover:text-cyan-400 transition-colors px-4 py-2 border border-cyan-500/20 rounded-lg bg-cyan-500/5">Contact</a>
         </div>
       </nav>
 
       {/* Hero Section */}
       {sections.hero && (
-        <section id="hero" className="relative pt-32 md:pt-40 pb-20 px-6 md:px-8 max-w-7xl mx-auto z-10 min-h-screen flex flex-col justify-center overflow-hidden">
+        <section id="hero" className="relative pt-32 pb-20 px-6 md:px-12 max-w-7xl mx-auto z-10 min-h-screen flex flex-col justify-center overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-6 md:space-y-8"
+          className="space-y-10"
         >
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em]">
-            <Activity className="h-3 w-3 animate-pulse" /> SYSTEM_ONLINE // BROADCAST_ACTIVE
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 text-[10px] font-bold uppercase tracking-[0.3em]">
+            <Activity className="h-3 w-3 animate-pulse" /> Status: Available for Projects
           </div>
-          <h1 className="text-5xl md:text-9xl font-black tracking-tighter uppercase leading-[0.9] md:leading-none">
+          <h1 className="text-6xl md:text-[10rem] font-bold tracking-tighter uppercase leading-[0.85] text-white">
             {personalInfo.fullName?.split(' ')[0]}<br/>
-            <span className="text-transparent border-t border-b border-cyan-500/20 pb-4 mt-2 md:mt-4 inline-block [-webkit-text-stroke:1px_#06b6d4]">
+            <span className="text-transparent border-y border-white/10 pb-4 mt-4 inline-block [-webkit-text-stroke:1px_rgba(255,255,255,0.2)]">
               {personalInfo.fullName?.split(' ').slice(1).join(' ')}
             </span>
           </h1>
-          <p className="max-w-2xl text-cyan-500/60 text-xs md:text-sm leading-relaxed uppercase tracking-[0.1em] md:tracking-widest border-l-2 border-cyan-500 pl-6 md:pl-8 font-bold italic">
-            {personalInfo.summary || "NO_SUMMARY_DATA_FOUND // INITIALIZING_DEFAULT_LOCUS"}
+          <p className="max-w-2xl text-slate-400 text-lg md:text-xl leading-relaxed border-l-2 border-cyan-500 pl-8 font-medium italic">
+            {personalInfo.summary || "Building high-performance digital experiences through elegant architecture and creative engineering."}
           </p>
           
-          <div className="pt-6 md:pt-10 flex flex-wrap gap-4">
-            <a href="#projects" className="h-12 md:h-14 px-8 md:px-10 bg-cyan-500 text-black flex items-center justify-center font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-cyan-400 transition-all rounded-sm shadow-xl shadow-cyan-500/20">
-              INIT_OPERATIONS
-            </a>
-            <div className="flex items-center gap-4 px-6 h-12 md:h-14 border border-cyan-500/20 rounded-sm bg-black/20">
-                {pData?.socialLinks?.github && (
-                  <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 transition-colors" />
-                  </a>
-                )}
-                {pData?.socialLinks?.linkedin && (
-                  <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 transition-colors" />
-                  </a>
-                )}
-                <Share2 className="h-4 w-4 text-cyan-500/60 hover:text-cyan-400 cursor-pointer transition-colors" />
-            </div>
+          <div className="flex flex-wrap gap-6 pt-6">
+             <a href="#projects" className="px-10 py-4 bg-cyan-500 text-black font-bold text-xs uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-all">
+                View Work
+             </a>
+             <a href="#contact" className="px-10 py-4 border border-white/10 text-white font-bold text-xs uppercase tracking-widest rounded-full hover:border-cyan-500 transition-all">
+                Get In Touch
+             </a>
           </div>
         </motion.div>
-        
-        {/* Decorative Data Nodes */}
-        <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:block space-y-12">
-            {[1, 2, 3].map((i) => (
-                <motion.div 
-                    key={i}
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, delay: i }}
-                    className="flex items-center gap-6"
-                >
-                    <div className="text-right">
-                        <p className="text-[10px] font-black text-cyan-500/40">DATA_NODE_0{i}</p>
-                        <p className="text-xs font-bold text-cyan-400 uppercase">SYNCHRONIZING...</p>
-                    </div>
-                    <div className="h-12 w-12 border border-cyan-500/20 rounded-sm flex items-center justify-center bg-cyan-500/5">
-                        <Layers className="h-6 w-6 text-cyan-500/40" />
-                    </div>
-                </motion.div>
-            ))}
-        </div>
-      </section>
+        </section>
       )}
 
       {/* Experience Section */}
-      {sections.experience && (
-        <section id="experience" className="py-32 px-8 max-w-7xl mx-auto z-10">
+      {sections.experience && experiences.length > 0 && (
+        <section id="experience" className="py-32 px-6 md:px-12 max-w-7xl mx-auto z-10">
           <div className="flex items-center gap-6 mb-20">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">OPERATIONAL_HISTORY</h2>
-            <div className="flex-1 h-px bg-cyan-500/20" />
+             <div className="h-px flex-grow bg-white/10" />
+             <h2 className="text-3xl font-bold uppercase tracking-[0.4em] text-white shrink-0">Experience</h2>
+             <div className="h-px flex-grow bg-white/10" />
           </div>
           
-          <div className="space-y-12">
+          <div className="space-y-24">
             {experiences.map((exp: any, i: number) => (
-              <motion.div
+              <motion.div 
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-8 p-8 border-l border-cyan-500/20 hover:bg-cyan-500/5 transition-all group"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start"
               >
-                <div className="md:col-span-3 text-[10px] font-black text-cyan-500/40 uppercase tracking-widest pt-2">
-                  {exp.startDate} - {exp.endDate}
+                <div className="md:col-span-4">
+                  <div className="text-cyan-400 font-bold text-sm tracking-widest mb-2">{exp.startDate} — {exp.current ? "Present" : exp.endDate}</div>
+                  <div className="text-xs font-bold text-slate-500 uppercase tracking-[0.3em]">Timeline</div>
                 </div>
-                <div className="md:col-span-9 space-y-4">
-                  <h3 className="text-2xl font-black uppercase text-cyan-400 group-hover:text-white transition-colors">
-                    {exp.position} // <span className="text-cyan-500/60 font-bold">{exp.company}</span>
-                  </h3>
-                  <p className="text-sm text-cyan-500/60 leading-relaxed uppercase tracking-widest max-w-3xl">
-                    {exp.description}
-                  </p>
+                <div className="md:col-span-8">
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight uppercase">{exp.position}</h3>
+                  <div className="text-sm font-bold text-cyan-500 uppercase tracking-widest mb-8">{exp.company}</div>
+                  <p className="text-lg text-slate-400 leading-relaxed max-w-3xl">{exp.description}</p>
                 </div>
               </motion.div>
             ))}
           </div>
         </section>
-      )}
-
-      {/* Projects Section */}
-      {sections.projects && (
-        <section id="projects" className="py-32 px-8 max-w-7xl mx-auto z-10">
-          <div className="flex items-center gap-6 mb-20">
-            <div className="flex-1 h-px bg-cyan-500/20" />
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-right">ACTIVE_DEPLOYMENTS</h2>
+      )      {/* Projects Section */}
+      {sections.projects && projects.length > 0 && (
+        <section id="projects" className="py-32 px-6 md:px-12 max-w-7xl mx-auto z-10">
+          <div className="mb-20">
+             <div className="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.5em] mb-4">Portfolio</div>
+             <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white">Selected Work.</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             {projects.map((project: any, i: number) => (
-              <motion.div
+              <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                className="p-10 border border-cyan-500/10 bg-cyan-500/5 rounded-sm space-y-8 group hover:border-cyan-500/40 transition-all shadow-2xl"
+                viewport={{ once: true }}
+                className="group relative p-10 md:p-16 border border-white/5 bg-white/[0.01] rounded-[3rem] hover:bg-white/[0.02] transition-all overflow-hidden"
               >
-                <div className="flex justify-between items-start">
-                  <div className="h-12 w-12 border border-cyan-500/20 rounded-sm flex items-center justify-center group-hover:bg-cyan-500 group-hover:text-black transition-all">
-                    <Terminal className="h-6 w-6" />
-                  </div>
-                  <div className="flex gap-4">
-                    {project.link && <ExternalLink className="h-4 w-4 text-cyan-500/40 hover:text-cyan-400 cursor-pointer" />}
-                    {project.github && <Github className="h-4 w-4 text-cyan-500/40 hover:text-cyan-400 cursor-pointer" />}
-                  </div>
+                <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:opacity-40 transition-opacity">
+                   <ExternalLink size={32} />
                 </div>
-                
-                <div className="space-y-4">
-                  <h3 className="text-3xl font-black uppercase tracking-tighter group-hover:text-cyan-400 transition-colors">
-                    {project.name}
-                  </h3>
-                  <p className="text-xs text-cyan-500/60 leading-relaxed uppercase tracking-widest">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-4">
-                    {project.technologies?.map((tech: string, tid: number) => (
-                      <span key={tid} className="text-[10px] font-black text-cyan-500 border border-cyan-500/20 px-3 py-1 rounded-sm uppercase bg-black/40">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                <div className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.4em] mb-8">Project_{i.toString().padStart(2, '0')}</div>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-8 tracking-tight group-hover:text-cyan-400 transition-colors uppercase leading-tight">{project.name}</h3>
+                <p className="text-slate-400 text-lg leading-relaxed mb-10">{project.description}</p>
+                <div className="flex flex-wrap gap-3 mb-12">
+                   {project.technologies.map((tech: string) => (
+                     <span key={tech} className="text-[10px] font-bold text-slate-500 uppercase tracking-widest border border-white/10 px-3 py-1 rounded-md">{tech}</span>
+                   ))}
                 </div>
+                {project.link && (
+                  <a href={project.link} className="inline-flex items-center gap-3 text-xs font-bold text-white uppercase tracking-widest border-b-2 border-cyan-500/30 pb-1 hover:border-cyan-500 transition-all">
+                     View Project <ExternalLink size={14} />
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>
@@ -222,86 +184,70 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
       )}
 
       {/* Skills Section */}
-      {sections.skills && (
-        <section id="skills" className="py-32 px-8 max-w-7xl mx-auto z-10">
-          <div className="flex items-center gap-6 mb-20">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">TECH_SPECIFICATIONS</h2>
-            <div className="flex-1 h-px bg-cyan-500/20" />
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((group: any, i: number) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                className="p-8 border border-cyan-500/10 hover:border-cyan-500/30 transition-all space-y-6"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-1.5 h-6 bg-cyan-500" />
-                  <h3 className="text-sm font-black uppercase tracking-[0.2em]">{group.category}</h3>
-                </div>
-                <div className="flex flex-col gap-3">
-                  {group.items.map((skill: string, sid: number) => (
-                    <div key={sid} className="flex items-center justify-between text-[10px] font-bold text-cyan-500/60 uppercase tracking-widest">
-                      <span>{skill}</span>
-                      <div className="h-0.5 w-8 bg-cyan-500/20" />
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+      {sections.skills && skills.length > 0 && (
+        <section id="skills" className="py-32 px-6 md:px-12 max-w-7xl mx-auto z-10">
+           <div className="bg-white/[0.02] border border-white/5 rounded-[4rem] p-12 md:p-24">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                 <div className="lg:col-span-4">
+                    <div className="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.5em] mb-6">Expertise</div>
+                    <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter text-white mb-8">Tech <br />Stack.</h2>
+                    <p className="text-slate-500 text-sm leading-relaxed uppercase tracking-widest font-bold">Comprehensive toolkit for modern digital solutions.</p>
+                 </div>
+                 <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+                    {skills.map((skillGroup: any, i: number) => (
+                      <div key={i} className="space-y-8">
+                         <h4 className="text-xs font-bold text-white uppercase tracking-[0.4em] border-l-2 border-cyan-500 pl-4">{skillGroup.category}</h4>
+                         <div className="flex flex-wrap gap-3">
+                           {skillGroup.items.map((skill: string) => (
+                             <span key={skill} className="text-sm font-medium text-slate-400 hover:text-white transition-colors cursor-default">{skill}</span>
+                           ))}
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+              </div>
+           </div>
         </section>
       )}
 
       {/* Contact Section */}
       {sections.contact && (
-        <section id="contact" className="py-20 md:py-40 px-8 max-w-7xl mx-auto z-10">
-        <div className="bg-cyan-500 p-12 md:p-20 flex flex-col md:flex-row justify-between items-center gap-12 rounded-sm shadow-[0_0_100px_rgba(6,182,212,0.15)] text-black">
-          <div className="space-y-6 max-w-xl text-center md:text-left">
-            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">ESTABLISH_LINK</h2>
-            <p className="text-sm font-bold uppercase tracking-widest opacity-80 leading-relaxed">
-              NODE IS READY FOR INCOMING COMMUNICATIONS. INITIALIZE SECURE PROTOCOL FOR COLLABORATIVE VENTURES.
-            </p>
-          </div>
-          <div className="flex flex-col gap-6 w-full md:w-auto">
-             <a href={`mailto:${personalInfo.email}`} className="h-20 px-12 bg-black text-cyan-500 flex items-center justify-center font-black text-lg uppercase tracking-widest hover:bg-black/90 transition-all rounded-sm shadow-2xl">
-               OPEN_PORT
-             </a>
-             <div className="flex justify-center md:justify-start gap-8">
-                {pData?.socialLinks?.github && (
-                  <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-6 w-6 hover:scale-125 transition-transform" />
-                  </a>
-                )}
-                {pData?.socialLinks?.linkedin && (
-                  <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer">
-                    <Linkedin className="h-6 w-6 hover:scale-125 transition-transform" />
-                  </a>
-                )}
-                {pData?.socialLinks?.twitter && (
-                  <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer">
-                    <Twitter className="h-6 w-6 hover:scale-125 transition-transform" />
-                  </a>
-                )}
-             </div>
-          </div>
-        </div>
-      </section>
+        <section id="contact" className="py-48 px-6 text-center z-10 relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-cyan-400 font-bold text-[10px] uppercase tracking-[0.6em] mb-12">Collaboration</div>
+            <h2 className="text-5xl md:text-9xl font-bold uppercase tracking-tighter text-white mb-20 leading-[0.85]">
+              Let&apos;s Build <br /> <span className="text-transparent [-webkit-text-stroke:1px_#06b6d4]">The Future.</span>
+            </h2>
+            <a 
+              href={`mailto:${personalInfo.email}`}
+              className="text-2xl md:text-5xl font-bold text-white hover:text-cyan-400 transition-colors tracking-tight underline underline-offset-[20px] decoration-cyan-500/20 decoration-2"
+            >
+              {personalInfo.email}
+            </a>
+            
+            <div className="mt-32 flex justify-center gap-12">
+              {pData?.socialLinks?.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} className="text-slate-500 hover:text-white transition-colors"><Linkedin size={24} /></a>}
+              {pData?.socialLinks?.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} className="text-slate-500 hover:text-white transition-colors"><Github size={24} /></a>}
+              {pData?.socialLinks?.twitter && <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} className="text-slate-500 hover:text-white transition-colors"><Twitter size={24} /></a>}
+            </div>
+          </motion.div>
+        </section>
       )}
 
       {/* Footer */}
-      <footer className="py-20 border-t border-cyan-500/10 px-8 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black text-cyan-500/40 uppercase tracking-[0.3em]">
-        <div className="flex items-center gap-2">
-            <Server className="h-3 w-3" /> NODE_STATUS: OPTIMAL
+      <footer className="py-20 px-8 border-t border-white/5 text-center relative z-10">
+        <div className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.5em] mb-4">
+          Built with Xeloria Professional Studio
         </div>
-        <p>&copy; 2024 QUANTUM_SHELL // ALL_RIGHTS_RESERVED</p>
-        <div className="flex gap-4">
-            <span>LATENCY: 14MS</span>
-            <span>ENCRYPTION: AES-256</span>
+        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+          © {new Date().getFullYear()} {username.toUpperCase()} — ALL RIGHTS RESERVED
         </div>
       </footer>
     </div>
   );
 };
+;

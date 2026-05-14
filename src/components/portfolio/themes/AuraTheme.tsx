@@ -86,7 +86,7 @@ export const PortfolioThemeAura = ({
               animate={{ opacity: 1, scale: 1 }}
               className="inline-flex items-center gap-3 px-6 py-2 bg-indigo-500/10 backdrop-blur-xl border border-indigo-500/20 rounded-full text-indigo-300 font-bold text-[10px] uppercase tracking-widest"
             >
-              <Sparkles className="w-3 h-3 text-indigo-400" /> Currently Inhabiting {data.personalInfo.location || "Earth"}
+              <Sparkles className="w-3 h-3 text-indigo-400" /> Professional Based In {data.personalInfo.location || "Remote"}
             </motion.div>
 
             <motion.h1 
@@ -95,7 +95,7 @@ export const PortfolioThemeAura = ({
               transition={{ delay: 0.2 }}
               className="text-5xl sm:text-7xl md:text-[8rem] font-black tracking-tighter leading-[0.85] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/40 drop-shadow-2xl"
             >
-              Digital <br /> Ether.
+              {data.personalInfo.fullName?.split(' ')[0]} <br /> {data.personalInfo.fullName?.split(' ').slice(1).join(' ')}.
             </motion.h1>
 
             <motion.div 
@@ -105,7 +105,7 @@ export const PortfolioThemeAura = ({
               className="max-w-2xl mx-auto space-y-8"
             >
               <p className="text-xl md:text-2xl text-white/60 font-medium leading-relaxed italic">
-                "{data.summary || "I weave complex logic into seamless digital experiences, elevating the mundane into the extraordinary through code."}"
+                "{data.summary || "Crafting elegant digital solutions through precision code and creative engineering."}"
               </p>
               <div className="flex justify-center gap-6">
                  <div className="text-xs font-bold tracking-[3px] uppercase text-indigo-400 border-b border-indigo-400/30 pb-2">{data.personalInfo.jobTitle}</div>
@@ -120,7 +120,7 @@ export const PortfolioThemeAura = ({
             >
                <a href="#work" className="group relative inline-flex items-center justify-center p-0.5 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500">
                  <span className="relative px-12 py-5 transition-all ease-in duration-75 bg-[#0a0a1a] rounded-full group-hover:bg-opacity-0">
-                    <span className="relative text-white font-bold text-sm tracking-[2px] uppercase">Reveal Work</span>
+                    <span className="relative text-white font-bold text-sm tracking-[2px] uppercase">Explore Portfolio</span>
                  </span>
                </a>
             </motion.div>
@@ -137,8 +137,8 @@ export const PortfolioThemeAura = ({
         <section id="work" className="relative z-10 py-32 px-6">
           <div className="max-w-6xl mx-auto">
              <header className="mb-24 text-center">
-                <p className="text-indigo-400 text-[10px] font-bold tracking-[6px] uppercase mb-4">Curation</p>
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Digital <br/>Manifestations.</h2>
+                <p className="text-indigo-400 text-[10px] font-bold tracking-[6px] uppercase mb-4">Portfolio</p>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Selected <br/>Projects.</h2>
              </header>
 
              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -149,7 +149,7 @@ export const PortfolioThemeAura = ({
                     className="group relative bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[3rem] p-10 overflow-hidden"
                   >
                     <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-100 transition-opacity">
-                       <Wand2 className="w-8 h-8 text-indigo-400" />
+                       <ExternalLink className="w-8 h-8 text-indigo-400" />
                     </div>
                     <div className="space-y-6 relative z-10">
                        <h3 className="text-4xl font-black tracking-tighter uppercase leading-none group-hover:text-indigo-400 transition-colors">{proj.name}</h3>
@@ -165,7 +165,7 @@ export const PortfolioThemeAura = ({
                        </div>
                        <div className="pt-10">
                           <a href={proj.link} className="flex items-center gap-3 text-xs font-bold tracking-[3px] uppercase group-hover:gap-6 transition-all">
-                             Enter Project <div className="h-[1px] w-12 bg-white/20 group-hover:w-24 group-hover:bg-indigo-400 transition-all" />
+                             View Case Study <div className="h-[1px] w-12 bg-white/20 group-hover:w-24 group-hover:bg-indigo-400 transition-all" />
                           </a>
                        </div>
                     </div>
@@ -182,8 +182,8 @@ export const PortfolioThemeAura = ({
         <section id="skills" className="relative z-10 py-32 px-6">
           <div className="max-w-6xl mx-auto">
              <header className="mb-24 text-center">
-                <p className="text-indigo-400 text-[10px] font-bold tracking-[6px] uppercase mb-4">Abilities</p>
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Mastered <br/>Flux.</h2>
+                <p className="text-indigo-400 text-[10px] font-bold tracking-[6px] uppercase mb-4">Core Skills</p>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">Technical <br/>Expertise.</h2>
              </header>
 
              <div className="flex flex-wrap justify-center gap-6">
@@ -217,7 +217,7 @@ export const PortfolioThemeAura = ({
         <section id="journey" className="relative z-10 py-32 px-6 bg-white/[0.02] backdrop-blur-sm">
           <div className="max-w-4xl mx-auto space-y-24">
              <div className="text-center">
-                <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase mb-4">Trajectory.</h2>
+                <h2 className="text-5xl md:text-6xl font-black tracking-tighter uppercase mb-4">Experience.</h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full" />
              </div>
 
@@ -232,14 +232,14 @@ export const PortfolioThemeAura = ({
                     className="flex flex-col md:flex-row gap-12 relative"
                   >
                     <div className="w-16 h-16 bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl flex items-center justify-center shrink-0 shadow-2xl relative z-10">
-                       <Moon className="w-6 h-6 text-indigo-400 animate-pulse" />
+                       <Briefcase className="w-6 h-6 text-indigo-400" />
                     </div>
                     <div className="space-y-4">
-                       <div className="text-[10px] font-bold tracking-[4px] text-indigo-400 uppercase">{exp.startDate} — {exp.current ? "Ongoing" : exp.endDate}</div>
+                       <div className="text-[10px] font-bold tracking-[4px] text-indigo-400 uppercase">{exp.startDate} — {exp.current ? "Present" : exp.endDate}</div>
                        <h3 className="text-3xl font-black uppercase tracking-tight leading-none">{exp.position}</h3>
                        <p className="text-white/40 font-bold uppercase tracking-widest text-sm">{exp.company}</p>
-                       <p className="text-white/60 leading-relaxed max-w-2xl italic">
-                          "{exp.description}"
+                       <p className="text-white/60 leading-relaxed max-w-2xl font-medium">
+                          {exp.description}
                        </p>
                     </div>
                   </motion.div>
@@ -252,7 +252,7 @@ export const PortfolioThemeAura = ({
       {/* Contact Section */}
       <footer id="contact" className="relative z-10 py-44 px-6 text-center border-t border-white/5 bg-[#0a0a1a]">
         <div className="max-w-5xl mx-auto space-y-16">
-           <p className="text-white/30 text-[10px] font-bold tracking-[8px] uppercase">Initialize Connection</p>
+           <p className="text-white/30 text-[10px] font-bold tracking-[8px] uppercase">Get In Touch</p>
            
            <motion.div 
               whileHover={{ scale: 1.05 }}
@@ -285,10 +285,9 @@ export const PortfolioThemeAura = ({
               )}
            </div>
 
-           <div className="pt-32 flex flex-col md:row justify-between items-center gap-8 text-[10px] uppercase tracking-[4px] font-bold text-white/20">
-              <span>{data.personalInfo.fullName} // © {mounted ? new Date().getFullYear() : "2024"}</span>
-              <span className="animate-pulse text-indigo-500/50 italic font-black">Aura Protocol v3.0</span>
-              <span className="italic">Powered by Xeloria</span>
+           <div className="pt-32 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[4px] font-bold text-white/20">
+              <span>{data.personalInfo.fullName} — © {mounted ? new Date().getFullYear() : "2024"}</span>
+              <span className="italic">Powered by Xeloria Studio</span>
            </div>
         </div>
       </footer>

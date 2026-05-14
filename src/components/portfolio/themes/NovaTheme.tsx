@@ -34,12 +34,12 @@ export const PortfolioThemeNova = ({
              </div>
              <span className="font-black text-xl tracking-[4px] text-white uppercase italic">NOVA.</span>
           </div>
-          <div className="flex items-center gap-4 md:gap-10 text-[9px] md:text-[10px] font-black uppercase tracking-[1px] md:tracking-[3px] text-slate-500">
-            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-cyan-400 transition-colors hidden sm:block">Origin</a>}
-            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors hidden sm:block">Stack</a>}
-            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors hidden sm:block">Nodes</a>}
-            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors hidden sm:block">Core</a>}
-            <a href="#contact" className="hover:text-cyan-400 transition-colors px-3 py-1.5 border border-white/10 rounded-full">Comms</a>
+          <div className="flex items-center gap-4 md:gap-10 text-[10px] font-bold uppercase tracking-[2px] text-slate-500">
+            {pData.sectionsVisibility.hero && <a href="#hero" className="hover:text-cyan-400 transition-colors hidden sm:block">Home</a>}
+            {pData.sectionsVisibility.skills && <a href="#skills" className="hover:text-cyan-400 transition-colors hidden sm:block">Skills</a>}
+            {pData.sectionsVisibility.projects && <a href="#projects" className="hover:text-cyan-400 transition-colors hidden sm:block">Projects</a>}
+            {pData.sectionsVisibility.experience && <a href="#experience" className="hover:text-cyan-400 transition-colors hidden sm:block">Experience</a>}
+            <a href="#contact" className="hover:text-cyan-400 transition-colors px-4 py-2 border border-white/10 rounded-full bg-white/[0.02]">Contact</a>
           </div>
         </div>
       </nav>
@@ -49,52 +49,52 @@ export const PortfolioThemeNova = ({
         <section className="relative z-10 pt-44 pb-24 px-6">
           <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-8 px-5 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 font-black text-[10px] uppercase tracking-[4px]"
+              className="mb-8 px-5 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 font-bold text-[10px] uppercase tracking-[3px]"
             >
-              Quantum Computing // Digital Architect
+              Professional Portfolio // {data.personalInfo.jobTitle || "Creative Developer"}
             </motion.div>
 
             <motion.h1 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-6xl md:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-10"
+               initial={{ opacity: 0, scale: 0.95 }}
+               animate={{ opacity: 1, scale: 1 }}
+               className="text-6xl md:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-10"
             >
-              Building the <br /> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">Next Era.</span>
+              Crafting the <br /> 
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-600 drop-shadow-[0_0_30px_rgba(6,182,212,0.2)]">Digital Frontier.</span>
             </motion.h1>
 
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
               className="text-slate-400 text-lg md:text-xl max-w-3xl mb-16 leading-relaxed font-medium"
             >
-              Mastering the intersection of enterprise complexity and futuristic UI. Specialist in <span className="text-white border-b border-cyan-500/30">{data.personalInfo.jobTitle}</span> and scalable Oracle systems.
+              Specializing in the intersection of high-performance architecture and elegant user experiences. Building scalable solutions as a <span className="text-white border-b border-cyan-500/30">{data.personalInfo.jobTitle}</span>.
             </motion.p>
 
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.4 }}
               className="flex flex-wrap justify-center gap-6"
             >
-               <button className="px-10 py-4 bg-white text-black font-black text-xs uppercase tracking-[3px] rounded-full hover:bg-cyan-400 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)]">
-                 Initialize View
-               </button>
-               <button className="px-10 py-4 border border-white/10 text-white font-black text-xs uppercase tracking-[3px] rounded-full hover:border-violet-500 transition-all bg-white/[0.02]">
-                 Request Protocol
-               </button>
+               <a href="#projects" className="px-10 py-4 bg-white text-black font-bold text-xs uppercase tracking-[2px] rounded-full hover:bg-cyan-400 transition-all shadow-[0_0_40px_rgba(255,255,255,0.05)]">
+                 Explore Work
+               </a>
+               <a href="#contact" className="px-10 py-4 border border-white/10 text-white font-bold text-xs uppercase tracking-[2px] rounded-full hover:border-violet-500 transition-all bg-white/[0.01]">
+                 Get In Touch
+               </a>
             </motion.div>
           </div>
 
           <div className="mt-32 max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-6">
              {[
-               { icon: <Cpu className="w-5 h-5 text-cyan-400" />, label: "Processors" },
-               { icon: <Layers className="w-5 h-5 text-blue-400" />, label: "Layers" },
-               { icon: <Zap className="w-5 h-5 text-violet-400" />, label: "Execution" },
-               { icon: <Atom className="w-5 h-5 text-white" />, label: "Core" },
+               { icon: <Cpu className="w-5 h-5 text-cyan-400" />, label: "Solutions" },
+               { icon: <Layers className="w-5 h-5 text-blue-400" />, label: "Architecture" },
+               { icon: <Zap className="w-5 h-5 text-violet-400" />, label: "Performance" },
+               { icon: <Atom className="w-5 h-5 text-white" />, label: "Innovation" },
              ].map((item, i) => (
                <div key={i} className="group p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-cyan-500/20 transition-all text-center">
                   <div className="mb-6 flex justify-center group-hover:scale-110 transition-transform">{item.icon}</div>
@@ -106,74 +106,85 @@ export const PortfolioThemeNova = ({
         </section>
       )}
 
-      {/* Projects - Horizontal Nodes */}
-      {pData.sectionsVisibility.projects && (
-        <section id="projects" className="relative z-10 py-32 px-6">
-           <div className="max-w-7xl mx-auto space-y-16">
-              <header className="flex flex-col md:row justify-between items-end gap-6 border-l-4 border-cyan-500 pl-8">
-                 <div>
-                    <h2 className="text-5xl font-black text-white italic uppercase tracking-tighter">Active_Nodes</h2>
-                    <p className="text-slate-500 mt-2 font-bold tracking-widest text-xs uppercase opacity-60">System Overhaul Deployments //</p>
-                 </div>
-                 <div className="text-xs font-black text-cyan-400 tracking-[5px] uppercase">Scroll Through Matrix</div>
-              </header>
+      {/* Projects */}
+      {sections.projects && projects.length > 0 && (
+        <section id="projects" className="py-32 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+               <div className="space-y-4">
+                  <div className="text-cyan-400 font-bold text-[10px] uppercase tracking-[4px]">Portfolio</div>
+                  <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">Featured Projects.</h2>
+               </div>
+               <p className="text-slate-500 text-sm max-w-xs uppercase tracking-widest font-bold leading-relaxed border-l border-white/10 pl-6">
+                  A curated selection of my most impactful work and technical explorations.
+               </p>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {data.projects.map((proj, i) => (
-                  <motion.div 
-                    key={i}
-                    whileHover={{ scale: 0.98 }}
-                    className="group bg-[#05050a] border border-white/5 rounded-[4rem] p-12 overflow-hidden relative"
-                  >
-                    <div className="absolute top-0 right-0 p-12 opacity-5 group-hover:opacity-100 transition-opacity">
-                      <Rocket className="w-12 h-12 text-cyan-500" />
-                    </div>
-                    <div className="space-y-8 relative z-10">
-                       <span className="text-xs font-black text-slate-600 tracking-[4px]">NODE_DATA_0{i+1}</span>
-                       <h3 className="text-3xl md:text-4xl font-black text-white uppercase leading-none">{proj.name}</h3>
-                       <p className="text-slate-400 text-lg leading-relaxed max-w-sm font-medium italic">
-                          "{proj.description}"
-                       </p>
-                       <div className="flex flex-wrap gap-3">
-                          {proj.technologies.map(t => (
-                            <span key={t} className="px-4 py-2 bg-white/[0.03] border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-400">
-                               {t}
-                            </span>
-                          ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project: any, i: number) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="group relative"
+                >
+                  <div className="relative aspect-video rounded-3xl overflow-hidden mb-8 border border-white/5 bg-white/[0.02]">
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-violet-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 flex items-center justify-center scale-90 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all">
+                       <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-black">
+                          <ExternalLink size={24} />
                        </div>
                     </div>
-                    <div className="absolute bottom-[-10%] right-[-10%] w-64 h-64 bg-cyan-500/5 blur-[100px] rounded-full group-hover:bg-cyan-500/10 transition-all" />
-                  </motion.div>
-                ))}
-              </div>
-           </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                     <div className="flex flex-wrap gap-2">
+                        {project.technologies.slice(0, 3).map((tech: string) => (
+                          <span key={tech} className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">{tech}</span>
+                        ))}
+                     </div>
+                     <h3 className="text-2xl font-black text-white uppercase tracking-tight group-hover:text-cyan-400 transition-colors">{project.name}</h3>
+                     <p className="text-slate-400 text-sm leading-relaxed line-clamp-2">{project.description}</p>
+                     
+                     {project.link && (
+                        <a href={project.link} className="inline-flex items-center gap-2 text-[10px] font-bold text-white uppercase tracking-[2px] border-b border-white/10 pb-1 hover:border-cyan-500 transition-all">
+                           View Details <ArrowUpRight size={14} />
+                        </a>
+                     )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </section>
       )}
 
-      {/* Experience - Quantum Timeline */}
-      {pData.sectionsVisibility.experience && (
-        <section id="experience" className="relative z-10 py-32 px-6">
-           <div className="max-w-4xl mx-auto space-y-24">
-              <h2 className="text-6xl font-black text-center text-white italic tracking-tighter uppercase underline decoration-cyan-500 decoration-8 underline-offset-12">Core_Memory.</h2>
-              
-              <div className="space-y-16">
-                 {data.experience.map((exp, i) => (
+      {/* Experience */}
+      {sections.experience && experiences.length > 0 && (
+        <section id="experience" className="py-32 px-6">
+           <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-20">
+                 <div className="text-violet-400 font-bold text-[10px] uppercase tracking-[4px] mb-4">Experience</div>
+                 <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">Career Journey.</h2>
+              </div>
+
+              <div className="space-y-12">
+                 {experiences.map((exp: any, i: number) => (
                    <motion.div 
                     key={i}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="relative pl-12 md:pl-24 group"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="p-8 md:p-12 rounded-[2.5rem] border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
                    >
-                      <div className="absolute left-0 top-2 w-4 h-4 rounded-full border-4 border-cyan-500 bg-black z-20" />
-                      <div className="absolute left-[7px] top-4 bottom-[-4rem] w-0.5 bg-gradient-to-b from-cyan-500 to-transparent opacity-20" />
-                      
-                      <div className="space-y-6">
-                        <div className="text-xs font-black text-violet-500 tracking-[4px] uppercase">{exp.startDate} - {exp.endDate}</div>
-                        <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight leading-none group-hover:text-cyan-400 transition-colors">{exp.position}</h3>
-                        <div className="inline-block px-4 py-1.5 bg-white text-black font-black text-[10px] uppercase tracking-[3px] rounded-full">{exp.company}</div>
-                        <p className="text-slate-500 text-lg leading-relaxed font-medium max-w-2xl border-l border-white/10 pl-8">
-                           {exp.description}
-                        </p>
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                         <div className="space-y-2">
+                            <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest">{exp.startDate} — {exp.current ? "Present" : exp.endDate}</span>
+                            <h3 className="text-2xl font-black text-white uppercase tracking-tight">{exp.position}</h3>
+                            <div className="text-sm font-bold text-slate-500 uppercase tracking-[2px]">{exp.company}</div>
+                         </div>
+                         <p className="text-slate-400 text-sm md:text-base max-w-md leading-relaxed">{exp.description}</p>
                       </div>
                    </motion.div>
                  ))}
@@ -182,26 +193,28 @@ export const PortfolioThemeNova = ({
         </section>
       )}
 
-      {/* Skills - Skill Nodes */}
-      {pData.sectionsVisibility.skills && data.skills && data.skills.length > 0 && (
-        <section id="skills" className="relative z-10 py-32 px-6">
+      {/* Skills */}
+      {sections.skills && skills.length > 0 && (
+        <section id="skills" className="py-32 px-6">
            <div className="max-w-6xl mx-auto space-y-24">
               <div className="text-center">
-                 <h2 className="text-6xl font-black text-white italic tracking-tighter uppercase underline decoration-violet-500 decoration-8 underline-offset-12 inline-block">Skill_Nodes.</h2>
+                 <div className="text-cyan-400 font-bold text-[10px] uppercase tracking-[4px] mb-4">Expertise</div>
+                 <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">Technical Stack.</h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                 {data.skills.map((group: any, i: number) => (
+                 {skills.map((group: any, i: number) => (
                    <motion.div 
                      key={i}
                      initial={{ opacity: 0, y: 20 }}
                      whileInView={{ opacity: 1, y: 0 }}
-                     className="p-8 bg-white/5 border border-white/10 rounded-[2rem] hover:border-cyan-500/50 transition-all group"
+                     viewport={{ once: true }}
+                     className="p-10 bg-white/[0.02] border border-white/5 rounded-[3rem] hover:border-cyan-500/30 transition-all group"
                    >
-                      <h3 className="text-xs font-black text-cyan-500 tracking-[5px] uppercase mb-8 border-b border-white/5 pb-4 group-hover:text-violet-500 transition-colors">{group.category}</h3>
+                      <h3 className="text-xs font-bold text-cyan-400 tracking-[2px] uppercase mb-8 border-b border-white/5 pb-4 group-hover:text-white transition-colors">{group.category}</h3>
                       <div className="flex flex-wrap gap-3">
                          {group.items.map((skill: string, sid: number) => (
-                           <span key={sid} className="px-4 py-2 bg-black border border-white/10 rounded-full text-[10px] font-black uppercase tracking-[2px] hover:border-cyan-500 hover:text-cyan-500 transition-all">
+                           <span key={sid} className="px-5 py-2 bg-white/5 border border-white/5 rounded-full text-[10px] font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors">
                              {skill}
                            </span>
                          ))}
@@ -213,49 +226,41 @@ export const PortfolioThemeNova = ({
         </section>
       )}
 
-      {/* Footer / Connect */}
-      {pData.sectionsVisibility.contact && (
-        <footer id="contact" className="relative z-10 pt-20 md:pt-44 pb-12 px-6">
-        <div className="max-w-7xl mx-auto bg-gradient-to-br from-slate-900 to-[#020205] border border-white/5 rounded-[5rem] p-12 md:p-24 text-center overflow-hidden">
-           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.5),transparent)]" />
-           
-           <div className="relative z-10 space-y-12">
-              <h2 className="text-5xl md:text-9xl font-black text-white italic tracking-tighter uppercase leading-[0.8]">Signal <br/> Now.</h2>
-              <p className="text-slate-400 text-lg max-w-xl mx-auto italic">Awaiting high-priority packets. Transmitting at speed of light.</p>
+      {/* Contact */}
+      {sections.contact && (
+        <section id="contact" className="py-48 px-6 text-center">
+           <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto space-y-12"
+           >
+              <div className="inline-block px-6 py-2 rounded-full border border-white/5 bg-white/[0.02] text-slate-500 font-bold text-[10px] uppercase tracking-[4px]">
+                 Get In Touch
+              </div>
+              <h2 className="text-6xl md:text-[8rem] font-black text-white leading-[0.8] tracking-tighter uppercase">
+                 Let&apos;s Build <br /> <span className="text-transparent border-y border-white/10 py-2 inline-block [-webkit-text-stroke:1px_rgba(255,255,255,0.2)]">Something New.</span>
+              </h2>
               
-              <a href={`mailto:${data.personalInfo.email}`}>
-                 <button className="px-16 py-8 bg-cyan-500 text-black font-black text-2xl rounded-[3rem] hover:bg-white hover:scale-110 transition-all shadow-[0_0_60px_rgba(6,182,212,0.4)] uppercase">
-                   Signal Peer
-                 </button>
-              </a>
+              <div className="pt-12">
+                 <a 
+                   href={`mailto:${data.personalInfo.email}`}
+                   className="text-2xl md:text-5xl font-black text-white hover:text-cyan-400 transition-colors underline underline-offset-[20px] decoration-white/10"
+                 >
+                   {data.personalInfo.email}
+                 </a>
+              </div>
 
-               <div className="flex justify-center gap-10 pt-20">
-                  {pData?.socialLinks?.github && (
-                    <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors">
-                      <Github className="w-5 h-5" />
-                    </a>
-                  )}
-                  {pData?.socialLinks?.linkedin && (
-                    <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors">
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                  )}
-                  {pData?.socialLinks?.twitter && (
-                    <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl border border-white/10 flex items-center justify-center hover:border-cyan-500 transition-colors">
-                      <Twitter className="w-5 h-5" />
-                    </a>
-                  )}
-               </div>
-           </div>
-
-           <div className="mt-32 flex flex-col md:row justify-between items-center gap-10 pt-10 border-t border-white/5 text-[10px] font-black uppercase tracking-[4px] text-slate-600">
-              <span>Nova Quantum Protocol © 2024</span>
-              <span>{data.personalInfo.fullName} // Digital Architect</span>
-              <span className="italic">Standard Issue Portfolios</span>
-           </div>
-        </div>
-      </footer>
-      )}
+              <div className="flex justify-center gap-12 pt-20">
+                {pData?.socialLinks?.linkedin && <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors"><Linkedin size={24} /></a>}
+                {pData?.socialLinks?.github && <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors"><Github size={24} /></a>}
+                {pData?.socialLinks?.twitter && <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors"><Twitter size={24} /></a>}
+              </div>
+           </motion.div>
+           
+           <div className="mt-48 flex flex-col md:flex-row justify-between items-center gap-10 pt-10 border-t border-white/5 text-[10px] font-bold uppercase tracking-[4px] text-slate-600">
+              <span>{data.personalInfo.fullName} © {new Date().getFullYear()}</span>
+              <span>Built with Xeloria Studio</span>
     </div>
   );
 };

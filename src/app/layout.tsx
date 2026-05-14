@@ -14,24 +14,24 @@ const BASE_URL = "https://xeloria.vercel.app";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Xeloria | Architect Your Professional DNA",
+    default: "Xeloria | Build a Professional Portfolio that Stands Out",
     template: "%s | Xeloria",
   },
   description:
-    "Xeloria lets you build a stunning, high-performance professional portfolio site in minutes. Synchronize your career narrative and deploy your legacy instantly with AI-powered tools.",
+    "Xeloria helps you create a premium, hand-crafted professional portfolio in minutes. Showcase your work, experience, and personal brand with elegant, performance-optimized designs.",
   keywords: [
     "portfolio builder",
     "resume builder",
     "professional portfolio",
-    "AI resume",
+    "personal brand",
     "career site",
     "personal website",
     "portfolio website",
     "Xeloria",
-    "job seeker tools",
+    "creative portfolio",
     "online resume",
     "developer portfolio",
-    "free portfolio builder",
+    "premium portfolio builder",
   ],
   authors: [{ name: "Xeloria", url: BASE_URL }],
   creator: "Xeloria",
@@ -52,23 +52,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: BASE_URL,
     siteName: "Xeloria",
-    title: "Xeloria | Architect Your Professional DNA",
+    title: "Xeloria | Build a Professional Portfolio that Stands Out",
     description:
-      "Build a stunning, AI-powered professional portfolio in minutes. Synchronize your career narrative and deploy your legacy instantly.",
+      "Create a premium, hand-crafted professional portfolio in minutes. Showcase your personal brand with elegant, high-performance designs.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Xeloria — Architect Your Professional DNA",
+        alt: "Xeloria — Build a Professional Portfolio that Stands Out",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Xeloria | Architect Your Professional DNA",
+    title: "Xeloria | Build a Professional Portfolio that Stands Out",
     description:
-      "Build a stunning, AI-powered professional portfolio in minutes. Deploy your professional legacy instantly.",
+      "Create a premium, hand-crafted professional portfolio in minutes. Showcase your personal brand with elegant, high-performance designs.",
     images: ["/og-image.png"],
     creator: "@xeloriaio",
     site: "@xeloriaio",
