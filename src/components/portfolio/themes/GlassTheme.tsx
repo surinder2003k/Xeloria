@@ -168,6 +168,8 @@ export const PortfolioThemeGlass = ({
                     <div className="flex flex-wrap gap-2">
                       {skillGroup.items.map((skill) => (
                         <span key={skill} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-[11px] font-bold text-white group-hover:text-[#60a5fa] transition-colors uppercase tracking-widest">
+                          {skill}
+                        </span>
                       ))}
                     </div>
                   </motion.div>
