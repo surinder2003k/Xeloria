@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Github, Linkedin, Twitter, Mail, Sparkles, Wand2, Bird, Moon, Sun, Star } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, Sparkles, Wand2, Bird, Moon, Sun, Star, ExternalLink, Briefcase } from "lucide-react";
 import { ResumeData } from "@/lib/store";
 import { PortfolioData } from "@/lib/portfolio-store";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Mail, Zap, Cpu, Orbit, Atom, Layers, Rocket } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, Zap, Cpu, Orbit, Atom, Layers, Rocket, ExternalLink, ArrowUpRight } from "lucide-react";
 import { ResumeData } from "@/lib/store";
 import { PortfolioData } from "@/lib/portfolio-store";
 
@@ -14,6 +14,10 @@ export const PortfolioThemeNova = ({
   data: ResumeData; 
   pData: PortfolioData; 
 }) => {
+  const sections = pData.sectionsVisibility || {};
+  const projects = data.projects || [];
+  const skills = data.skills || [];
+  const experiences = data.experience || [];
 
   return (
     <div className="bg-[#020205] min-h-screen text-slate-300 font-sans selection:bg-cyan-500/30 selection:text-white relative overflow-hidden">
