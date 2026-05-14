@@ -217,18 +217,6 @@ export const PortfolioThemeElysian = ({ username, data, pData }: ThemeProps) => 
             )}
         </div>
       </footer>
-        <div className="flex gap-12">
-            {pData?.socialLinks?.linkedin && (
-              <a href={pData.socialLinks.linkedin.startsWith('http') ? pData.socialLinks.linkedin : `https://${pData.socialLinks.linkedin}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">LinkedIn</a>
-            )}
-            {pData?.socialLinks?.twitter && (
-              <a href={pData.socialLinks.twitter.startsWith('http') ? pData.socialLinks.twitter : `https://${pData.socialLinks.twitter}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">Twitter</a>
-            )}
-            {pData?.socialLinks?.github && (
-              <a href={pData.socialLinks.github.startsWith('http') ? pData.socialLinks.github : `https://${pData.socialLinks.github}`} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]">GitHub</a>
-            )}
-        </div>
-      </footer>
     </div>
   );
 };

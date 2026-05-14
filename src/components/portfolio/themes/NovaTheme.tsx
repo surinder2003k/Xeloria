@@ -261,6 +261,9 @@ export const PortfolioThemeNova = ({
            <div className="mt-48 flex flex-col md:flex-row justify-between items-center gap-10 pt-10 border-t border-white/5 text-[10px] font-bold uppercase tracking-[4px] text-slate-600">
               <span>{data.personalInfo.fullName} © {new Date().getFullYear()}</span>
               <span>Built with Xeloria Studio</span>
+            </div>
+         </section>
+      )}
     </div>
   );
 };

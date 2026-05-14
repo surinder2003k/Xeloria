@@ -208,7 +208,8 @@ export const PortfolioThemeAura = ({
                     )}
                   </div>
                 ))}
-             </div>          </div>
+             </div>
+          </div>
         </section>
       )}
 
@@ -286,9 +287,9 @@ export const PortfolioThemeAura = ({
            </div>
 
            <div className="pt-32 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] uppercase tracking-[4px] font-bold text-white/20">
-              <span>{data.personalInfo.fullName} — © {mounted ? new Date().getFullYear() : "2024"}</span>
-              <span className="italic">Powered by Xeloria Studio</span>
-           </div>
+               <span>{data.personalInfo.fullName} — © {mounted ? new Date().getFullYear() : "2024"}</span>
+               <span className="italic">Built with Xeloria Studio</span>
+            </div>
         </div>
       </footer>
     </div>

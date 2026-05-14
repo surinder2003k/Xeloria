@@ -168,9 +168,15 @@ export const PortfolioThemeGlass = ({
                     <div className="flex flex-wrap gap-2">
                       {skillGroup.items.map((skill) => (
                         <span key={skill} className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl text-[11px] font-bold text-white group-hover:text-[#60a5fa] transition-colors uppercase tracking-widest">
-                          {skill}
-                        </span>
                       ))}
+                    </div>
+                  </motion.div>
+                ))}
+             </div>
+          </div>
+        </section>
+      )}
+
       {/* Projects Grid */}
       {pData.sectionsVisibility.projects && data.projects.length > 0 && (
         <section id="projects" className="py-32 px-6">
@@ -236,34 +242,7 @@ export const PortfolioThemeGlass = ({
         </section>
       )}
 
-      {/* Skills Section */}
-      {pData.sectionsVisibility.skills && data.skills && data.skills.length > 0 && (
-        <section id="skills" className="py-32 px-6">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-[#60a5fa] text-[10px] tracking-[4px] uppercase font-bold mb-4">Expertise</div>
-            <h2 className="text-4xl font-extrabold mb-12">Core <span className="bg-gradient-to-r from-[#60a5fa] to-[#a78bfa] bg-clip-text text-transparent">Competencies</span></h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {data.skills.map((group: any, i: number) => (
-                <motion.div 
-                  key={i}
-                  {...fadeIn}
-                  className="p-8 bg-white/[0.02] border border-white/5 rounded-3xl backdrop-blur-xl"
-                >
-                  <h3 className="text-sm font-bold text-[#60a5fa] uppercase tracking-[3px] mb-8 border-b border-white/10 pb-4">{group.category}</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {group.items.map((skill: string, sid: number) => (
-                      <span key={sid} className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-medium hover:bg-white/10 transition-colors">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-            {/* Contact Section */}
+      {/* Contact Section */}
       {pData.sectionsVisibility.contact && (
         <section id="contact" className="py-48 px-6 text-center">
            <motion.div 
@@ -306,10 +285,6 @@ export const PortfolioThemeGlass = ({
       <footer className="py-12 px-6 border-t border-white/10 text-center font-bold text-[9px] text-[#64748b] tracking-[4px] uppercase relative z-10">
         {data.personalInfo.fullName} — © {new Date().getFullYear()} — Built with Xeloria Studio
       </footer>
-    </div>
-  );
-};
-ter>
     </div>
   );
 };

@@ -144,7 +144,9 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
             ))}
           </div>
         </section>
-      )      {/* Projects Section */}
+      )}
+
+      {/* Projects Section */}
       {sections.projects && projects.length > 0 && (
         <section id="projects" className="py-32 px-6 md:px-12 max-w-7xl mx-auto z-10">
           <div className="mb-20">
@@ -241,7 +243,7 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
       {/* Footer */}
       <footer className="py-20 px-8 border-t border-white/5 text-center relative z-10">
         <div className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.5em] mb-4">
-          Built with Xeloria Professional Studio
+          Built with Xeloria Studio
         </div>
         <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
           © {new Date().getFullYear()} {username.toUpperCase()} — ALL RIGHTS RESERVED
@@ -250,4 +252,3 @@ export const PortfolioThemeQuantum = ({ username, data, pData }: ThemeProps) => 
     </div>
   );
 };
-;

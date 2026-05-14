@@ -115,7 +115,7 @@ export const PortfolioThemeCyberpunk = ({
                  { icon: Code, label: "Quality", color: "text-yellow-400" }
                ].map((item, i) => (
                  <div key={i} className="p-8 border border-slate-800 bg-white/[0.01] flex flex-col items-center justify-center text-center group hover:border-[#00ff41]/30 transition-all rounded-xl">
-                    <item.icon size={32} className={cn("mb-4 transition-transform group-hover:scale-110", item.color)} />
+                    <item.icon size={32} className={`mb-4 transition-transform group-hover:scale-110 ${item.color}`} />
                     <span className="text-[10px] font-bold text-slate-600 uppercase tracking-widest">{item.label}</span>
                  </div>
                ))}
