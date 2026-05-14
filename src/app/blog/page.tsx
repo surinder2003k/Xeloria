@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Navbar } from "@/components/landing/Navbar";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, ArrowRight, Tag, Sparkles, Terminal } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Tag, Sparkles, Terminal, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import { format } from "date-fns";
@@ -13,12 +13,21 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default async function BlogArchivePage() {
-  const { data: posts, error } = await supabase
+export default async function BlogArchivePage(props: { searchParams?: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  const searchParams = await props.searchParams;
+  const currentPage = typeof searchParams?.page === 'string' ? parseInt(searchParams.page) : 1;
+  const limit = 9;
+  const from = (currentPage - 1) * limit;
+  const to = from + limit - 1;
+
+  const { data: posts, error, count } = await supabase
     .from('blogs')
-    .select('*')
+    .select('*', { count: 'exact' })
     .eq('is_published', true)
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
+    .range(from, to);
+
+  const totalPages = Math.ceil((count || 0) / limit);
 
   if (error) {
     console.error("Error fetching blogs:", error);
@@ -48,8 +57,9 @@ export default async function BlogArchivePage() {
         </header>
 
         {posts && posts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            {posts.map((post, idx) => (
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+              {posts.map((post, idx) => (
               <article key={post.id} className="group cursor-pointer">
                 <Link href={`/blog/${post.slug}`}>
                   <div className="aspect-[16/10] rounded-[3.5rem] overflow-hidden border border-white/10 mb-10 relative bg-white/5 shadow-2xl transition-all duration-500 group-hover:border-indigo-500/30">
@@ -92,6 +102,36 @@ export default async function BlogArchivePage() {
               </article>
             ))}
           </div>
+          
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-4 mt-20">
+              <Link href={`/blog?page=${Math.max(1, currentPage - 1)}`} className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}>
+                <Button variant="outline" className="rounded-full w-12 h-12 p-0 border-white/10 bg-white/5 hover:bg-white/10 hover:text-white flex items-center justify-center">
+                  <ChevronLeft className="h-5 w-5" />
+                </Button>
+              </Link>
+              
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <Link key={i} href={`/blog?page=${i + 1}`}>
+                    <Button 
+                      variant="outline" 
+                      className={`rounded-full w-10 h-10 p-0 border-white/10 ${currentPage === i + 1 ? 'bg-indigo-500/20 border-indigo-500/50 text-indigo-400' : 'bg-white/5 hover:bg-white/10 hover:text-white'}`}
+                    >
+                      {i + 1}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+
+              <Link href={`/blog?page=${Math.min(totalPages, currentPage + 1)}`} className={currentPage >= totalPages ? "pointer-events-none opacity-50" : ""}>
+                <Button variant="outline" className="rounded-full w-12 h-12 p-0 border-white/10 bg-white/5 hover:bg-white/10 hover:text-white flex items-center justify-center">
+                  <ChevronRight className="h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+          )}
+        </div>
         ) : (
           <div className="py-40 text-center space-y-8 bg-white/[0.02] border border-dashed border-white/10 rounded-[4rem]">
              <div className="h-24 w-24 bg-white/5 rounded-full flex items-center justify-center mx-auto text-slate-700">
