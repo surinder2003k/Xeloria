@@ -16,7 +16,7 @@ export const revalidate = 3600; // Revalidate every hour
 export default async function BlogArchivePage(props: { searchParams?: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const searchParams = await props.searchParams;
   const currentPage = typeof searchParams?.page === 'string' ? parseInt(searchParams.page) : 1;
-  const limit = 9;
+  const limit = 6;
   const from = (currentPage - 1) * limit;
   const to = from + limit - 1;
 
