@@ -45,10 +45,16 @@ export const Navbar = () => {
               Home
             </Link>
             <Link href="/blog" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
-              Journal
+              Blog
             </Link>
             <Link href="/about" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
-              Our Story
+              About Us
+            </Link>
+            <Link href="/contact" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
+              Contact Us
+            </Link>
+            <Link href="/terms" className="text-[11px] font-medium uppercase tracking-wider text-slate-400 hover:text-white transition-all">
+              Terms
             </Link>
           </div>
 
@@ -119,14 +125,28 @@ export const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
             >
-              Journal
+              Blog
             </Link>
             <Link 
               href="/about" 
               onClick={() => setIsMobileMenuOpen(false)}
               className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
             >
-              Our Story
+              About Us
+            </Link>
+            <Link 
+              href="/contact" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
+            >
+              Contact Us
+            </Link>
+            <Link 
+              href="/terms" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-2xl font-bold text-slate-200 hover:text-indigo-400 transition-all"
+            >
+              Terms
             </Link>
             {isSignedIn && (
               <Link 
